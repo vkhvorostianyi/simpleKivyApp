@@ -63,19 +63,15 @@ class Wallet(object):
             view_string += ('\n%s:%s' % (item[0], item[1]))
         return view_string + '\n'
 
-    def last_transaction_view(self):
-        transaction = sorted(self.transaction_list, reverse=True)[0]
-        return self.list_view(self.transaction_list[transaction])
-
-    def all_transactions_view(self):
+    def transactions_view(self):
         stack = ''
         total = 0
         for item in sorted(self.transaction_list, reverse=True):
-            total += Decimal(self.transaction_list[item]['value']).quantize(Decimal("0.01"),
-                                                       rounding=ROUND_DOWN)
+            total += Decimal(self.transaction_list[item]['value']).quantize(Decimal("0.01"), rounding=ROUND_DOWN)
             stack += '%s%s\n' % (item, self.list_view(self.transaction_list[item]))
-
-        return stack, total
+        last_transaction = sorted(self.transaction_list, reverse=True)[0]
+        last_transaction_view = self.list_view(self.transaction_list[last_transaction])
+        return stack, total, last_transaction_view
 
     def search(self, input_list, keyword):
         total = 0

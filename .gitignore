@@ -1,0 +1,7 @@
+venv/
+__pycache__/
+.idea/
+*.pyc
+/mysnd.py
+buildozer.spec
+.buildozer/

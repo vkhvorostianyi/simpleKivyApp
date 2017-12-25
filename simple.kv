@@ -1,0 +1,16 @@
+<Root>:
+    Label:
+        center_x: root.center_x
+        center_y:root.height-10
+        orientation: 'vertical'
+        text: "Enter your name"
+
+    TextInput:
+        size: 200,30
+        center_y: root.height/2
+        center_x: root.center_x
+        id:form
+
+    Label:
+        text: 'Hello, %s!' % (form.text)
+        center_x: root.center_x

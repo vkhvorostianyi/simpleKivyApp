@@ -13,5 +13,11 @@
         id:form
 
     Label:
-        text: 'Hello, %s!' % (form.text)
+        text: 'Hello!'
         center_x: root.center_x
+        id: field
+
+    Button:
+        size: 100,30
+        text: "ok"
+        on_press: field.text = 'Hello, %s!' % (form.text)

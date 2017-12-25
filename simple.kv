@@ -27,4 +27,5 @@
 
         on_press:
             field.text = 'Hello, %s!' % (form.text)
-            print(wallet.account_list)
+            field.text = wallet.list_view(wallet.account_list)
+

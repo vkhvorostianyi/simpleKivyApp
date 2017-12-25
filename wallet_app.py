@@ -54,6 +54,50 @@ class Wallet(object):
             data_loaded = json.load(data_file)
         return data_loaded
 
+    def list_view(self, input_list):
+        view_string = ""
+        for item in input_list.items():
+            view_string += ('\n%s:%s' % (item[0], item[1]))
+        return view_string + '\n'
+
+    def last_transaction_view(self):
+        transaction = sorted(self.transaction_list, reverse=True)[0]
+        return self.list_view(self.transaction_list[transaction])
+
+    def all_transactions_view(self):
+        stack = ''
+        for item in sorted(self.transaction_list, reverse=True):
+            stack += '%s%s\n' % (item, self.list_view(self.transaction_list[item]))
+        return stack
+
+    def search(self, input_list, keyword):
+        search_stack = ''
+        for item in sorted(input_list.items(), reverse=True):
+            if keyword in item[0]:
+                search_stack += '%s%s\n' % (item[0], self.list_view(item[1]))
+            else:
+                for i in item[1].values():
+                    if keyword in i:
+                        search_stack += '%s%s\n' % (item[0], self.list_view(item[1]))
+        else:
+            if search_stack:
+                print(search_stack)
+            else:
+                print("No results,sorry")
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 wallet = Wallet()
 
 wallet.category_list = wallet.read_from_file('categories.json')

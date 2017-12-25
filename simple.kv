@@ -1,3 +1,5 @@
+#:import wallet wallet_app.wallet
+
 <Root>:
     size:150,50
     Label:
@@ -23,4 +25,6 @@
         center_y: root.height/2 - 40
         center_x: root.center_x
 
-        on_press: field.text = 'Hello, %s!' % (form.text)
+        on_press:
+            field.text = 'Hello, %s!' % (form.text)
+            print(wallet.account_list)

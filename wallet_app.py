@@ -29,6 +29,14 @@ class Transaction(object):
         self.category = category
 
 
+class Category(object):
+
+    # name is string and is_spend is boolean
+    def __init__(self, name, is_spend):
+        self.name = name
+        self.is_spend = is_spend
+
+
 class Wallet(object):
     transaction_list = {}
     account_list = {}
@@ -69,9 +77,12 @@ class Wallet(object):
         for item in sorted(self.transaction_list, reverse=True):
             total += Decimal(self.transaction_list[item]['value']).quantize(Decimal("0.01"), rounding=ROUND_DOWN)
             stack += '%s%s\n' % (item, self.list_view(self.transaction_list[item]))
+        return stack, total
+
+    def last_transaction_view(self):
         last_transaction = sorted(self.transaction_list, reverse=True)[0]
-        last_transaction_view = self.list_view(self.transaction_list[last_transaction])
-        return stack, total, last_transaction_view
+        last_transaction_view = "%s:%s" % (last_transaction, self.list_view(self.transaction_list[last_transaction]))
+        return last_transaction_view
 
     def search(self, input_list, keyword):
         total = 0

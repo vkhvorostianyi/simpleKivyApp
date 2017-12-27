@@ -1,4 +1,7 @@
 #:import wallet wallet_app.wallet
+#:import Transaction wallet_app.wallet
+#:import Account wallet_app.wallet
+#:import Category wallet_app.wallet
 
 <Root>:
     size:150,50
@@ -15,9 +18,14 @@
         id:form
 
     Label:
-        text: 'Hello!'
+        text: wallet.list_view(wallet.account_list)
+        center_x: root.center_x-100
+        id: field1
+
+    Label:
+
         center_x: root.center_x
-        id: field
+        id: field2
 
     Button:
         size: 100,30
@@ -26,6 +34,5 @@
         center_x: root.center_x
 
         on_press:
-            field.text = 'Hello, %s!' % (form.text)
-            field.text = wallet.list_view(wallet.account_list)
-
+            field2.text = wallet.list_view(wallet.account_list)
+            field1.text = wallet.last_transaction_view()

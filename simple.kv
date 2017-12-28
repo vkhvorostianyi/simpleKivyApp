@@ -33,6 +33,8 @@
         center_y: root.height/2 - 40
         center_x: root.center_x
 
+
         on_press:
             field2.text = wallet.list_view(wallet.account_list)
             field1.text = wallet.last_transaction_view()
+            wallet.on_press_btn(10,'test','test')

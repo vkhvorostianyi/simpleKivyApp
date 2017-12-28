@@ -102,9 +102,7 @@ class Wallet(object):
             else:
                 return "No results,sorry"
 
-    def on_press_btn(self, val, ac, cat):
-        self.add_transaction(Transaction(val, ac, cat))
-        self.save_to_file('transactions.json', self.transaction_list)
+
 
 
 wallet = Wallet()

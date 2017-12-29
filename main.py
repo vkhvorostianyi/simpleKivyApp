@@ -11,15 +11,17 @@ class Root(Widget):
     def layout(self):
         layout = GridLayout(cols=2)
         layout.add_widget(Label(text=wallet.list_view(wallet.account_list)))
-        layout.add_widget(Button(text='World 1'))
-        layout.add_widget(Button(text='Hello 2'))
-        layout.add_widget(Button(text='World 2'))
+        layout.add_widget(Label(text=wallet.last_transaction_view()))
+        layout.add_widget(Button(text='Add new transaction'))
+        layout.add_widget(Button(text='View all transaction'))
         return layout
+
 
 class SimpleApp(App):
 
     def build(self):
-        return Root().layout()
+        root = Root()
+        return root.layout()
 
 
 if __name__ == '__main__':

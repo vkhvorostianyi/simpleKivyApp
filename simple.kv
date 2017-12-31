@@ -2,21 +2,20 @@
 #:import w wallet_app
 
 <InputWindow>:
-    size: 200, 300
-    Label:
-        text: "enter value"
-    TextInput:
-        id: tr_value
-    Button:
-        text: "choose category"
-
-
+    GridLayout:
+        size: 200, 300
+        Label:
+            text: "enter value"
+        TextInput:
+            id: tr_value
+        Button:
+            text: "choose category"
 <Root>:
+
     Label:
         id: info_label
         center: root.center
         text: "hello"
-
     GridLayout:
         size:400,200
         cols: 2
@@ -29,7 +28,6 @@
         Button:
             id: btn_2
             text: "new transaction"
-            on_press:
         Button:
             id: btn_3
             text:"hello3"
@@ -42,7 +40,4 @@
         Button:
             id: btn_6
             text:"hello6"
-
-
-
 

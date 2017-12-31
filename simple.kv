@@ -1,37 +1,48 @@
 
 #:import w wallet_app
 
-#
-#
-#<Root>:
-#    Label:
-#        center_x: root.center_x
-#        center_y:root.height/2 + 40
-#        orientation: 'vertical'
-#        text: "Enter your name"
-#
-#    TextInput:
-#        size: 200,30
-#        center_y: root.height/2
-#        center_x: root.center_x
-#        id:form
-#
-#    Label:
-#        text: w.wallet.list_view(w.wallet.account_list)
-#        center_x: root.center_x-100
-#        id: field1
-#
-#    Label:
-#
-#        center_x: root.center_x
-#        id: field2
-#
-#    Button:
-#        size: 100,30
-#        text: "ok"
-#        center_y: root.height/2 - 40
-#        center_x: root.center_x
-#        on_press:
-#            field2.text = w.wallet.list_view(w.wallet.account_list)
-#            field1.text = w.wallet.last_transaction_view()
-#            w.wallet.add_transaction(w.Transaction(10,'test','test'))
+<InputWindow>:
+    size: 200, 300
+    Label:
+        text: "enter value"
+    TextInput:
+        id: tr_value
+    Button:
+        text: "choose category"
+
+
+<Root>:
+    Label:
+        id: info_label
+        center: root.center
+        text: "hello"
+
+    GridLayout:
+        size:400,200
+        cols: 2
+        center_x:root.center_x
+        padding: 10
+        Button:
+            id: btn_1
+            text: "view accounts"
+            on_press: info_label.text = w.wallet.list_view(w.wallet.account_list)
+        Button:
+            id: btn_2
+            text: "new transaction"
+            on_press:
+        Button:
+            id: btn_3
+            text:"hello3"
+        Button:
+            id: btn_4
+            text: "hello4"
+        Button:
+            id: btn_5
+            text: "hello5"
+        Button:
+            id: btn_6
+            text:"hello6"
+
+
+
+

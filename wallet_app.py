@@ -103,8 +103,6 @@ class Wallet(object):
                 return "No results,sorry"
 
 
-
-
 wallet = Wallet()
 
 wallet.category_list = wallet.read_from_file('categories.json')

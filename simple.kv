@@ -1,43 +1,7 @@
-
-#:import w wallet_app
-
-<InputWindow>:
-    GridLayout:
-        size: root.size
-        center: root.center
-        Label:
-            text: "enter value"
-        TextInput:
-        Button:
-            text: "choose category"
-
-
 <Root>:
+    Button:
+        text: "a"
     Label:
-        id: info_label
-        text: "hello"
-    GridLayout:
-        size:400,200
-        cols: 2
-        center_x: root.center_x
-        padding: 10
-        Button:
-            id: btn_1
-            text: "view accounts"
-            on_press: info_label.text = w.wallet.list_view(w.wallet.account_list)
-        Button:
-            id: btn_2
-            text: "new transaction"
-        Button:
-            id: btn_3
-            text:"hello3"
-        Button:
-            id: btn_4
-            text: "hello4"
-        Button:
-            id: btn_5
-            text: "hello5"
-        Button:
-            id: btn_6
-            text:"hello6"
-
+        text: "b"
+    Label:
+        text: "c"

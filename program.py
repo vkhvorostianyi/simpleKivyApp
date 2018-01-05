@@ -1,9 +1,14 @@
-from kivy.uix.boxlayout  import BoxLayout
+from kivy.uix.boxlayout import BoxLayout
 from kivy.uix.widget import Widget
 from kivy.app import App
+from kivy.properties import ObjectProperty
 
 
-class InputWindow(Widget):
+class InputWindow(BoxLayout):
+    pass
+
+
+class StartScreen(BoxLayout):
     pass
 
 
@@ -14,8 +19,8 @@ class Root(BoxLayout):
 class SimpleApp(App):
 
     def build(self):
-        root = Root()
-        return root
+        app = Root()
+        return app
 
 
 if __name__ == '__main__':

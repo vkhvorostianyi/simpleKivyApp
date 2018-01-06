@@ -1,13 +1,19 @@
 from kivy.uix.boxlayout import BoxLayout
 from kivy.uix.widget import Widget
 from kivy.app import App
+from kivy.properties import ObjectProperty
 
 
-class InputWindow(BoxLayout):
+class InputWindow(Widget):
     pass
 
 
-class Root(BoxLayout):
+class Root(Widget):
+    obj1 = ObjectProperty(None)
+    obj2 = ObjectProperty(None)
+
+
+class StartScreen(Widget):
     pass
 
 

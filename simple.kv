@@ -1,5 +1,6 @@
 #:import program program
-<Root>:
+<StartScreen>:
+    id: sc
     GridLayout:
         cols: 1
         Label:
@@ -9,18 +10,10 @@
             on_press:
                 root.clear_widgets()
                 root.add_widget(program.InputWindow())
-        GridLayout:
-            cols: 2
-            Label:
-                text: "a"
-            Label:
-                text: "b"
 
 <InputWindow>:
     id: in_win
-    size: 20,20
     GridLayout:
-        center: root.center
         cols:1
         Label:
             text: "Enter value"
@@ -32,6 +25,17 @@
             on_press:
                 root.clear_widgets()
                 root.add_widget(program.Root())
+
+<Root>:
+    size: root.size
+    canvas:
+        Color:
+            rgba: 0, 1, 0, 1
+        Rectangle:
+            pos: self.pos
+            size: self.size
+
+
 
 
 

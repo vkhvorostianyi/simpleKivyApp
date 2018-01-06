@@ -1,14 +1,9 @@
 from kivy.uix.boxlayout import BoxLayout
 from kivy.uix.widget import Widget
 from kivy.app import App
-from kivy.properties import ObjectProperty
 
 
 class InputWindow(BoxLayout):
-    pass
-
-
-class StartScreen(BoxLayout):
     pass
 
 

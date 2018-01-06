@@ -1,8 +1,5 @@
 #:import program program
 <Root>:
-    StartScreen:
-
-<StartScreen>:
     GridLayout:
         cols: 1
         Label:
@@ -21,21 +18,20 @@
 
 <InputWindow>:
     id: in_win
+    size: 20,20
     GridLayout:
         center: root.center
         cols:1
         Label:
             text: "Enter value"
-
         TextInput:
-
         Label:
             text: "Choose account"
         Button:
             text: "Back"
             on_press:
                 root.clear_widgets()
-                root.add_widget(program.StartScreen())
+                root.add_widget(program.Root())
 
 
 

@@ -61,7 +61,7 @@ def spend(account, transaction):
 def list_view(input_dict):
     view_string = ""
     for item in input_dict.items():
-        view_string += ('\n%s:%s' % (item[0], item[1]))
+        view_string += ('\n{}:{}'.format(item[0], item[1]))
     return view_string + '\n'
 
 
@@ -69,27 +69,22 @@ def search(input_list, keyword):
     total = 0
     search_stack = ''
     for item in sorted(input_list.keys(), reverse=True):
-        if keyword in item:
-            search_stack += '%s%s\n' % (item, list_view(input_list[item]))
-            total += Decimal(item[1]['value']).quantize(Decimal('0.01'), rounding=ROUND_DOWN)
-        else:
-            for i in item[1].values():
-                if keyword in i:
-                    search_stack += '%s%s\n' % (item[0], list_view(item[1]))
-                    total += Decimal(item[1]['value']).quantize(Decimal('0.01'), rounding=ROUND_DOWN)
+        if keyword in (item and str(input_list[item].values())):
+            search_stack += '{}{}\n'.format(item, list_view(input_list[item]))
+            total += Decimal(input_list[item]['value']).quantize(Decimal('0.01'), rounding=ROUND_DOWN)
+
     else:
         if search_stack:
-            return search_stack, total
+            print(search_stack)
+            return total, search_stack
         else:
             return "No results,sorry"
 
 
 def count_total(tr_data):
-    stack = ''
     total = 0
     for item in sorted(tr_data.keys()):
         total += Decimal(tr_data[item]['value']).quantize(Decimal('0.01'), rounding=ROUND_DOWN)
-        stack += '%s%s\n' % (item, list_view(tr_data[item]))
     return total
 
 

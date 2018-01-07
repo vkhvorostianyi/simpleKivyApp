@@ -4,7 +4,7 @@ from kivy.app import App
 from kivy.properties import ObjectProperty
 
 
-class InputWindow(Widget):
+class InputWindow(BoxLayout):
     pass
 
 
@@ -13,7 +13,7 @@ class Root(Widget):
     obj2 = ObjectProperty(None)
 
 
-class StartScreen(Widget):
+class StartScreen(BoxLayout):
     pass
 
 

@@ -1,6 +1,5 @@
 #:import program program
 <StartScreen>:
-    id: sc
     GridLayout:
         cols: 1
         Label:
@@ -12,7 +11,6 @@
                 root.add_widget(program.InputWindow())
 
 <InputWindow>:
-    id: in_win
     GridLayout:
         cols:1
         Label:
@@ -27,13 +25,9 @@
                 root.add_widget(program.Root())
 
 <Root>:
-    size: root.size
-    canvas:
-        Color:
-            rgba: 0, 1, 0, 1
-        Rectangle:
-            pos: self.pos
-            size: self.size
+    StartScreen:
+        center: root.center
+
 
 
 

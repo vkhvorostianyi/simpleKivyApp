@@ -1,16 +1,23 @@
 #:import program program
+#:import w wallet_app
 <StartScreen>:
     GridLayout:
-        cols: 1
-        Label:
-            text: "a"
+        cols: 2
         Button:
-            text: "hello"
+            text: "add new transaction"
             on_press:
                 root.clear_widgets()
                 root.add_widget(program.InputWindow())
+        Button:
+            text: "add account"
+        Button:
+            text: "add category"
+        Button:
+            text: "view all transactions"
+
 
 <InputWindow>:
+
     GridLayout:
         cols:1
         Label:
@@ -25,8 +32,31 @@
                 root.add_widget(program.Root())
 
 <Root>:
+    Label:
+        text: "MyWallet"
+        center_x:root.center_x
+        center_y:root.height-10
     StartScreen:
-        center: root.center
+        size: 800,200
+        center:root.center
+        padding: 10
+    GridLayout:
+        size:500,200
+        center_x: root.width/2
+        center_y:root.height-100
+        cols: 2
+        GridLayout:
+            size: 300,100
+            cols: 2
+            Label:
+                text: "Last transaction:"+ "\n"*4
+            Label:
+                text:w.wallet.last_transaction_view()
+        Label:
+            text: "Accounts:{}".format(w.wallet.list_view(w.wallet.account_list))
+
+
+
 
 
 

@@ -51,60 +51,61 @@ class Wallet(object):
         tr_cell["category"] = transaction.category
         tr_cell['account'] = transaction.transaction_account
 
-    def spend(self, account, transaction):
-        decimal_account = Decimal(account).quantize(Decimal('0.01'), rounding=ROUND_DOWN)
-        decimal_transaction = Decimal(transaction).quantize(Decimal('0.01'), rounding=ROUND_DOWN)
-        return str(decimal_account - decimal_transaction)
 
-    def save_to_file(self, file_name, data):
-        with open(file_name, "w") as outfile:
-            json.dump(data, outfile)
+def spend(account, transaction):
+    decimal_account = Decimal(account).quantize(Decimal('0.01'), rounding=ROUND_DOWN)
+    decimal_transaction = Decimal(transaction).quantize(Decimal('0.01'), rounding=ROUND_DOWN)
+    return str(decimal_account - decimal_transaction)
 
-    def read_from_file(self, file_name):
-        with open(file_name) as data_file:
-            data_loaded = json.load(data_file)
-        return data_loaded
 
-    def list_view(self, input_list):
-        view_string = ""
-        for item in input_list.items():
-            view_string += ('\n%s:%s' % (item[0], item[1]))
-        return view_string + '\n'
+def list_view(input_dict):
+    view_string = ""
+    for item in input_dict.items():
+        view_string += ('\n%s:%s' % (item[0], item[1]))
+    return view_string + '\n'
 
-    def transactions_view(self):
-        stack = ''
-        total = 0
-        for item in sorted(self.transaction_list, reverse=True):
-            total += Decimal(self.transaction_list[item]['value']).quantize(Decimal("0.01"), rounding=ROUND_DOWN)
-            stack += '%s%s\n' % (item, self.list_view(self.transaction_list[item]))
-        return stack, total
 
-    def last_transaction_view(self):
-        last_transaction = sorted(self.transaction_list, reverse=True)[0]
-        last_transaction_view = "%s:%s" % (last_transaction, self.list_view(self.transaction_list[last_transaction]))
-        return last_transaction_view
-
-    def search(self, input_list, keyword):
-        total = 0
-        search_stack = ''
-        for item in sorted(input_list.items(), reverse=True):
-            if keyword in item[0]:
-                search_stack += '%s%s\n' % (item[0], self.list_view(item[1]))
-                total += Decimal(item[1]['value']).quantize(Decimal('0.01'), rounding=ROUND_DOWN)
-            else:
-                for i in item[1].values():
-                    if keyword in i:
-                        search_stack += '%s%s\n' % (item[0], self.list_view(item[1]))
-                        total += Decimal(item[1]['value']).quantize(Decimal('0.01'), rounding=ROUND_DOWN)
+def search(input_list, keyword):
+    total = 0
+    search_stack = ''
+    for item in sorted(input_list.keys(), reverse=True):
+        if keyword in item:
+            search_stack += '%s%s\n' % (item, list_view(input_list[item]))
+            total += Decimal(item[1]['value']).quantize(Decimal('0.01'), rounding=ROUND_DOWN)
         else:
-            if search_stack:
-                return search_stack, total
-            else:
-                return "No results,sorry"
+            for i in item[1].values():
+                if keyword in i:
+                    search_stack += '%s%s\n' % (item[0], list_view(item[1]))
+                    total += Decimal(item[1]['value']).quantize(Decimal('0.01'), rounding=ROUND_DOWN)
+    else:
+        if search_stack:
+            return search_stack, total
+        else:
+            return "No results,sorry"
+
+
+def count_total(tr_data):
+    stack = ''
+    total = 0
+    for item in sorted(tr_data.keys()):
+        total += Decimal(tr_data[item]['value']).quantize(Decimal('0.01'), rounding=ROUND_DOWN)
+        stack += '%s%s\n' % (item, list_view(tr_data[item]))
+    return total
+
+
+def save_to_file(file_name, data):
+    with open(file_name, "w") as outfile:
+        json.dump(data, outfile)
+
+
+def read_from_file(file_name):
+    with open(file_name) as data_file:
+        data_loaded = json.load(data_file)
+    return data_loaded
 
 
 wallet = Wallet()
 
-wallet.category_list = wallet.read_from_file('categories.json')
-wallet.transaction_list = wallet.read_from_file('transactions.json')
-wallet.account_list = wallet.read_from_file('accounts.json')
+wallet.category_list = read_from_file('categories.json')
+wallet.transaction_list = read_from_file('transactions.json')
+wallet.account_list = read_from_file('accounts.json')

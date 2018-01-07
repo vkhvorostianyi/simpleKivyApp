@@ -14,6 +14,8 @@
             text: "add category"
         Button:
             text: "view all transactions"
+            on_press:
+
 
 
 <InputWindow>:
@@ -23,11 +25,15 @@
         Label:
             text: "Enter value"
         TextInput:
+            id: val
         Label:
             text: "Choose account"
         Button:
             text: "Back"
             on_press:
+                print(val.text)
+                w.wallet.add_transaction(w.Transaction(val.text,'test1','test1'))
+                w.wallet.save_to_file("transactions.json",w.wallet.transaction_list)
                 root.clear_widgets()
                 root.add_widget(program.StartScreen())
 
@@ -51,9 +57,9 @@
             Label:
                 text: "Last transaction:"+ "\n"*4
             Label:
-                text:w.wallet.last_transaction_view()
+#                text:w.list_view(w.wallet.transaction_list[sorted(w.wallet.transaction_list.keys()[0])])
         Label:
-            text: "Accounts:{}".format(w.wallet.list_view(w.wallet.account_list))
+            text: "Accounts:{}".format(w.list_view(w.wallet.account_list))
 
 
 

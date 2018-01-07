@@ -9,9 +9,7 @@ class InputWindow(BoxLayout):
 
 
 class Root(Widget):
-    obj1 = ObjectProperty(None)
-    obj2 = ObjectProperty(None)
-
+    pass
 
 class StartScreen(BoxLayout):
     pass

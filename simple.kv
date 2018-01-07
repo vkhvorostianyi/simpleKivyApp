@@ -31,9 +31,6 @@
         Button:
             text: "Back"
             on_press:
-                print(val.text)
-                w.wallet.add_transaction(w.Transaction(val.text,'test1','test1'))
-                w.wallet.save_to_file("transactions.json",w.wallet.transaction_list)
                 root.clear_widgets()
                 root.add_widget(program.StartScreen())
 

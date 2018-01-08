@@ -1,5 +1,6 @@
 #:import program program
 #:import w wallet_app
+
 <StartScreen>:
     GridLayout:
         cols: 2
@@ -16,12 +17,13 @@
             text: "view all transactions"
             on_press:
 
-<Head>:
+<HeadTitle>:
     rows:2
+    spacing: 100
+    padding: 10
     Label:
         text: "MyWallet"
-    GridLayout:
-        cols: 2
+    BoxLayout:
         Label:
             text: "Last transaction:\n{}".format(w.last_transaction_view())
         Label:
@@ -44,16 +46,21 @@
                 root.add_widget(program.StartScreen())
 
 <Root>:
+    start_screen: startScreen
+    head_title: headTitle
+
     StartScreen:
-        size: 800,200
-        center:root.center
-        padding: 10
-    Head:
-        size: 800,200
-        center_x: root.width/2
-        center_y: root.height * 4/5
-        padding: 10
-        spacing: 5
+        id: startScreen
+        size: root.width/2, root.height/4
+        center: root.center
+
+    HeadTitle:
+        id: headTitle
+        size: root.width/2, root.height/4
+        pos: root.center_x/2, root.height * 3/4
+
+
+
 
 
 

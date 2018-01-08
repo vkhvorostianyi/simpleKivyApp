@@ -2,19 +2,21 @@ from kivy.uix.boxlayout import BoxLayout
 from kivy.uix.gridlayout import GridLayout
 from kivy.uix.widget import Widget
 from kivy.app import App
-# from kivy.properties import ObjectProperty
+from kivy.properties import ObjectProperty
 
 
-class Head(GridLayout):
+class HeadTitle(GridLayout):
     pass
 
 
-class InputWindow(BoxLayout):
+class InputWindow(Widget):
     pass
 
 
 class Root(Widget):
-    pass
+    start_screen = ObjectProperty()
+    transaction_window = ObjectProperty()
+    head_title = ObjectProperty()
 
 
 class StartScreen(BoxLayout):

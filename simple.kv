@@ -26,7 +26,8 @@
             text: "Enter value"
         TextInput:
             id: val
-        Label:
+            size_hint:.8,.5
+        Button:
             text: "Choose account"
         Button:
             text: "Back"
@@ -48,15 +49,10 @@
         center_x: root.width/2
         center_y:root.height-100
         cols: 2
-        GridLayout:
-            size: 300,100
-            cols: 2
-            Label:
-                text: "Last transaction:"+ "\n"*4
-            Label:
-
         Label:
-            text: "Accounts:{}".format(w.list_view(w.wallet.account_list))
+            text: "Last transaction:\n{}".format(w.last_transaction_view())
+        Label:
+            text: "Accounts:{}\n".format(w.list_view(w.wallet.account_list))
 
 
 

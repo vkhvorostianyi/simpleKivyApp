@@ -75,7 +75,8 @@ def search(input_list, keyword=None):
                 total += Decimal(input_list[item]['value']).quantize(Decimal('0.01'), rounding=ROUND_DOWN)
         else:
             if search_stack:
-                for i in search_stack: print(i)
+                for i in search_stack:
+                    print(i)
                 return total, search_stack
             else:
                 return "No results,sorry"

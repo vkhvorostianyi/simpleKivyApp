@@ -11,6 +11,7 @@ class InputWindow(BoxLayout):
 class Root(Widget):
     pass
 
+
 class StartScreen(BoxLayout):
     pass
 

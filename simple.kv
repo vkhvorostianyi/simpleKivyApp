@@ -16,17 +16,25 @@
             text: "view all transactions"
             on_press:
 
-
+<Head>:
+    rows:2
+    Label:
+        text: "MyWallet"
+    GridLayout:
+        cols: 2
+        Label:
+            text: "Last transaction:\n{}".format(w.last_transaction_view())
+        Label:
+            text: "Accounts:{}\n".format(w.list_view(w.wallet.account_list))
 
 <InputWindow>:
 
     GridLayout:
-        cols:1
+        cols:2
         Label:
             text: "Enter value"
         TextInput:
             id: val
-            size_hint:.8,.5
         Button:
             text: "Choose account"
         Button:
@@ -36,23 +44,18 @@
                 root.add_widget(program.StartScreen())
 
 <Root>:
-    Label:
-        text: "MyWallet"
-        center_x:root.center_x
-        center_y:root.height-10
     StartScreen:
         size: 800,200
         center:root.center
         padding: 10
-    GridLayout:
-        size:500,200
+    Head:
+        size: 800,200
         center_x: root.width/2
-        center_y:root.height-100
-        cols: 2
-        Label:
-            text: "Last transaction:\n{}".format(w.last_transaction_view())
-        Label:
-            text: "Accounts:{}\n".format(w.list_view(w.wallet.account_list))
+        center_y: root.height * 4/5
+        padding: 10
+        spacing: 5
+
+
 
 
 

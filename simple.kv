@@ -2,64 +2,71 @@
 #:import w wallet_app
 
 <StartScreen>:
-    GridLayout:
-        cols: 2
-        Button:
-            text: "add new transaction"
-            on_press:
-                root.clear_widgets()
-                root.add_widget(program.InputWindow())
-        Button:
-            text: "add account"
-        Button:
-            text: "add category"
-        Button:
-            text: "view all transactions"
-            on_press:
+    AnchorLayout:
+        padding:
+            30,0,30,400
+        HeadTitle:
+    AnchorLayout:
+        padding: 30,400,30,0
+        GridLayout:
+            cols: 2
+            Button:
+                text: "add new transaction"
+                on_press:
+                    root.clear_widgets()
+                    root.add_widget(program.InputWindow())
+            Button:
+                text: "add account"
+            Button:
+                text: "add category"
+            Button:
+                text: "view all transactions"
+                on_press:
 
 <HeadTitle>:
-    rows:2
-    spacing: 100
-    padding: 10
-    Label:
-        text: "MyWallet"
-    BoxLayout:
+    GridLayout:
+        rows: 2
         Label:
-            text: "Last transaction:\n{}".format(w.last_transaction_view())
-        Label:
-            text: "Accounts:{}\n".format(w.list_view(w.wallet.account_list))
+            text: "MyWallet"
+        BoxLayout:
+            Label:
+                text: "Last transaction:\n{}".format(w.last_transaction_view())
+            Label:
+                text: "Accounts:{}\n".format(w.list_view(w.wallet.account_list))
 
 <InputWindow>:
-
-    GridLayout:
-        cols:2
-        Label:
-            text: "Enter value"
-        TextInput:
-            id: val
-        Button:
-            text: "Choose account"
-        Button:
-            text: "Back"
-            on_press:
-                root.clear_widgets()
-                root.add_widget(program.StartScreen())
+    AnchorLayout:
+        padding: 250, 250
+        GridLayout:
+            rows:2
+            Label:
+                text: "Enter value"
+            GridLayout:
+                rows: 2
+                TextInput:
+                    id: val
+#                Button:
+#                    text: "Choose account"
+                Button:
+                    text: "Back"
+                    on_press:
+                        root.clear_widgets()
+                        root.add_widget(program.StartScreen())
 
 <Root>:
-    start_screen: startScreen
-    head_title: headTitle
-
     StartScreen:
-        id: startScreen
-        size: root.width/2, root.height/4
-        center: root.center
-
-    HeadTitle:
-        id: headTitle
-        size: root.width/2, root.height/4
-        pos: root.center_x/2, root.height * 3/4
-
-
+#    start_screen: startScreen
+#    head_title: headTitle
+#
+#    StartScreen:
+#        id: startScreen
+#        size: root.width, root.height/2
+#
+#
+#    HeadTitle:
+#        id: headTitle
+#        size: root.width/2, root.height/4
+#        pos: root.center_x/2, root.height * 3/4
 
 
 

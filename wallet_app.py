@@ -65,27 +65,29 @@ def list_view(input_dict):
     return view_string + '\n'
 
 
-def search(input_list, keyword):
+def search(input_list, keyword=None):
     total = 0
-    search_stack = ''
-    for item in sorted(input_list.keys(), reverse=True):
-        if keyword in (item and str(input_list[item].values())):
-            search_stack += '{}{}\n'.format(item, list_view(input_list[item]))
-            total += Decimal(input_list[item]['value']).quantize(Decimal('0.01'), rounding=ROUND_DOWN)
-
-    else:
-        if search_stack:
-            print(search_stack)
-            return total, search_stack
+    search_stack = []
+    if keyword:
+        for item in sorted(input_list.keys(), reverse=True):
+            if keyword in (item and str(input_list[item].values())):
+                search_stack.append('{}{}\n'.format(item, list_view(input_list[item])))
+                total += Decimal(input_list[item]['value']).quantize(Decimal('0.01'), rounding=ROUND_DOWN)
         else:
-            return "No results,sorry"
+            if search_stack:
+                for i in search_stack: print(i)
+                return total, search_stack
+            else:
+                return "No results,sorry"
+    else:
+        for item in sorted(input_list.keys(), reverse=True):
+            search_stack.append('{}{}\n'.format(item, list_view(input_list[item])))
+            total += Decimal(input_list[item]['value']).quantize(Decimal('0.01'), rounding=ROUND_DOWN)
+        return total, search_stack
 
 
-def count_total(tr_data):
-    total = 0
-    for item in sorted(tr_data.keys()):
-        total += Decimal(tr_data[item]['value']).quantize(Decimal('0.01'), rounding=ROUND_DOWN)
-    return total
+def last_transaction_view():
+    return search(wallet.transaction_list)[1][0]
 
 
 def save_to_file(file_name, data):

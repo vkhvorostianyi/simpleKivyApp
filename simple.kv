@@ -1,10 +1,25 @@
 #:import program program
 #:import w wallet_app
 
+<MyBtn>:
+    Button:
+        text: "Back"
+        on_press:
+            root.clear_widgets()
+            root.add_widget(program.StartScreen())
+
+<TransactionScreen>:
+    AnchorLayout:
+        padding: 100, 0
+        ScrollView:
+            GridLayout:
+                cols: 1
+                MyBtn
+
 <StartScreen>:
     AnchorLayout:
         padding:
-            30,0,30,400
+            root.width*.1,10,root.width*.1,root.height * 3/4
         HeadTitle:
     AnchorLayout:
         padding: root.width*.1,root.height * 3/4,root.width*.1,10
@@ -17,6 +32,9 @@
                     root.add_widget(program.InputWindow())
             Button:
                 text: "add account"
+                on_press:
+                    root.clear_widgets()
+                    root.add_widget(program.TransactionScreen())
             Button:
                 text: "add category"
             Button:

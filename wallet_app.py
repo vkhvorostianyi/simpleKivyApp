@@ -61,7 +61,7 @@ def spend(account, transaction):
 def list_view(input_dict):
     view_string = ""
     for item in input_dict.items():
-        view_string += ('\n{}:{}'.format(item[0], item[1]))
+        view_string += ('{}:{}\n'.format(item[0], item[1]))
     return view_string + '\n'
 
 

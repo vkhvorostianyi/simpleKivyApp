@@ -4,13 +4,15 @@ from kivy.uix.widget import Widget
 # from kivy.properties import ObjectProperty
 from kivy.app import App
 from kivy.uix.screenmanager import ScreenManager, Screen
+from kivy.uix.listview import ListView
+import wallet_app as mw
 
 
 class HeadTitle(Screen):
     pass
 
 
-class MyBtn(Screen):
+class MainView(Screen):
     pass
 
 

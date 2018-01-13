@@ -17,19 +17,25 @@
 
 <TransactionScreen>:
     AnchorLayout:
-        padding: 100, 0
+        padding:
+            root.width*.1,10,root.width*.1,root.height * 3/4
         GridLayout:
-            spacing: 10
-            cols: 1
-            GridLayout:
             rows: 2
-
+            spacing:20
+            row_force_default: True
+            row_default_height: 40
             Button:
                 text: "Back"
                 on_press:
                     root.clear_widgets()
                     root.add_widget(program.StartScreen())
-            MainView:
+            BoxLayout:
+                TextInput:
+                Button:
+                    text: "Search"
+    AnchorLayout:
+        padding: root.width*.1,root.height * .2,root.width*.1,10
+        MainView
 
 <StartScreen>:
     AnchorLayout:

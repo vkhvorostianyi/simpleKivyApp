@@ -5,13 +5,13 @@
 <Btn>:
     size: 100, 100
 <Lb>:
-#    size: 100, 100
+    size: 100, 210
 <MainView>:
     ListView:
         adapter:
             sla.SimpleListAdapter(
             data=w.search(w.wallet.transaction_list)[1],
-            args_converter=program.list_item_args_converter,
+#            args_converter=program.list_item_args_converter,
             cls=program.Lb
             )
 
@@ -21,18 +21,15 @@
         GridLayout:
             spacing: 10
             cols: 1
+            GridLayout:
+            rows: 2
+
             Button:
                 text: "Back"
                 on_press:
                     root.clear_widgets()
                     root.add_widget(program.StartScreen())
             MainView:
-
-
-
-
-
-
 
 <StartScreen>:
     AnchorLayout:
@@ -58,17 +55,18 @@
             Button:
                 text: "view all transactions"
                 on_press:
-
+                    root.clear_widgets()
+                    root.add_widget(program.TransactionScreen())
 <HeadTitle>:
     GridLayout:
         rows: 2
         Label:
-            text: "MyWallet"
+            text: "MyWallet\n"
         BoxLayout:
             Label:
-                text: "Last transaction:\n{}".format(w.last_transaction_view())
+                text: "\nLast transaction:\n{}".format(w.last_transaction_view())
             Label:
-                text: "Accounts:{}\n".format(w.list_view(w.wallet.account_list))
+                text: "Accounts:\n{}".format(w.list_view(w.wallet.account_list))
 
 <InputWindow>:
     AnchorLayout:

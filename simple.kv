@@ -1,19 +1,25 @@
 #:import program program
 #:import w wallet_app
-#:import label kivy.uix.label
+#:import button kivy.uix.button
 #:import sla kivy.adapters.simplelistadapter
-
+<Btn>:
+    size: 100, 100
+<Lb>:
+#    size: 100, 100
 <MainView>:
     ListView:
         adapter:
             sla.SimpleListAdapter(
             data=w.search(w.wallet.transaction_list)[1],
-            cls=label.Label)
+            args_converter=program.list_item_args_converter,
+            cls=program.Lb
+            )
 
 <TransactionScreen>:
     AnchorLayout:
         padding: 100, 0
         GridLayout:
+            spacing: 10
             cols: 1
             Button:
                 text: "Back"
@@ -21,6 +27,8 @@
                     root.clear_widgets()
                     root.add_widget(program.StartScreen())
             MainView:
+
+
 
 
 

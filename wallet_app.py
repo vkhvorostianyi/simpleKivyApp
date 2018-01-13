@@ -71,7 +71,7 @@ def search(input_list, keyword=None):
     if keyword:
         for item in sorted(input_list.keys(), reverse=True):
             if keyword in (item and str(input_list[item].values())):
-                search_stack.append('{}{}\n'.format(item, list_view(input_list[item])))
+                search_stack.append('{}:\n{}'.format(item, list_view(input_list[item])))
                 total += Decimal(input_list[item]['value']).quantize(Decimal('0.01'), rounding=ROUND_DOWN)
         else:
             if search_stack:
@@ -82,7 +82,7 @@ def search(input_list, keyword=None):
                 return "No results,sorry"
     else:
         for item in sorted(input_list.keys(), reverse=True):
-            search_stack.append('{}{}\n'.format(item, list_view(input_list[item])))
+            search_stack.append('{}:\n{}'.format(item, list_view(input_list[item])))
             total += Decimal(input_list[item]['value']).quantize(Decimal('0.01'), rounding=ROUND_DOWN)
         return total, search_stack
 

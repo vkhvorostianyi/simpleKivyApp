@@ -5,10 +5,8 @@ from kivy.uix.listview import ListView, ListItemButton
 from kivy.uix.gridlayout import GridLayout
 from kivy.lang import Builder
 from kivy.factory import Factory
-from wallet_app import wallet
-integers_dict = {str(i): {'text': str(i), 'is_selected': False}
-                 for i in range(10000)}
 
+from fixtures import integers_dict
 
 # [TODO] Will SelectableView be in the kivy/factory_registers.py,
 #        as a result of setup.py? ListItemButton? others?
@@ -41,7 +39,7 @@ class MainView(GridLayout):
                 lambda row_index, rec: {'text': rec['text'],
                                         'is_selected': rec['is_selected'],
                                         'size_hint_y': None,
-                                        'height': 125}
+                                        'height': 25}
 
         # Here we create a dict adapter with 1..100 integer strings as
         # sorted_keys, and integers_dict from fixtures as data, passing our
@@ -49,7 +47,7 @@ class MainView(GridLayout):
         # create a list view using this adapter. args_converter above converts
         # dict attributes to ctx attributes.
         dict_adapter = DictAdapter(sorted_keys=[str(i) for i in range(100)],
-                                   data=wallet.transaction_list,
+                                   data=integers_dict,
                                    args_converter=list_item_args_converter,
                                    template='CustomListItem')
 

@@ -3,10 +3,10 @@ from kivy.uix.screenmanager import ScreenManager, Screen
 from kivy.uix.button import Button, Label
 
 
-# list_item_args_converter = lambda row_index, obj: {'text': obj, 'size_hint_y': None, 'height': 210}
+list_item_args_converter = lambda row_index, obj: {'text': obj, 'size_hint_y': None, 'height': 210}
 
 
-class Btn(Button):
+class Btn(Screen):
     pass
 
 

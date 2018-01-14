@@ -107,3 +107,6 @@ wallet = Wallet()
 wallet.category_list = read_from_file('categories.json')
 wallet.transaction_list = read_from_file('transactions.json')
 wallet.account_list = read_from_file('accounts.json')
+
+ac_list = list(wallet.account_list.keys())
+print(ac_list)

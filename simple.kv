@@ -3,7 +3,13 @@
 #:import button kivy.uix.button
 #:import sla kivy.adapters.simplelistadapter
 <Btn>:
-    size: 100, 100
+    ListView:
+        adapter:
+            sla.SimpleListAdapter(
+            data=w.ac_list,
+            args_converter=program.list_item_args_converter,
+            cls=program.Lb
+            )
 <Lb>:
     size: 100, 210
 <MainView>:
@@ -55,7 +61,6 @@
                 text: "add account"
                 on_press:
                     root.clear_widgets()
-                    root.add_widget(program.TransactionScreen())
             Button:
                 text: "add category"
             Button:
@@ -83,10 +88,12 @@
                 text: "Enter value"
             GridLayout:
                 rows: 2
+                cols: 2
                 TextInput:
                     id: val
                 Button:
                     text: "Choose account"
+                Btn:
                 Button:
                     text: "Back"
                     on_press:

@@ -1,14 +1,17 @@
 #:import program program
 #:import w wallet_app
-#:import button kivy.uix.button
+#:import tgbutton kivy.uix.togglebutton
 #:import sla kivy.adapters.simplelistadapter
 <Btn>:
-    ListView:
-        adapter:
-            sla.SimpleListAdapter(
-            data= w.
-            cls=program.Lb
-            )
+    BoxLayout:
+        orientation: 'vertical'
+        ListView:
+            adapter:
+                sla.SimpleListAdapter(
+                data=w.ac_list,
+    #            args_converter=program.list_item_args_converter,
+                cls=tgbutton.ToggleButton
+                )
 <Lb>:
     size: 100, 210
 <MainView>:
@@ -80,7 +83,7 @@
 
 <InputWindow>:
     AnchorLayout:
-        padding: root.width*.3, root.height*.4
+        padding: 50,root.width*.4,50, root.height*.1
         GridLayout:
             rows:2
             Label:
@@ -92,13 +95,14 @@
                     id: val
                 Button:
                     text: "Choose account"
-                Btn:
                 Button:
                     text: "Back"
                     on_press:
                         root.clear_widgets()
                         root.add_widget(program.StartScreen())
-
+    AnchorLayout:
+        padding: 10,root.width*.1,10, root.height*.4
+        Btn:
 
 <Root>:
     StartScreen:

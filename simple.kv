@@ -8,7 +8,7 @@
         ListView:
             adapter:
                 sla.SimpleListAdapter(
-                data=w.ac_list,
+                data=["{}:{}".format(x,y) for x,y in w.wallet.account_list.items()],
     #            args_converter=program.list_item_args_converter,
                 cls=tgbutton.ToggleButton
                 )

@@ -1,19 +1,12 @@
 #:import program program
 #:import w wallet_app
-#:import tgbutton kivy.uix.togglebutton
 #:import sla kivy.adapters.simplelistadapter
+#:import drop timer
 <Btn>:
-    BoxLayout:
-        orientation: 'vertical'
-        ListView:
-            adapter:
-                sla.SimpleListAdapter(
-                data=["{}:{}".format(x,y) for x,y in w.wallet.account_list.items()],
-    #            args_converter=program.list_item_args_converter,
-                cls=tgbutton.ToggleButton
-                )
+    drop.dropdown
 <Lb>:
     size: 100, 210
+
 <MainView>:
     ListView:
         adapter:

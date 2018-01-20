@@ -107,24 +107,19 @@
             rows:2
             Label:
                 text: "Enter value"
-            CustomDropDown:
             GridLayout:
-                rows: 2
-                cols: 2
+                cols: 1
+                row_default_height: 48
+                row_force_default: True
                 TextInput:
                     id: val
-                Button:
-                    text: "Choose account"
-                    on_press:
                 Button:
                     text: "Back"
                     on_press:
                         root.clear_widgets()
                         root.add_widget(program.StartScreen())
+                CustomDropDown
 
-    AnchorLayout:
-        padding: 10,root.width*.1,10, root.height*.4
-        Btn:
 
 <Root>:
     StartScreen:

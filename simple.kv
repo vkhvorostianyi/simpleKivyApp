@@ -1,9 +1,35 @@
 #:import program program
 #:import w wallet_app
 #:import sla kivy.adapters.simplelistadapter
-#:import drop timer
-<Btn>:
-    drop.dropdown
+#:import t tester
+
+<CustomDropDown>:
+    Button:
+        id: btn
+        text: 'Select Account'
+        on_release: dropdown.open(self)
+        size_hint_y: None
+        height: '48dp'
+
+    DropDown:
+
+        id: dropdown
+        on_select: btn.text = '{}'.format(args[1])
+
+        Button:
+            text: 'First Item'
+            size_hint_y: None
+            height: '48dp'
+            on_release: dropdown.select(self.text)
+        Label:
+            text: 'Second Item'
+            size_hint_y: None
+            height: '48dp'
+
+        Button:
+            text: 'Third Item'
+            size_hint_y: None
+            height: '48dp'
 <Lb>:
     size: 100, 210
 
@@ -76,11 +102,12 @@
 
 <InputWindow>:
     AnchorLayout:
-        padding: 50,root.width*.4,50, root.height*.1
+        padding: 50,root.width*.1,50, root.height*.1
         GridLayout:
             rows:2
             Label:
                 text: "Enter value"
+            CustomDropDown:
             GridLayout:
                 rows: 2
                 cols: 2
@@ -88,11 +115,13 @@
                     id: val
                 Button:
                     text: "Choose account"
+                    on_press:
                 Button:
                     text: "Back"
                     on_press:
                         root.clear_widgets()
                         root.add_widget(program.StartScreen())
+
     AnchorLayout:
         padding: 10,root.width*.1,10, root.height*.4
         Btn:

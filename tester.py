@@ -15,4 +15,3 @@ mainbutton = Button(text='Choose account', size_hint=(None, None))
 mainbutton.bind(on_release=dropdown.open)
 dropdown.bind(on_select=lambda instance, x: setattr(mainbutton, 'text', x))
 
-runTouchApp(mainbutton)

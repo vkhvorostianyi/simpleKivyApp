@@ -4,7 +4,7 @@ from kivy.uix.label import Label
 from kivy.uix.dropdown import DropDown
 from kivy.uix.button import Button
 from kivy.uix.boxlayout import BoxLayout
-# list_item_args_converter = lambda row_index, obj: {'text': obj, 'size_hint_y': None, 'height': 210}
+from kivy.properties import ListProperty
 
 
 class Btn(Screen):
@@ -41,7 +41,7 @@ class StartScreen(Screen):
 
 
 class CustomDropDown(BoxLayout):
-    pass
+    data = ListProperty()
 
 class SimpleApp(App):
 

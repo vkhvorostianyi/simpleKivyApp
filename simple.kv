@@ -9,27 +9,19 @@
         text: 'Select Account'
         on_release: dropdown.open(self)
         size_hint_y: None
-        height: '48dp'
+        height: 48
 
     DropDown:
 
         id: dropdown
         on_select: btn.text = '{}'.format(args[1])
-
+        # I want lor-lop for realization of every item in list
         Button:
-            text: 'First Item'
+            text: 'item'
             size_hint_y: None
-            height: '48dp'
+            height: 48
             on_release: dropdown.select(self.text)
-        Label:
-            text: 'Second Item'
-            size_hint_y: None
-            height: '48dp'
 
-        Button:
-            text: 'Third Item'
-            size_hint_y: None
-            height: '48dp'
 <Lb>:
     size: 100, 210
 

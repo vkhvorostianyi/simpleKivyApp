@@ -4,7 +4,7 @@ from kivy.uix.label import Label
 from kivy.uix.dropdown import DropDown
 from kivy.uix.button import Button
 from kivy.uix.boxlayout import BoxLayout
-from kivy.properties import ListProperty
+from kivy.properties import ListProperty, ObjectProperty
 
 
 class Btn(Screen):
@@ -42,10 +42,19 @@ class StartScreen(Screen):
 
 class CustomDropDown(BoxLayout):
     data = ListProperty()
+    dropdown = ObjectProperty()
+    def make_btn(self):
+        for item in self.data:
+            btn = Button(text='Value %d' % item, size_hint_y=None, height=44)
+            btn.bind(on_release=lambda btn: self.dropdown.select(btn.text))
+            self.dropdown.add_widget(btn)
+
 
 class SimpleApp(App):
 
     def build(self):
+        drop = CustomDropDown()
+        drop.make_btn()
         app = Root()
         return app
 

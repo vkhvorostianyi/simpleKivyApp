@@ -15,7 +15,7 @@
 
         id: dropdown
         on_select: btn.text = '{}'.format(args[1])
-        # I want lor-lop for realization of every item in list
+        # I want for-loop for realization of every item in list
         Button:
             text: 'item'
             size_hint_y: None
@@ -30,7 +30,6 @@
         adapter:
             sla.SimpleListAdapter(
             data=w.search(w.wallet.transaction_list)[1],
-#            args_converter=program.list_item_args_converter,
             cls=program.Lb
             )
 

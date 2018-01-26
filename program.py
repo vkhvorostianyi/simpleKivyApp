@@ -53,10 +53,11 @@ class MyDrop(Screen):
 
         self.clear_widgets()
         drp_name = DropDown()
-        btn_name = Button(text="Choose account", size_hint=(.8, .5))
+        btn_name = Button(text="Choose account", size_hint=(.5, .5))
 
         for i in self.sel:
             btn=Button(text=i, size_hint_y=None, height=btn_name.height)
+            btn.bind(on_release=lambda btn=btn, dropdown=drp_name: dropdown.select(btn.text))
             drp_name.add_widget(btn)
         btn_name.bind(on_release=drp_name.open)
         drp_name.bind(on_select=lambda instance, x, btn=btn_name: setattr(btn, 'text', x))

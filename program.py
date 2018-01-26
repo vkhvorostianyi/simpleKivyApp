@@ -43,18 +43,17 @@ class StartScreen(Screen):
 
 
 
-class MyDrop(GridLayout):
+class MyDrop(Screen):
     def __init__(self, **kwargs):
         super(MyDrop, self).__init__(**kwargs)
         self.redraw()
-
     sel = ["{}:{}".format(x, y) for x, y in wallet.account_list.items()]
 
     def redraw(self):
 
         self.clear_widgets()
         drp_name = DropDown()
-        btn_name = Button(text="Choose account", size_hint=(None, None))
+        btn_name = Button(text="Choose account", size_hint=(.8, .5))
 
         for i in self.sel:
             btn=Button(text=i, size_hint_y=None, height=btn_name.height)

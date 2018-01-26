@@ -41,18 +41,11 @@ class StartScreen(Screen):
     pass
 
 
-class CustomDropDown(BoxLayout):
-    data = ListProperty()
-    dropdown = ObjectProperty()
-    def make_btn(self):
-        for item in self.data:
-            btn = Button(text='Value %d' % item, size_hint_y=None, height=44)
-            btn.bind(on_release=lambda btn: self.dropdown.select(btn.text))
-            self.dropdown.add_widget(btn)
 
-class MyGrid(GridLayout):
+
+class MyDrop(GridLayout):
     def __init__(self, **kwargs):
-        super(MyGrid, self).__init__(**kwargs)
+        super(MyDrop, self).__init__(**kwargs)
         self.redraw()
 
     sel = ["{}:{}".format(x, y) for x, y in wallet.account_list.items()]
@@ -60,25 +53,19 @@ class MyGrid(GridLayout):
     def redraw(self):
 
         self.clear_widgets()
-        self.rows = 5
-        self.cols =2
+        drp_name = DropDown()
+        btn_name = Button(text="Choose account", size_hint=(None, None))
 
-        drpName = []
-        drpName.append(DropDown())
-        btnName = Button(text="B", size_hint=(None, None))
         for i in self.sel:
-            btn=Button(text=i, size_hint_y=None, height=btnName.height)
-            btn.bind(on_release=lambda btn=btn,dropdown=drpName[0]:dropdown.select(btn.text))
-            drpName[0].add_widget(btn)
-        btnName.bind(on_release=drpName[0].open)
-        drpName[0].bind(on_select=lambda instance, x, btn=btnName: setattr(btn, 'text', x))
-        self.add_widget(btnName)
+            btn=Button(text=i, size_hint_y=None, height=btn_name.height)
+            drp_name.add_widget(btn)
+        btn_name.bind(on_release=drp_name.open)
+        drp_name.bind(on_select=lambda instance, x, btn=btn_name: setattr(btn, 'text', x))
+        self.add_widget(btn_name)
 
 class SimpleApp(App):
 
     def build(self):
-        drop = CustomDropDown()
-        drop.make_btn()
         app = Root()
         return app
 

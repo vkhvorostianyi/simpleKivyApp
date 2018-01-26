@@ -43,11 +43,10 @@ class StartScreen(Screen):
 
 
 
-class MyDrop(GridLayout):
+class MyDrop(Screen):
     def __init__(self, **kwargs):
         super(MyDrop, self).__init__(**kwargs)
         self.redraw()
-
     sel = ["{}:{}".format(x, y) for x, y in wallet.account_list.items()]
 
     def redraw(self):

@@ -63,6 +63,7 @@ class MyDrop(Screen):
         drp_name.bind(on_select=lambda instance, x, btn=btn_name: setattr(btn, 'text', x))
         self.add_widget(btn_name)
 
+
 class SimpleApp(App):
 
     def build(self):

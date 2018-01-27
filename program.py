@@ -53,7 +53,7 @@ class MyDrop(Screen):
 
         self.clear_widgets()
         drp_name = DropDown()
-        btn_name = Button(text="Choose account", size_hint=(.5, .5))
+        btn_name = Button(text="Choose account", size_hint=(1, .5))
 
         for i in self.sel:
             btn=Button(text=i, size_hint_y=None, height=btn_name.height)

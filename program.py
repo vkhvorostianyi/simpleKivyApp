@@ -49,16 +49,19 @@ class MyDrop(GridLayout):
         self.redraw()
 
     sel = ["{}:{}".format(x, y) for x, y in wallet.account_list.items()]
-
+    cat = ["{}".format(x) for x in wallet.category_list.keys()]
+    dd1 = DropDown()
+    dd2 = DropDown()
     def redraw(self):
 
         self.clear_widgets()
-        self.rows = 5
         self.cols =2
-
         drpName = []
-        drpName.append(DropDown())
-        btnName = Button(text="B", size_hint=(None, None))
+        drpName.append(self.dd1)
+        drpName.append(self.dd2)
+        btnName = Button(text="choose account", size_hint=(.5, None))
+        BtnCat = Button(text="choose category", size_hint=(.5, None))
+
         for i in self.sel:
             btn=Button(text=i, size_hint_y=None, height=btnName.height)
             btn.bind(on_release=lambda btn=btn,dropdown=drpName[0]:dropdown.select(btn.text))
@@ -67,6 +70,13 @@ class MyDrop(GridLayout):
         drpName[0].bind(on_select=lambda instance, x, btn=btnName: setattr(btn, 'text', x))
         self.add_widget(btnName)
 
+        for i in self.cat:
+            btn=Button(text=i, size_hint_y=None, height=BtnCat.height)
+            btn.bind(on_release=lambda btn=btn,dropdown=drpName[1]:dropdown.select(btn.text))
+            drpName[1].add_widget(btn)
+        BtnCat.bind(on_release=drpName[1].open)
+        drpName[1].bind(on_select=lambda instance, x, btn=BtnCat: setattr(btn, 'text', x))
+        self.add_widget(BtnCat)
 
 class SimpleApp(App):
 

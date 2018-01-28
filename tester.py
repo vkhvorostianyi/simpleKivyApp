@@ -23,7 +23,7 @@ class MyGrid(GridLayout):
         drpName = []
         drpName.append(DropDown())
         drpName.append(DropDown())
-        btnName = Button(text="B", size_hint=(None, None))
+        btnName = Button(text="B", size_hint=(.5, None))
         for i in self.sel:
             btn=Button(text=i, size_hint_y=None, height=btnName.height)
             btn.bind(on_release=lambda btn=btn,dropdown=drpName[0]:dropdown.select(btn.text))

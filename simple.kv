@@ -77,12 +77,11 @@
         padding: 50,root.width*.1,50, root.height*.1
 
         GridLayout:
-            rows:4
+            rows:3
             cols:1
             size_hint_x: .5
             Label:
                 text: "Enter value"
-            MyDrop:
             GridLayout:
                 cols: 1
                 row_default_height: 48
@@ -94,7 +93,7 @@
                     on_press:
                         root.clear_widgets()
                         root.add_widget(program.StartScreen())
-
+            MyDrop:
 
 <Root>:
     StartScreen:

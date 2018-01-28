@@ -13,7 +13,7 @@ class MyGrid(GridLayout):
         self.redraw()
 
     sel = ["{}:{}".format(x, y) for x, y in wallet.account_list.items()]
-
+    test = 'a', 'b', 'c'
     def redraw(self):
 
         self.clear_widgets()
@@ -21,6 +21,7 @@ class MyGrid(GridLayout):
         self.cols =2
 
         drpName = []
+        drpName.append(DropDown())
         drpName.append(DropDown())
         btnName = Button(text="B", size_hint=(None, None))
         for i in self.sel:

@@ -50,15 +50,17 @@ class MyDrop(GridLayout):
 
     sel = ["{}:{}".format(x, y) for x, y in wallet.account_list.items()]
     cat = ["{}".format(x) for x in wallet.category_list.keys()]
-    dd1 = DropDown()
-    dd2 = DropDown()
+
+
     def redraw(self):
 
         self.clear_widgets()
         self.cols =2
         drpName = []
-        drpName.append(self.dd1)
-        drpName.append(self.dd2)
+        dd1 = DropDown()
+        dd2 = DropDown()
+        drpName.append(dd1)
+        drpName.append(dd2)
         btnName = Button(text="choose account", size_hint=(.5, None))
         BtnCat = Button(text="choose category", size_hint=(.5, None))
 

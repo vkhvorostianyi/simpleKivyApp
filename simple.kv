@@ -1,26 +1,7 @@
 #:import program program
 #:import w wallet_app
 #:import sla kivy.adapters.simplelistadapter
-#:import t tester
 
-<CustomDropDown>:
-    Button:
-        id: btn
-        text: 'Select Account'
-        on_release: dropdown.open(self)
-        size_hint_y: None
-        height: 48
-
-    DropDown:
-
-        id: dropdown
-        on_select: btn.text = '{}'.format(args[1])
-        # I want for-loop for realization of every item in list
-        Button:
-            text: 'item'
-            size_hint_y: None
-            height: 48
-            on_release: dropdown.select(self.text)
 
 <Lb>:
     size: 100, 210
@@ -92,10 +73,17 @@
                 text: "Accounts:\n{}".format(w.list_view(w.wallet.account_list))
 
 <InputWindow>:
+    Button:
+        size_hint: .1,.1
+        text: "Back"
+        on_press:
+            root.clear_widgets()
+            root.add_widget(program.StartScreen())
     AnchorLayout:
         padding: 50,root.width*.1,50, root.height*.1
         GridLayout:
-            rows:2
+            cols:1
+            size_hint_x: .8
             Label:
                 text: "Enter value"
             GridLayout:
@@ -104,28 +92,11 @@
                 row_force_default: True
                 TextInput:
                     id: val
-                Button:
-                    text: "Back"
-                    on_press:
-                        root.clear_widgets()
-                        root.add_widget(program.StartScreen())
-                CustomDropDown
-
+            MyDrop:
 
 <Root>:
     StartScreen:
-#    start_screen: startScreen
-#    head_title: headTitle
-#
-#    StartScreen:
-#        id: startScreen
-#        size: root.width, root.height/2
-#
-#
-#    HeadTitle:
-#        id: headTitle
-#        size: root.width/2, root.height/4
-#        pos: root.center_x/2, root.height * 3/4
+
 
 
 

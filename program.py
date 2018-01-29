@@ -1,11 +1,12 @@
-from kivy.app import App
 from kivy.uix.screenmanager import ScreenManager, Screen
-from kivy.uix.label import Label
-from kivy.uix.dropdown import DropDown
-from kivy.uix.button import Button
 from kivy.uix.boxlayout import BoxLayout
 from kivy.properties import ListProperty, ObjectProperty
-
+from kivy.app import App
+from kivy.uix.label import Label
+from kivy.uix.button import Button
+from kivy.uix.dropdown import DropDown
+from kivy.uix.gridlayout import GridLayout
+from wallet_app import  *
 
 class Btn(Screen):
     pass
@@ -40,21 +41,48 @@ class StartScreen(Screen):
     pass
 
 
-class CustomDropDown(BoxLayout):
-    data = ListProperty()
-    dropdown = ObjectProperty()
-    def make_btn(self):
-        for item in self.data:
-            btn = Button(text='Value %d' % item, size_hint_y=None, height=44)
-            btn.bind(on_release=lambda btn: self.dropdown.select(btn.text))
-            self.dropdown.add_widget(btn)
 
+
+class MyDrop(GridLayout):
+    def __init__(self, **kwargs):
+        super(MyDrop, self).__init__(**kwargs)
+        self.redraw()
+
+    sel = ["{}:{}".format(x, y) for x, y in wallet.account_list.items()]
+    cat = ["{}".format(x) for x in wallet.category_list.keys()]
+
+
+    def redraw(self):
+
+        self.clear_widgets()
+        self.cols =2
+        drpName = []
+        dd1 = DropDown()
+        dd2 = DropDown()
+        drpName.append(dd1)
+        drpName.append(dd2)
+        btnName = Button(text="choose account", size_hint=(.5, None))
+        BtnCat = Button(text="choose category", size_hint=(.5, None))
+
+        for i in self.sel:
+            btn=Button(text=i, size_hint_y=None, height=btnName.height)
+            btn.bind(on_release=lambda btn=btn,dropdown=drpName[0]:dropdown.select(btn.text))
+            drpName[0].add_widget(btn)
+        btnName.bind(on_release=drpName[0].open)
+        drpName[0].bind(on_select=lambda instance, x, btn=btnName: setattr(btn, 'text', x))
+        self.add_widget(btnName)
+
+        for i in self.cat:
+            btn=Button(text=i, size_hint_y=None, height=BtnCat.height)
+            btn.bind(on_release=lambda btn=btn,dropdown=drpName[1]:dropdown.select(btn.text))
+            drpName[1].add_widget(btn)
+        BtnCat.bind(on_release=drpName[1].open)
+        drpName[1].bind(on_select=lambda instance, x, btn=BtnCat: setattr(btn, 'text', x))
+        self.add_widget(BtnCat)
 
 class SimpleApp(App):
 
     def build(self):
-        drop = CustomDropDown()
-        drop.make_btn()
         app = Root()
         return app
 

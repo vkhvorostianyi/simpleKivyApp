@@ -73,11 +73,15 @@
                 text: "Accounts:\n{}".format(w.list_view(w.wallet.account_list))
 
 <InputWindow>:
+    Button:
+        size_hint: .1,.1
+        text: "Back"
+        on_press:
+            root.clear_widgets()
+            root.add_widget(program.StartScreen())
     AnchorLayout:
         padding: 50,root.width*.1,50, root.height*.1
-
         GridLayout:
-            rows:3
             cols:1
             size_hint_x: .8
             Label:
@@ -88,11 +92,6 @@
                 row_force_default: True
                 TextInput:
                     id: val
-                Button:
-                    text: "Back"
-                    on_press:
-                        root.clear_widgets()
-                        root.add_widget(program.StartScreen())
             MyDrop:
 
 <Root>:

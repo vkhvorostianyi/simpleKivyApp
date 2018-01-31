@@ -13,6 +13,9 @@ class AccountScreen(Screen):
     pass
 
 
+class CategoryScreen(Screen):
+    pass
+
 class Lb(Label):
     pass
 

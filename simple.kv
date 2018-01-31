@@ -5,12 +5,41 @@
 
 <Lb>:
     size: 100, 210
+
+<CategoryScreen>:
+    BoxLayout:
+        orientation: "vertical"
+        size_hint: .5,.5
+        center_x: root.width/3
+        center_y: root.height/3
+        Label:
+            text: "Enter new category name"
+        TextInput:
+        Button:
+            text: "Back"
+            on_press:
+                root.clear_widgets()
+                root.add_widget(program.StartScreen())
+
 <AccountScreen>:
-    Button:
-        text: "Back"
-        on_press:
-            root.clear_widgets()
-            root.add_widget(program.StartScreen())
+    GridLayout:
+        size_hint: .5,.5
+        center_x: root.width/3
+        center_y: root.height/3
+        cols: 1
+        Label:
+            text: "Enter name"
+        TextInput:
+        Label:
+            text: "Enter value"
+        Button:
+            text: "Save"
+
+        Button:
+            text: "Back"
+            on_press:
+                root.clear_widgets()
+                root.add_widget(program.StartScreen())
 <MainView>:
     ListView:
         adapter:
@@ -62,6 +91,9 @@
                     root.add_widget(program.AccountScreen())
             Button:
                 text: "add category"
+                on_press:
+                    root.clear_widgets()
+                    root.add_widget(program.CategoryScreen())
             Button:
                 text: "view all transactions"
                 on_press:

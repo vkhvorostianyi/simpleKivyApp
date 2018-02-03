@@ -8,7 +8,7 @@ from kivy.uix.dropdown import DropDown
 from kivy.uix.gridlayout import GridLayout
 from wallet_app import  *
 
-class Btn(Screen):
+class AccountScreen(Screen):
     pass
 
 

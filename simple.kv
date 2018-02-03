@@ -11,6 +11,12 @@
         on_press:
             root.clear_widgets()
             root.add_widget(program.StartScreen())
+<AccountScreen>:
+    Button:
+        text: "Back"
+        on_press:
+            root.clear_widgets()
+            root.add_widget(program.StartScreen())
 
 
 <MainView>:
@@ -61,8 +67,13 @@
                 text: "add account"
                 on_press:
                     root.clear_widgets()
+                    root.add_widget(program.AccountScreen())
             Button:
                 text: "add category"
+                on_press:
+                    root.clear_widgets()
+                    root.add_widget(program.CategoryScreen())
+
             Button:
                 text: "view all transactions"
                 on_press:

@@ -43,32 +43,39 @@ class StartScreen(Screen):
 
 
 
-class MyDrop(Screen):
+class MyDrop(BoxLayout):
     def __init__(self, **kwargs):
         super(MyDrop, self).__init__(**kwargs)
         self.redraw()
-    sel = []
-    btn_text = ''
+    sel = [str(i) for i in range(2,16,2)]
+    btn_text = 'a'
     def redraw(self):
 
         self.clear_widgets()
-        drp_name = DropDown()
+        __drp_name = DropDown()
         btn_name = Button(text=self.btn_text, size_hint=(.5, .5))
 
         for i in self.sel:
             btn=Button(text=i, size_hint_y=None, height=btn_name.height)
-            btn.bind(on_release=lambda btn=btn, dropdown=drp_name: dropdown.select(btn.text))
-            drp_name.add_widget(btn)
-        btn_name.bind(on_release=drp_name.open)
-        drp_name.bind(on_select=lambda instance, x, btn=btn_name: setattr(btn, 'text', x))
+            btn.bind(on_release=lambda btn=btn, dropdown=__drp_name: dropdown.select(btn.text))
+            __drp_name.add_widget(btn)
+        btn_name.bind(on_release=__drp_name.open)
+        __drp_name.bind(on_select=lambda instance, x, btn=btn_name: setattr(btn, 'text', x))
         self.add_widget(btn_name)
 
 
 class AccountDrop(MyDrop):
+    def __init__(self, **kwargs):
+        super(AccountDrop, self).__init__(**kwargs)
+        self.redraw()
     sel = ["{}:{}".format(x, y) for x, y in wallet.account_list.items()]
     btn_text = 'Choose account'
 
+
 class CategoryDrop(MyDrop):
+    def __init__(self, **kwargs):
+        super(CategoryDrop, self).__init__(**kwargs)
+        self.redraw()
     sel = ["{}".format(x) for x in wallet.category_list.keys()]
     btn_text = 'Choose category'
 

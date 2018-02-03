@@ -5,6 +5,13 @@
 
 <Lb>:
     size: 100, 210
+<CategoryScreen>:
+    Button:
+        text: "Back"
+        on_press:
+            root.clear_widgets()
+            root.add_widget(program.StartScreen())
+
 
 <MainView>:
     ListView:

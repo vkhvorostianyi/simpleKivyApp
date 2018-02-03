@@ -53,8 +53,9 @@ class MyDrop(BoxLayout):
 
     sel = ["{}:{}".format(x, y) for x, y in wallet.account_list.items()]
     cat = ["{}".format(x) for x in wallet.category_list.keys()]
-    def clear(self):
-        self.clear_widgets()
+    def clear(self,e=None):
+        self.parent.clear_widgets()
+
 
     def redraw(self):
 
@@ -82,7 +83,7 @@ class MyDrop(BoxLayout):
             drpName[1].add_widget(btn)
         else:
             btn = Button(text='add category', size_hint_y=None, height=BtnCat.height)
-            btn.bind(on_release=lambda btn=btn, dropdown=drpName[1]: dropdown.select(btn.text))
+            btn.bind(on_release = self.clear)
             drpName[1].add_widget(btn)
         BtnCat.bind(on_release=drpName[1].open)
         drpName[1].bind(on_select=lambda instance, x, btn=BtnCat: setattr(btn, 'text', x))

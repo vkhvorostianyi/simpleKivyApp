@@ -3,8 +3,9 @@ from kivy.uix.label import Label
 from kivy.uix.button import Button
 from kivy.uix.dropdown import DropDown
 from kivy.uix.gridlayout import GridLayout
+from kivy.uix.boxlayout import BoxLayout
 from wallet_app import  *
-
+from kivy.uix.widget import Widget
 
 
 class MyGrid(GridLayout):
@@ -17,11 +18,11 @@ class MyGrid(GridLayout):
     def redraw(self):
 
         self.clear_widgets()
-        self.rows = 5
-        self.cols =2
+        self.cols =1
 
         drpName = []
-        drpName.append(DropDown())
+        dd = DropDown()
+        drpName.append(dd)
         btnName = Button(text="B", size_hint=(None, None))
         for i in self.sel:
             btn=Button(text=i, size_hint_y=None, height=btnName.height)
@@ -31,9 +32,25 @@ class MyGrid(GridLayout):
         drpName[0].bind(on_select=lambda instance, x, btn=btnName: setattr(btn, 'text', x))
         self.add_widget(btnName)
 
+class Root(BoxLayout):
+    pass
+
+
+class MyChild(MyGrid):
+    sel = [str(i) for i in range(0,5,1)]
+
+
+class SecChild(MyGrid):
+    pass
+
+
+class Separator(Widget):
+    pass
+
+
 class testApp(App):
     def build(self):
-        return MyGrid()
+        return Root()
 
 if __name__=="__main__":
     testApp().run()

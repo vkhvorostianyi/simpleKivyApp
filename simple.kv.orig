@@ -6,6 +6,40 @@
 <Lb>:
     size: 100, 210
 
+<CategoryScreen>:
+    BoxLayout:
+        orientation: "vertical"
+        size_hint: .5,.5
+        center_x: root.width/3
+        center_y: root.height/3
+        Label:
+            text: "Enter new category name"
+        TextInput:
+        Button:
+            text: "Back"
+            on_press:
+                root.clear_widgets()
+                root.add_widget(program.StartScreen())
+
+<AccountScreen>:
+    GridLayout:
+        size_hint: .5,.5
+        center_x: root.width/3
+        center_y: root.height/3
+        cols: 1
+        Label:
+            text: "Enter name"
+        TextInput:
+        Label:
+            text: "Enter value"
+        Button:
+            text: "Save"
+
+        Button:
+            text: "Back"
+            on_press:
+                root.clear_widgets()
+                root.add_widget(program.StartScreen())
 <MainView>:
     ListView:
         adapter:
@@ -54,8 +88,12 @@
                 text: "add account"
                 on_press:
                     root.clear_widgets()
+                    root.add_widget(program.AccountScreen())
             Button:
                 text: "add category"
+                on_press:
+                    root.clear_widgets()
+                    root.add_widget(program.CategoryScreen())
             Button:
                 text: "view all transactions"
                 on_press:
@@ -73,29 +111,41 @@
                 text: "Accounts:\n{}".format(w.list_view(w.wallet.account_list))
 
 <InputWindow>:
+    Button:
+        size_hint: .1,.1
+        text: "Back"
+        on_press:
+            root.clear_widgets()
+            root.add_widget(program.StartScreen())
     AnchorLayout:
         padding: 50,root.width*.1,50, root.height*.1
-
         GridLayout:
-            rows:3
             cols:1
+<<<<<<< HEAD
+||||||| merged common ancestors
             size_hint_x: .5
+=======
+            size_hint_x: .8
+>>>>>>> mybranch
             Label:
                 text: "Enter value"
+<<<<<<< HEAD
+            BoxLayout:
+
+                CategoryDrop:
+                AccountDrop:
+
+||||||| merged common ancestors
             MyDrop:
+=======
+>>>>>>> mybranch
             GridLayout:
                 cols: 1
                 row_default_height: 48
                 row_force_default: True
-
                 TextInput:
                     id: val
-                Button:
-                    text: "Back"
-                    on_press:
-                        root.clear_widgets()
-                        root.add_widget(program.StartScreen())
-
+            MyDrop:
 
 <Root>:
     StartScreen:

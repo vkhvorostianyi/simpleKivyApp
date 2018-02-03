@@ -8,7 +8,8 @@ from kivy.uix.dropdown import DropDown
 from kivy.uix.gridlayout import GridLayout
 from wallet_app import  *
 
-class Btn(Screen):
+
+class AccountScreen(Screen):
     pass
 
 
@@ -46,19 +47,40 @@ class StartScreen(Screen):
 
 
 
+<<<<<<< HEAD
 class MyDrop(BoxLayout):
+||||||| merged common ancestors
+class MyDrop(Screen):
+=======
+class MyDrop(GridLayout):
+>>>>>>> mybranch
     def __init__(self, **kwargs):
         super(MyDrop, self).__init__(**kwargs)
         self.redraw()
+<<<<<<< HEAD
+    sel = [str(i) for i in range(2,16,2)]
+    btn_text = 'a'
+||||||| merged common ancestors
+    sel = ["{}:{}".format(x, y) for x, y in wallet.account_list.items()]
+
+=======
 
     sel = ["{}:{}".format(x, y) for x, y in wallet.account_list.items()]
     cat = ["{}".format(x) for x in wallet.category_list.keys()]
     def clear(self):
         self.clear_widgets()
 
+>>>>>>> mybranch
     def redraw(self):
 
         self.clear_widgets()
+<<<<<<< HEAD
+        __drp_name = DropDown()
+        btn_name = Button(text=self.btn_text, size_hint=(.5, .5))
+||||||| merged common ancestors
+        drp_name = DropDown()
+        btn_name = Button(text="Choose account", size_hint=(.5, .5))
+=======
         self.cols =2
         drpName = []
         dd1 = DropDown()
@@ -67,8 +89,24 @@ class MyDrop(BoxLayout):
         drpName.append(dd2)
         btnName = Button(text="choose account", size_hint=(.5, None))
         BtnCat = Button(text="choose category", size_hint=(.5, None))
+>>>>>>> mybranch
 
         for i in self.sel:
+<<<<<<< HEAD
+            btn=Button(text=i, size_hint_y=None, height=btn_name.height)
+            btn.bind(on_release=lambda btn=btn, dropdown=__drp_name: dropdown.select(btn.text))
+            __drp_name.add_widget(btn)
+        btn_name.bind(on_release=__drp_name.open)
+        __drp_name.bind(on_select=lambda instance, x, btn=btn_name: setattr(btn, 'text', x))
+        self.add_widget(btn_name)
+||||||| merged common ancestors
+            btn=Button(text=i, size_hint_y=None, height=btn_name.height)
+            btn.bind(on_release=lambda btn=btn, dropdown=drp_name: dropdown.select(btn.text))
+            drp_name.add_widget(btn)
+        btn_name.bind(on_release=drp_name.open)
+        drp_name.bind(on_select=lambda instance, x, btn=btn_name: setattr(btn, 'text', x))
+        self.add_widget(btn_name)
+=======
             btn=Button(text=i, size_hint_y=None, height=btnName.height)
             btn.bind(on_release=lambda btn=btn,dropdown=drpName[0]:dropdown.select(btn.text))
             drpName[0].add_widget(btn)
@@ -87,6 +125,24 @@ class MyDrop(BoxLayout):
         BtnCat.bind(on_release=drpName[1].open)
         drpName[1].bind(on_select=lambda instance, x, btn=BtnCat: setattr(btn, 'text', x))
         self.add_widget(BtnCat)
+>>>>>>> mybranch
+
+
+class AccountDrop(MyDrop):
+    def __init__(self, **kwargs):
+        super(AccountDrop, self).__init__(**kwargs)
+        self.redraw()
+    sel = ["{}:{}".format(x, y) for x, y in wallet.account_list.items()]
+    btn_text = 'Choose account'
+
+
+class CategoryDrop(MyDrop):
+    def __init__(self, **kwargs):
+        super(CategoryDrop, self).__init__(**kwargs)
+        self.redraw()
+    sel = ["{}".format(x) for x in wallet.category_list.keys()]
+    btn_text = 'Choose category'
+
 
 class SimpleApp(App):
 

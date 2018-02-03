@@ -48,12 +48,12 @@ class MyDrop(Screen):
         super(MyDrop, self).__init__(**kwargs)
         self.redraw()
     sel = []
-
+    btn_text = ''
     def redraw(self):
 
         self.clear_widgets()
         drp_name = DropDown()
-        btn_name = Button(text="Choose account", size_hint=(.5, .5))
+        btn_name = Button(text=self.btn_text, size_hint=(.5, .5))
 
         for i in self.sel:
             btn=Button(text=i, size_hint_y=None, height=btn_name.height)
@@ -62,6 +62,16 @@ class MyDrop(Screen):
         btn_name.bind(on_release=drp_name.open)
         drp_name.bind(on_select=lambda instance, x, btn=btn_name: setattr(btn, 'text', x))
         self.add_widget(btn_name)
+
+
+class AccountDrop(MyDrop):
+    sel = ["{}:{}".format(x, y) for x, y in wallet.account_list.items()]
+    btn_text = 'Choose account'
+
+class CategoryDrop(MyDrop):
+    sel = ["{}".format(x) for x in wallet.category_list.keys()]
+    btn_text = 'Choose category'
+
 
 class SimpleApp(App):
 

@@ -93,26 +93,19 @@
 <InputWindow>:
     AnchorLayout:
         padding: 50,root.width*.1,50, root.height*.1
+#    pos:root.width/4,root.height*.1
 
-        GridLayout:
-            rows:3
-            cols:1
-            size_hint_x: .5
-            Label:
-                text: "Enter value"
-            GridLayout:
-                cols: 1
-                row_default_height: 48
-                row_force_default: True
-
-                TextInput:
-                    id: val
-                Button:
-                    text: "Back"
-                    on_press:
-                        root.clear_widgets()
-                        root.add_widget(program.StartScreen())
-            MyDrop
+#    size_hint_x: .5
+    Label:
+        text: "Enter value"
+    TextInput:
+        id: val
+    Button:
+        text: "Back"
+        on_press:
+            root.clear_widgets()
+            root.add_widget(program.StartScreen())
+        MyDrop
 
 
 <Root>:

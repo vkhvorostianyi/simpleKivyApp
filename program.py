@@ -93,6 +93,11 @@ class SimpleApp(App):
 
     def build(self):
         app = Root()
+        app.add_widget(StartScreen(name='main'))
+        app.add_widget(InputWindow(name="add_tr"))
+        app.add_widget(TransactionScreen(name='tr_screen'))
+        app.add_widget(CategoryScreen(name='add_cat'))
+        app.add_widget(AccountScreen(name='add_acc'))
         return app
 
 

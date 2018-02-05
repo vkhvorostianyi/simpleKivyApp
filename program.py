@@ -1,11 +1,9 @@
 from kivy.uix.screenmanager import ScreenManager, Screen
 from kivy.uix.boxlayout import BoxLayout
-from kivy.properties import ListProperty, ObjectProperty
 from kivy.app import App
 from kivy.uix.label import Label
 from kivy.uix.button import Button
 from kivy.uix.dropdown import DropDown
-from kivy.uix.gridlayout import GridLayout
 from wallet_app import  *
 
 class AccountScreen(Screen):
@@ -19,11 +17,11 @@ class Lb(Label):
     pass
 
 
-class HeadTitle(Screen):
+class HeadTitle(BoxLayout):
     pass
 
 
-class MainView(Screen):
+class MainView(BoxLayout):
     pass
 
 
@@ -54,7 +52,9 @@ class MyDrop(BoxLayout):
     sel = ["{}:{}".format(x, y) for x, y in wallet.account_list.items()]
     cat = ["{}".format(x) for x in wallet.category_list.keys()]
     def clear(self,e=None):
-        self.parent.clear_widgets()
+        # self.parent.remove_widget()
+        self.parent.parent.parent.manager.transition.direction = 'right'
+        self.parent.parent.parent.manager.current = 'add_cat'
 
 
     def redraw(self):

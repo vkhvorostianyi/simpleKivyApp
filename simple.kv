@@ -9,12 +9,14 @@
     Button:
         text: "Back"
         on_press:
+            root.manager.transition.direction = 'right'
             root.manager.current = 'main'
 
 <AccountScreen>:
     Button:
         text: "Back"
         on_press:
+            root.manager.transition.direction = 'right'
             root.manager.current = 'main'
 
 
@@ -39,6 +41,7 @@
             Button:
                 text: "Back"
                 on_press:
+                    root.manager.transition.direction = 'right'
                     root.manager.current = 'main'
             BoxLayout:
                 TextInput:
@@ -89,24 +92,25 @@
 
 <InputWindow>:
     AnchorLayout:
-        padding: 50,root.width*.1,50, root.height*.1
+        padding: 50,0,50, root.height*.1
 
-    GridLayout:
-        cols: 1
-        row_force_default: True
-        row_default_height: 48
-        spacing: 60
-        Button:
-            text: "Back"
-            on_press:
-                root.manager.current= "main"
-#
-        Label:
-            text: "Enter value"
-        TextInput:
-            id: val
 
-        MyDrop
+        GridLayout:
+            cols: 1
+            row_force_default: True
+            row_default_height: 48
+            spacing: 60
+            Button:
+                text: "Back"
+                on_press:
+                    root.manager.transition.direction = 'right'
+                    root.manager.current= "main"
+            Label:
+                text: "Enter value"
+            TextInput:
+                id: val
+
+            MyDrop
 
 
 

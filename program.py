@@ -52,8 +52,8 @@ class MyDrop(BoxLayout):
     sel = ["{}:{}".format(x, y) for x, y in wallet.account_list.items()]
     cat = ["{}".format(x) for x in wallet.category_list.keys()]
     def clear(self,e=None):
-        # self.parent.remove_widget()
-        self.parent.parent.parent.manager.transition.direction = 'right'
+        # self.parent.remove_widget(self)
+        # self.remove_widget(self)
         self.parent.parent.parent.manager.current = 'add_cat'
 
 

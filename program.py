@@ -43,8 +43,9 @@ class StartScreen(Screen):
 
 class CatAdd(BoxLayout):
     def __init__(self):
-        super(CatAdd,self).__init__()
+        super(CatAdd, self).__init__()
         self.orientation = 'vertical'
+        self.size_hint  = .5,.5
 
 
 class MyDrop(BoxLayout):
@@ -86,11 +87,13 @@ class MyDrop(BoxLayout):
             drpName[1].add_widget(btn)
         else:
             btn = Button(text='add category', size_hint_y=None, height=BtnCat.height)
-            btn.bind(on_release = self.clear)
+            btn.bind(on_release = lambda btn=btn,dropdown=drpName[1]:dropdown.select(btn.text))
+            btn.bind(on_press = self.clear)
             drpName[1].add_widget(btn)
         BtnCat.bind(on_release=drpName[1].open)
         drpName[1].bind(on_select=lambda instance, x, btn=BtnCat: setattr(btn, 'text', x))
         self.add_widget(BtnCat)
+
 
 class SimpleApp(App):
 

@@ -2,7 +2,14 @@
 #:import w wallet_app
 #:import sla kivy.adapters.simplelistadapter
 
-
+<CatAdd>:
+    Label:
+        text: "Add Category"
+    TextInput:
+        id: add_category
+    Button:
+        text: "Add"
+        id: add_cat_btn
 <Lb>:
     size: 100, 210
 <CategoryScreen>:

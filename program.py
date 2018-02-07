@@ -41,7 +41,10 @@ class Root(ScreenManager):
 class StartScreen(Screen):
     pass
 
-
+class CatAdd(BoxLayout):
+    def __init__(self):
+        super(CatAdd,self).__init__()
+        self.orientation = 'vertical'
 
 
 class MyDrop(BoxLayout):
@@ -52,9 +55,9 @@ class MyDrop(BoxLayout):
     sel = ["{}:{}".format(x, y) for x, y in wallet.account_list.items()]
     cat = ["{}".format(x) for x in wallet.category_list.keys()]
     def clear(self,e=None):
-        # self.parent.remove_widget(self)
+        self.parent.parent.add_widget(CatAdd())
         # self.remove_widget(self)
-        self.parent.parent.parent.manager.current = 'add_cat'
+        # self.parent.parent.parent.manager.current = 'add_cat'
 
 
     def redraw(self):

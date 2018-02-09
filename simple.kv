@@ -1,11 +1,13 @@
 #:import program program
 #:import w wallet_app
 #:import sla kivy.adapters.simplelistadapter
+#:import hex kivy.utils.get_color_from_hex
+
 
 <CatAdd>:
     canvas.before:
         Color:
-            rgba: (0,1,0,.8)
+            rgba: hex('#001919')
         Rectangle:
             size: self.size
             pos: self.pos

@@ -77,6 +77,11 @@ class MyDrop(BoxLayout):
             btn=Button(text=i, size_hint_y=None, height=btnName.height)
             btn.bind(on_release=lambda btn=btn,dropdown=drpName[0]:dropdown.select(btn.text))
             drpName[0].add_widget(btn)
+        else:
+            btn = Button(text='add account', size_hint_y=None, height=BtnCat.height)
+            btn.bind(on_release=lambda btn=btn, dropdown=drpName[0]: dropdown.select(btn.text))
+            btn.bind(on_press=self.clear)
+            drpName[0].add_widget(btn)
         btnName.bind(on_release=drpName[0].open)
         drpName[0].bind(on_select=lambda instance, x, btn=btnName: setattr(btn, 'text', x))
         self.add_widget(btnName)

@@ -3,11 +3,26 @@
 #:import sla kivy.adapters.simplelistadapter
 #:import hex kivy.utils.get_color_from_hex
 
+<AccountAdd>:
+    canvas.before:
+        Color:
+            rgba: hex('#36aad0')
+        Rectangle:
+            size: self.size
+            pos: self.pos
+    Label:
+        text: "Add Account"
+    TextInput:
+        id: add_account
+    Button:
+        text: "Add"
+        id: add_acc_btn
+        on_press: self.parent.parent.remove_widget(root)
 
 <CatAdd>:
     canvas.before:
         Color:
-            rgba: hex('#001919')
+            rgba: hex('#36aad0')
         Rectangle:
             size: self.size
             pos: self.pos
@@ -78,24 +93,24 @@
         GridLayout:
             cols: 2
             Button:
-                text: "add new income transaction"
+                text: "add new income \ntransaction"
                 on_press:
-                    root.manager.current = 'add_tr'
+                    root.manager.current = 'add_in_tr'
 
             Button:
-                text: "add new outcome transaction"
+                text: "add new outcome \ntransaction"
                 on_press:
-                    root.manager.current = 'add_acc'
+                    root.manager.current = 'add_out_tr'
 
             Button:
-                text: "view all income transactions"
+                text: "view all income \ntransactions"
                 on_press:
-                    root.manager.current = 'add_cat'
+                    root.manager.current = 'in_tr_screen'
 
             Button:
-                text: "view all outcome transactions"
+                text: "view all outcome \ntransactions"
                 on_press:
-                    root.manager.current = 'tr_screen'
+                    root.manager.current = 'out_tr_screen'
 <HeadTitle>:
     GridLayout:
         rows: 2
@@ -126,7 +141,6 @@
                 text: "Enter value"
             TextInput:
                 id: val
-
             MyDrop
 
 

@@ -41,6 +41,17 @@ class Root(ScreenManager):
 class StartScreen(Screen):
     pass
 
+
+class Del(BoxLayout):
+    def __init__(self):
+        super(Del, self).__init__()
+        self.orientation = 'vertical'
+        self.size_hint  = .75,.25
+
+class DelCat(Del):
+    def __init__(self):
+        super(DelCat,self).__init__()
+
 class CatAdd(BoxLayout):
     def __init__(self):
         super(CatAdd, self).__init__()
@@ -69,6 +80,8 @@ class MyDrop(BoxLayout):
         self.parent.parent.add_widget(AccountAdd())
         # self.remove_widget(self)
         # self.parent.parent.parent.manager.current = 'add_cat'
+    def call_del_cat(self,e=None):
+        self.parent.parent.add_widget(DelCat())
 
     def redraw(self):
 
@@ -106,7 +119,7 @@ class MyDrop(BoxLayout):
             drpName[1].add_widget(btn)
             del_btn = Button(text='delete...', size_hint_y=None, height=BtnCat.height)
             del_btn.bind(on_release=lambda btn=btn, dropdown=drpName[1]: dropdown.select(btn.text))
-            del_btn.bind(on_press=self.call_cat_add_btn)
+            del_btn.bind(on_press=self.call_del_cat)
             drpName[1].add_widget(del_btn)
         BtnCat.bind(on_release=drpName[1].open)
         drpName[1].bind(on_select=lambda instance, x, btn=BtnCat: setattr(btn, 'text', x))

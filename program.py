@@ -42,28 +42,29 @@ class StartScreen(Screen):
     pass
 
 
-class Del(BoxLayout):
+class BlueCanvas(BoxLayout):
     def __init__(self):
-        super(Del, self).__init__()
+        super(BlueCanvas, self).__init__()
         self.orientation = 'vertical'
         self.size_hint  = .75,.25
 
-class DelCat(Del):
+class DelCat(BlueCanvas):
     def __init__(self):
         super(DelCat,self).__init__()
 
-class CatAdd(BoxLayout):
+class DelAcc(BlueCanvas):
+    pass
+
+class CatAdd(BlueCanvas):
     def __init__(self):
         super(CatAdd, self).__init__()
-        self.orientation = 'vertical'
-        self.size_hint  = .75,.25
 
 
-class AccountAdd(BoxLayout):
+
+class AccountAdd(BlueCanvas):
     def __init__(self):
         super(AccountAdd,self).__init__()
-        self.orientation = 'vertical'
-        self.size_hint = .75, .25
+
 
 class MyDrop(BoxLayout):
     def __init__(self, **kwargs):
@@ -83,6 +84,9 @@ class MyDrop(BoxLayout):
     def call_del_cat(self,e=None):
         self.parent.parent.add_widget(DelCat())
 
+    def call_del_acc(self,e=None):
+        self.parent.parent.add_widget(DelAcc())
+
     def redraw(self):
 
         self.clear_widgets()
@@ -97,13 +101,17 @@ class MyDrop(BoxLayout):
 
         for i in self.sel:
             btn=Button(text=i, size_hint_y=None, height=btnName.height)
-            btn.bind(on_release=lambda btn=btn,dropdown=drpName[0]:dropdown.select(btn.text))
+            btn.bind(on_release=lambda btn=btn,dropdown=drpName[0]:dropdown.select(btnName.text))
             drpName[0].add_widget(btn)
         else:
             btn = Button(text='add...', size_hint_y=None, height=BtnCat.height)
             btn.bind(on_release=lambda btn=btn, dropdown=drpName[0]: dropdown.select(btn.text))
             btn.bind(on_press=self.call_acc_add_btn)
             drpName[0].add_widget(btn)
+            del_btn = Button(text='delete...',size_hint_y=None,height =btnName.height)
+            del_btn.bind(on_release=lambda btn=btn, dropdown=drpName[0]: dropdown.select(btn.text))
+            del_btn.bind(on_press=self.call_del_acc)
+            drpName[0].add_widget(del_btn)
         btnName.bind(on_release=drpName[0].open)
         drpName[0].bind(on_select=lambda instance, x, btn=btnName: setattr(btn, 'text', x))
         self.add_widget(btnName)

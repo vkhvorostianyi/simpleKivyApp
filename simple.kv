@@ -3,7 +3,7 @@
 #:import sla kivy.adapters.simplelistadapter
 #:import hex kivy.utils.get_color_from_hex
 
-<Del>:
+<BlueCanvas>:
     canvas.before:
         Color:
             rgba: hex('#36aad0')
@@ -14,20 +14,24 @@
     Label:
         text: "Del Category"
     TextInput:
-        id: add_account
+        id: del_category
     #Mydrop
     Button:
         text: "Delete"
-        id: add_acc_btn
+        id: del_cat_btn
+        on_press: self.parent.parent.remove_widget(root)
+<DelAcc>:
+    Label:
+        text: "Del Account"
+    TextInput:
+        id: del_account
+    #Mydrop
+    Button:
+        text: "Delete"
+        id: del_acc_btn
         on_press: self.parent.parent.remove_widget(root)
 
 <AccountAdd>:
-    canvas.before:
-        Color:
-            rgba: hex('#36aad0')
-        Rectangle:
-            size: self.size
-            pos: self.pos
     Label:
         text: "Add Account"
     TextInput:
@@ -38,13 +42,6 @@
         on_press: self.parent.parent.remove_widget(root)
 
 <CatAdd>:
-    canvas.before:
-        Color:
-            rgba: hex('#36aad0')
-        Rectangle:
-            size: self.size
-            pos: self.pos
-
     Label:
         text: "Add Category"
     TextInput:

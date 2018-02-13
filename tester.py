@@ -18,7 +18,7 @@ class MyGrid(GridLayout):
     def redraw(self):
 
         self.clear_widgets()
-        self.cols =1
+        # self.cols =1
 
         drpName = []
         dd = DropDown()
@@ -37,6 +37,9 @@ class Root(BoxLayout):
 
 
 class MyChild(MyGrid):
+    # def __init__(self,**kwargs):
+        # super(MyChild,self).__init__(**kwargs)
+        # self.redraw()
     sel = [str(i) for i in range(0,5,1)]
 
 

@@ -65,6 +65,28 @@ class AccountAdd(BlueCanvas):
     def __init__(self):
         super(AccountAdd,self).__init__()
 
+class DeleteDrop(BoxLayout):
+    def __init__(self, **kwargs):
+        super(DeleteDrop, self).__init__(**kwargs)
+        self.redraw()
+
+    sel = ["{}:{}".format(x, y) for x, y in wallet.account_list.items()]
+
+    def redraw(self):
+        self.clear_widgets()
+        # self.cols =1
+
+        drpName = []
+        dd = DropDown()
+        drpName.append(dd)
+        btnName = Button(text="accounts", size_hint=(1, 1))
+        for i in self.sel:
+            btn = Button(text=i, size_hint_y=None, height=btnName.height)
+            btn.bind(on_release=lambda btn=btn, dropdown=drpName[0]: dropdown.select(btn.text))
+            drpName[0].add_widget(btn)
+        btnName.bind(on_release=drpName[0].open)
+        drpName[0].bind(on_select=lambda instance, x, btn=btnName: setattr(btn, 'text', x))
+        self.add_widget(btnName)
 
 class MyDrop(BoxLayout):
     def __init__(self, **kwargs):
@@ -101,7 +123,7 @@ class MyDrop(BoxLayout):
 
         for i in self.sel:
             btn=Button(text=i, size_hint_y=None, height=btnName.height)
-            btn.bind(on_release=lambda btn=btn,dropdown=drpName[0]:dropdown.select(btnName.text))
+            btn.bind(on_release=lambda btn=btn,dropdown=drpName[0]:dropdown.select(btn.text))
             drpName[0].add_widget(btn)
         else:
             btn = Button(text='add...', size_hint_y=None, height=BtnCat.height)

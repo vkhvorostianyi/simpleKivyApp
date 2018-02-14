@@ -79,7 +79,7 @@ class DeleteDrop(BoxLayout):
         drpName = []
         dd = DropDown()
         drpName.append(dd)
-        btnName = Button(text="accounts", size_hint=(1, 1))
+        btnName = Button(text="choose item...", size_hint=(1, 1))
         for i in self.sel:
             btn = Button(text=i, size_hint_y=None, height=btnName.height)
             btn.bind(on_release=lambda btn=btn, dropdown=drpName[0]: dropdown.select(btn.text))

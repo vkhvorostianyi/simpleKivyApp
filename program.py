@@ -88,6 +88,14 @@ class DeleteDrop(BoxLayout):
         drpName[0].bind(on_select=lambda instance, x, btn=btnName: setattr(btn, 'text', x))
         self.add_widget(btnName)
 
+
+class DeleteCatDrop(DeleteDrop):
+    sel = ["{}".format(x) for x in wallet.category_list.keys()]
+
+
+class DeleteAccDrop(DeleteDrop):
+    pass
+
 class MyDrop(BoxLayout):
     def __init__(self, **kwargs):
         super(MyDrop, self).__init__(**kwargs)

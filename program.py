@@ -74,7 +74,6 @@ class DeleteDrop(BoxLayout):
 
     def redraw(self):
         self.clear_widgets()
-        # self.cols =1
 
         drpName = []
         dd = DropDown()
@@ -89,12 +88,14 @@ class DeleteDrop(BoxLayout):
         self.add_widget(btnName)
 
 
+class DeleteAccDrop(DeleteDrop):
+    pass
+
 class DeleteCatDrop(DeleteDrop):
     sel = ["{}".format(x) for x in wallet.category_list.keys()]
 
 
-class DeleteAccDrop(DeleteDrop):
-    pass
+
 
 class MyDrop(BoxLayout):
     def __init__(self, **kwargs):

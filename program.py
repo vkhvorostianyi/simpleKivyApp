@@ -5,7 +5,7 @@ from kivy.uix.label import Label
 from kivy.uix.button import Button
 from kivy.uix.dropdown import DropDown
 from wallet_app import  *
-
+from kivy.clock import Clock
 class AccountScreen(Screen):
     pass
 
@@ -174,6 +174,7 @@ class SimpleApp(App):
         app.add_widget(TransactionScreen(name='out_tr_screen'))
         app.add_widget(CategoryScreen(name='in_tr_screen'))
         app.add_widget(AccountScreen(name='add_in_tr'))
+        # Clock.schedule_interval(app.update, 1.0 / 60.0)
         return app
 
 

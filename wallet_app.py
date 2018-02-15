@@ -36,7 +36,6 @@ class Category(object):
         self.name = name
         self.is_spend = is_spend
 
-
 class Wallet(object):
     transaction_list = {}
     account_list = {}
@@ -51,6 +50,8 @@ class Wallet(object):
         tr_cell["category"] = transaction.category
         tr_cell['account'] = transaction.transaction_account
 
+    def add_category(self,cat):
+        self.category_list[cat.name] = cat.is_spend
 
 def spend(account, transaction):
     decimal_account = Decimal(account).quantize(Decimal('0.01'), rounding=ROUND_DOWN)

@@ -45,7 +45,12 @@
     Button:
         text: "Add"
         id: add_cat_btn
-        on_press: self.parent.parent.remove_widget(root)
+        on_press:
+            w.wallet.add_category(w.Category(add_category.text,True))
+            w.save_to_file('categories.json', w.wallet.category_list)
+            self.parent.parent.remove_widget(root)
+
+
 <Lb>:
     size: 100, 210
 <CategoryScreen>:

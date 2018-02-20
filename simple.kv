@@ -13,7 +13,8 @@
 <DelCat>:
     Label:
         text: "Del Category"
-    DeleteCatDrop
+    DeleteCatDrop:
+        id:del_cat_drop
     Button:
         text: "Delete"
         id: del_cat_btn
@@ -22,6 +23,7 @@
     Label:
         text: "Del Account"
     DeleteAccDrop:
+        id: del_acc_drop
     Button:
         text: "Delete"
         id: del_acc_btn
@@ -32,10 +34,16 @@
         text: "Add Account"
     TextInput:
         id: add_account
+    TextInput:
+        id: add_acc_value
     Button:
         text: "Add"
         id: add_acc_btn
-        on_press: self.parent.parent.remove_widget(root)
+        on_press:
+            w.wallet.add_account(w.Account(add_account.text,add_acc_value.text))
+            w.save_to_file('accounts.json', w.wallet.account_list)
+            self.parent.parent.remove_widget(root)
+
 
 <CatAdd>:
     Label:

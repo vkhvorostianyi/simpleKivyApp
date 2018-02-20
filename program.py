@@ -34,8 +34,10 @@ class InputWindow(Screen):
 
 
 class Root(ScreenManager):
-    pass
 
+    def update(self, dt):
+        self.clear_widgets()
+        self.add_widget((StartScreen(name='main')))
 
 
 class StartScreen(Screen):
@@ -174,7 +176,6 @@ class SimpleApp(App):
         app.add_widget(TransactionScreen(name='out_tr_screen'))
         app.add_widget(CategoryScreen(name='in_tr_screen'))
         app.add_widget(AccountScreen(name='add_in_tr'))
-        # Clock.schedule_interval(app.update, 1.0 / 60.0)
         return app
 
 

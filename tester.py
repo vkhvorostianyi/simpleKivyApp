@@ -10,9 +10,9 @@ from kivy.uix.widget import Widget
 
 class MyGrid(BoxLayout):
     def __init__(self, **kwargs):
+
         super(MyGrid, self).__init__(**kwargs)
         self.orientation = 'vertical'
-
         self.sel = ["{}:{}".format(x, y) for x, y in wallet.account_list.items()]
         self.dd1 = DropDown()
         self.dd2 = DropDown()
@@ -22,6 +22,7 @@ class MyGrid(BoxLayout):
         self.btnName = Button(text="choose account", size_hint=(.5, None))
         self.BtnCat = Button(text="choose category", size_hint=(.5, None))
         self.redraw()
+
     def redraw(self):
         #
         # drpName = []

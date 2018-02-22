@@ -14,45 +14,29 @@ class MyGrid(BoxLayout):
         super(MyGrid, self).__init__(**kwargs)
         self.orientation = 'vertical'
         self.sel = ["{}:{}".format(x, y) for x, y in wallet.account_list.items()]
-        self.dd1 = DropDown()
-        self.dd2 = DropDown()
-        self.drpName = []
-        self.drpName.append(self.dd1)
-        self.drpName.append(self.dd2)
-        self.btnName = Button(text="choose account", size_hint=(.5, None))
-        self.BtnCat = Button(text="choose category", size_hint=(.5, None))
+        self.drop_down = DropDown()
+        self.btn_name = Button(text="choose account", size_hint=(.5, None))
         self.redraw()
 
     def redraw(self):
-        #
-        # drpName = []
-        # dd1 = DropDown()
-        # dd2 = DropDown()
-        # drpName.append(dd1)
-        # drpName.append(dd2)
-        # btnName = Button(text="choose account", size_hint=(.5, None))
-        # BtnCat = Button(text="choose category", size_hint=(.5, None))
-
         for i in self.sel:
-            btn=Button(text=i, size_hint_y=None, height=self.BtnCat.height)
-            btn.bind(on_release=lambda btn=btn,dropdown=self.drpName[1]:dropdown.select(btn.text))
-            self.drpName[1].add_widget(btn)
+            btn=Button(text=i, size_hint_y=None, height=self.btn_name.height)
+            btn.bind(on_release=lambda btn=btn,drop_down=self.drop_down:drop_down.select(btn.text))
+            self.drop_down.add_widget(btn)
         else:
             self.build_func()
-        self.BtnCat.bind(on_release=self.drpName[1].open)
-        self.drpName[1].bind(on_select=lambda instance, x, btn=self.BtnCat: setattr(btn, 'text', x))
-        self.add_widget(self.BtnCat)
+        self.btn_name.bind(on_release=self.drop_down.open)
+        self.drop_down.bind(on_select=lambda instance, x, btn=self.btn_name: setattr(btn, 'text', x))
+        self.add_widget(self.btn_name)
 
     def build_func(self):
 
-        btn = Button(text='add...', size_hint_y=None, height=self.BtnCat.height)
-        btn.bind(on_release=lambda btn=btn, dropdown=self.drpName[1]: dropdown.select('choose category'))
-        # btn.bind(on_press = self.call_cat_add_btn)
-        self.drpName[1].add_widget(btn)
-        del_btn = Button(text='delete...', size_hint_y=None, height=self.BtnCat.height)
-        del_btn.bind(on_release=lambda btn=btn, dropdown=self.drpName[1]: dropdown.select("choose category"))
-        # del_btn.bind(on_press=self.call_del_cat)
-        self.drpName[1].add_widget(del_btn)
+        btn = Button(text='add...', size_hint_y=None, height=self.btn_name.height)
+        btn.bind(on_release=lambda btn=btn, drop_down=self.drop_down: drop_down.select('choose category'))
+        self.drop_down.add_widget(btn)
+        del_btn = Button(text='delete...', size_hint_y=None, height=self.btn_name.height)
+        del_btn.bind(on_release=lambda btn=btn, drop_down=self.drop_down: drop_down.select("choose category"))
+        self.drop_down.add_widget(del_btn)
 
 class Root(BoxLayout):
     pass

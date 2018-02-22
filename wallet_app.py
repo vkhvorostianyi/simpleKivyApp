@@ -11,30 +11,29 @@ from datetime import datetime
 from decimal import *
 import json
 
-
-class Account(object):
-    # var name always is string, var value is number
+class AppUnit(object):
     def __init__(self, name, value):
-        self.account_name = name
-        self.account_value = value
+        self.name = name
+        self.value = value
+
+
+class Account(AppUnit):
+    # var name always is string, var value is number
+    pass
 
 
 class Transaction(object):
 
     # var name always is string, var value is number, account is object of Account class
     def __init__(self, value, account, category):
-        self.transaction_name = datetime.now().strftime("%d-%m-%y %H:%M:%S")
-        self.transaction_value = value
+        self.name = datetime.now().strftime("%d-%m-%y %H:%M:%S")
+        self.value = value
         self.transaction_account = account
         self.category = category
 
 
-class Category(object):
-
-    # name is string and is_spend is boolean
-    def __init__(self, name, is_spend):
-        self.name = name
-        self.is_spend = is_spend
+class Category(AppUnit):
+    pass
 
 class Wallet(object):
     transaction_list = {}
@@ -42,7 +41,7 @@ class Wallet(object):
     category_list = {}
 
     def add_account(self, account):
-        self.account_list[account.account_name] = str(account.account_value)
+        self.account_list[account.name] = str(account.value)
 
     def add_transaction(self, transaction):
         tr_cell = self.transaction_list[transaction.transaction_name] = {}
@@ -51,7 +50,8 @@ class Wallet(object):
         tr_cell['account'] = transaction.transaction_account
 
     def add_category(self,cat):
-        self.category_list[cat.name] = cat.is_spend
+        # name is string and is_spend is boolean
+        self.category_list[cat.name] = cat.value
 
 def spend(account, transaction):
     decimal_account = Decimal(account).quantize(Decimal('0.01'), rounding=ROUND_DOWN)

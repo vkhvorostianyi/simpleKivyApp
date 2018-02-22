@@ -22,13 +22,13 @@ class Account(AppUnit):
     pass
 
 
-class Transaction(object):
+class Transaction(AppUnit):
 
     # var name always is string, var value is number, account is object of Account class
     def __init__(self, value, account, category):
+        super(Transaction,self).__init__(name=datetime.now().strftime("%d-%m-%y %H:%M:%S"), value=value)
         self.name = datetime.now().strftime("%d-%m-%y %H:%M:%S")
-        self.value = value
-        self.transaction_account = account
+        self.account = account
         self.category = category
 
 
@@ -44,10 +44,10 @@ class Wallet(object):
         self.account_list[account.name] = str(account.value)
 
     def add_transaction(self, transaction):
-        tr_cell = self.transaction_list[transaction.transaction_name] = {}
-        tr_cell["value"] = str(transaction.transaction_value)
+        tr_cell = self.transaction_list[transaction.name] = {}
+        tr_cell["value"] = str(transaction.value)
         tr_cell["category"] = transaction.category
-        tr_cell['account'] = transaction.transaction_account
+        tr_cell['account'] = transaction.account
 
     def add_category(self,cat):
         # name is string and is_spend is boolean

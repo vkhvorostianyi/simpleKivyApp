@@ -51,49 +51,59 @@ class BlueCanvas(BoxLayout):
         self.size_hint  = .75,.25
 
 class DelCat(BlueCanvas):
-    def __init__(self):
-        super(DelCat,self).__init__()
+    pass
+
 
 class DelAcc(BlueCanvas):
     pass
 
+
 class CatAdd(BlueCanvas):
-    def __init__(self):
-        super(CatAdd, self).__init__()
-
-
-
-class AccountAdd(BlueCanvas):
-    def __init__(self):
-        super(AccountAdd,self).__init__()
-
-class DeleteDrop(BoxLayout):
-    def __init__(self, **kwargs):
-        super(DeleteDrop, self).__init__(**kwargs)
-        self.redraw()
-
-    sel = ["{}:{}".format(x, y) for x, y in wallet.account_list.items()]
-
-    def redraw(self):
-        self.clear_widgets()
-
-        drpName = []
-        dd = DropDown()
-        drpName.append(dd)
-        btnName = Button(text="choose item...", size_hint=(1, 1))
-        for i in self.sel:
-            btn = Button(text=i, size_hint_y=None, height=btnName.height)
-            btn.bind(on_release=lambda btn=btn, dropdown=drpName[0]: dropdown.select(btn.text))
-            drpName[0].add_widget(btn)
-        btnName.bind(on_release=drpName[0].open)
-        drpName[0].bind(on_select=lambda instance, x, btn=btnName: setattr(btn, 'text', x))
-        self.add_widget(btnName)
-
-
-class DeleteAccDrop(DeleteDrop):
     pass
 
-class DeleteCatDrop(DeleteDrop):
+class AccountAdd(BlueCanvas):
+    pass
+
+class CustomDrop(BoxLayout):
+    def __init__(self, **kwargs):
+
+        super(CustomDrop, self).__init__(**kwargs)
+        self.orientation = 'vertical'
+        self.data = []
+        self.drop_down = DropDown()
+        self.btn_name = Button(text="set the text", size_hint=(.5, None))
+        self.redraw()
+
+    def redraw(self):
+        for i in self.data:
+            btn = Button(text=i, size_hint_y=None, height=self.btn_name.height)
+            btn.bind(on_release=lambda btn=btn, drop_down=self.drop_down: drop_down.select(btn.text))
+            self.drop_down.add_widget(btn)
+        else:
+            self.build_func()
+        self.btn_name.bind(on_release=self.drop_down.open)
+        self.drop_down.bind(on_select=lambda instance, x, btn=self.btn_name: setattr(btn, 'text', x))
+        self.add_widget(self.btn_name)
+
+    def build_func(self):
+
+        btn = Button(text='add...', size_hint_y=None, height=self.btn_name.height)
+        btn.bind(on_release=lambda btn=btn, drop_down=self.drop_down: drop_down.select(''))
+        self.drop_down.add_widget(btn)
+        del_btn = Button(text='delete...', size_hint_y=None, height=self.btn_name.height)
+        del_btn.bind(on_release=lambda btn=btn, drop_down=self.drop_down: drop_down.select(''))
+        self.drop_down.add_widget(del_btn)
+
+
+class DeleteAccDrop(CustomDrop):
+    def __init__(self, **kwargs):
+        super(DeleteAccDrop,self).__init__(**kwargs)
+        self.data = ["{}:{}".format(x, y) for x, y in wallet.account_list.items()]
+    def build_func(self):
+        pass
+
+
+class DeleteCatDrop(CustomDrop):
     sel = ["{}".format(x) for x in wallet.category_list.keys()]
 
 

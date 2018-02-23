@@ -13,9 +13,9 @@ class MyGrid(BoxLayout):
 
         super(MyGrid, self).__init__(**kwargs)
         self.orientation = 'vertical'
-        self.sel = ["{}:{}".format(x, y) for x, y in wallet.account_list.items()]
+        self.data = []
         self.drop_down = DropDown()
-        self.btn_name = Button(text="choose account", size_hint=(.5, None))
+        self.btn_name = Button(text="set the text", size_hint=(.5, None))
         self.redraw()
 
     def redraw(self):
@@ -32,10 +32,10 @@ class MyGrid(BoxLayout):
     def build_func(self):
 
         btn = Button(text='add...', size_hint_y=None, height=self.btn_name.height)
-        btn.bind(on_release=lambda btn=btn, drop_down=self.drop_down: drop_down.select('choose category'))
+        btn.bind(on_release=lambda btn=btn, drop_down=self.drop_down: drop_down.select(''))
         self.drop_down.add_widget(btn)
         del_btn = Button(text='delete...', size_hint_y=None, height=self.btn_name.height)
-        del_btn.bind(on_release=lambda btn=btn, drop_down=self.drop_down: drop_down.select("choose category"))
+        del_btn.bind(on_release=lambda btn=btn, drop_down=self.drop_down: drop_down.select(''))
         self.drop_down.add_widget(del_btn)
 
 class Root(BoxLayout):

@@ -50,7 +50,7 @@ class Wallet(object):
         tr_cell['account'] = transaction.account
 
     def add_category(self,cat):
-        # name is string and is_spend is boolean
+        # name is string and value is boolean true for spends and false for incomes
         self.category_list[cat.name] = cat.value
 
 def spend(account, transaction):

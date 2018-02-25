@@ -6,6 +6,7 @@ from kivy.uix.button import Button
 from kivy.uix.dropdown import DropDown
 from wallet_app import  *
 from kivy.clock import Clock
+
 class AccountScreen(Screen):
     pass
 
@@ -65,13 +66,14 @@ class AccountAdd(BlueCanvas):
     pass
 
 class CustomDrop(BoxLayout):
-    def __init__(self,data=None,**kwargs):
+    def __init__(self,title="Choose item",data=None,**kwargs):
 
         super(CustomDrop, self).__init__(**kwargs)
         self.orientation = 'vertical'
         self.data = data
         self.drop_down = DropDown()
-        self.btn_name = Button(text="set the text", size_hint=(1, None))
+        self.title = title
+        self.btn_name = Button(text=self.title, size_hint=(1, None))
         self.redraw()
 
     def redraw(self):
@@ -116,10 +118,12 @@ class AccDrop(CustomDrop):
 
     def build_func(self):
         btn = Button(text='add...', size_hint_y=None, height=self.btn_name.height)
-        btn.bind(on_release=lambda btn=btn, drop_down=self.drop_down: drop_down.select(''))
+        btn.bind(on_release=lambda btn=btn, drop_down=self.drop_down: drop_down.select(self.title))
+        btn.bind(on_press=self.call_acc_add_btn)
         self.drop_down.add_widget(btn)
         del_btn = Button(text='delete...', size_hint_y=None, height=self.btn_name.height)
-        del_btn.bind(on_release=lambda btn=btn, drop_down=self.drop_down: drop_down.select(''))
+        del_btn.bind(on_release=lambda btn=btn, drop_down=self.drop_down: drop_down.select(self.title))
+        del_btn.bind(on_press=self.call_del_acc)
         self.drop_down.add_widget(del_btn)
 
 class CatDrop(CustomDrop):
@@ -134,11 +138,11 @@ class CatDrop(CustomDrop):
 
     def build_func(self):
         btn = Button(text='add...', size_hint_y=None, height=self.btn_name.height)
-        btn.bind(on_release=lambda btn=btn, drop_down=self.drop_down: drop_down.select(''))
+        btn.bind(on_release=lambda btn=btn, drop_down=self.drop_down: drop_down.select(self.title))
         btn.bind(on_press = self.call_cat_add_btn)
         self.drop_down.add_widget(btn)
         del_btn = Button(text='delete...', size_hint_y=None, height=self.btn_name.height)
-        del_btn.bind(on_release=lambda btn=btn, drop_down=self.drop_down: drop_down.select(''))
+        del_btn.bind(on_release=lambda btn=btn, drop_down=self.drop_down: drop_down.select(self.title))
         del_btn.bind(on_press = self.call_del_cat)
         self.drop_down.add_widget(del_btn)
 

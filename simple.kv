@@ -11,23 +11,33 @@
             size: self.size
             pos: self.pos
 <DelCat>:
-    Label:
-        text: "Del Category"
-    DeleteCatDrop:
-        id:del_cat_drop
-    Button:
-        text: "Delete"
-        id: del_cat_btn
-        on_press: self.parent.parent.remove_widget(root)
+    BoxLayout:
+        orientation: "vertical"
+        Label:
+            text: "Del Category"
+        DeleteCatDrop:
+            id:del_cat_drop
+    BoxLayout:
+        Button:
+            text: "OK"
+            id: del_cat_btn
+            on_press: self.parent.parent.remove_widget(root)
+        Button:
+            text: "Cancel"
+            on_press: self.parent.parent.remove_widget(root)
 <DelAcc>:
     Label:
         text: "Del Account"
     DeleteAccDrop:
         id: del_acc_drop
-    Button:
-        text: "Delete"
-        id: del_acc_btn
-        on_press: self.parent.parent.remove_widget(root)
+    BoxLayout:
+        Button:
+            text: "OK"
+            id: del_cat_btn
+            on_press: self.parent.parent.remove_widget(root)
+        Button:
+            text: "Cancel"
+            on_press: self.parent.parent.remove_widget(root)
 
 <AccountAdd>:
     Label:

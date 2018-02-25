@@ -21,10 +21,15 @@
         Button:
             text: "OK"
             id: del_cat_btn
-            on_press: self.parent.parent.remove_widget(root)
+            on_press:
+                del (w.wallet.category_list[del_cat_drop.btn_name.text])
+                w.save_to_file('categories.json',w.wallet.category_list)
+                self.parent.parent.parent.remove_widget(root)
+#                root.clear_widgets()
+#                root.add_widget(Button(text="Ok",on_press = self.parent.parent.parent.remove_widget(root)))
         Button:
             text: "Cancel"
-            on_press: self.parent.parent.remove_widget(root)
+            on_press: self.parent.parent.parent.remove_widget(root)
 <DelAcc>:
     Label:
         text: "Del Account"
@@ -34,10 +39,15 @@
         Button:
             text: "OK"
             id: del_cat_btn
-            on_press: self.parent.parent.remove_widget(root)
+            on_press:
+                del (w.wallet.account_list[del_acc_drop.btn_name.text])
+                w.save_to_file('accounts.json',w.wallet.account_list)
+                self.parent.parent.parent.remove_widget(root)
         Button:
             text: "Cancel"
-            on_press: self.parent.parent.remove_widget(root)
+            on_press:
+
+                self.parent.parent.parent.remove_widget(root)
 
 <AccountAdd>:
     Label:
@@ -46,28 +56,34 @@
         id: add_account
     TextInput:
         id: add_acc_value
-    Button:
-        text: "Add"
-        id: add_acc_btn
-        on_press:
-            w.wallet.add_account(w.Account(add_account.text,add_acc_value.text))
-            w.save_to_file('accounts.json', w.wallet.account_list)
-            self.parent.parent.remove_widget(root)
-
+    BoxLayout:
+        Button:
+            text: "OK"
+            id: add_acc_btn
+            on_press:
+                w.wallet.add_account(w.Account(add_account.text,add_acc_value.text))
+                w.save_to_file('accounts.json', w.wallet.account_list)
+                self.parent.parent.parent.remove_widget(root)
+        Button:
+            text: "Cancel"
+            on_press: self.parent.parent.parent.remove_widget(root)
 
 <CatAdd>:
     Label:
         text: "Add Category"
     TextInput:
         id: add_category
-    Button:
-        text: "Add"
-        id: add_cat_btn
-        on_press:
-            w.wallet.add_category(w.Category(add_category.text,True))
-            w.save_to_file('categories.json', w.wallet.category_list)
-            self.parent.parent.remove_widget(root)
-
+    BoxLayout:
+        Button:
+            text: "OK"
+            id: add_cat_btn
+            on_press:
+                w.wallet.add_category(w.Category(add_category.text,True))
+                w.save_to_file('categories.json', w.wallet.category_list)
+                self.parent.parent.remove_widget(root)
+        Button:
+            text: "Cancel"
+            on_press: self.parent.parent.parent.remove_widget(root)
 
 <Lb>:
     size: 100, 210

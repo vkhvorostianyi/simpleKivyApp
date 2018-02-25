@@ -73,7 +73,7 @@ class CustomDrop(BoxLayout):
         self.data = data
         self.drop_down = DropDown()
         self.title = title
-        self.btn_name = Button(text=self.title, size_hint=(1, None))
+        self.btn_name = Button(text=self.title, size_hint=(1,1))
         self.redraw()
 
     def redraw(self):

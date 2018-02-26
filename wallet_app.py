@@ -53,10 +53,11 @@ class Wallet(object):
         # name is string and value is boolean true for spends and false for incomes
         self.category_list[cat.name] = cat.value
 
-def spend(account, transaction):
-    decimal_account = Decimal(account).quantize(Decimal('0.01'), rounding=ROUND_DOWN)
-    decimal_transaction = Decimal(transaction).quantize(Decimal('0.01'), rounding=ROUND_DOWN)
-    return str(decimal_account - decimal_transaction)
+    def spend(self,account, transaction_value):
+        decimal_account = Decimal(self.account_list[account]).quantize(Decimal('0.01'),
+                                                          rounding=ROUND_DOWN)
+        decimal_transaction = Decimal(transaction_value).quantize(Decimal('0.01'), rounding=ROUND_DOWN)
+        self.account_list[account] = str(decimal_account - decimal_transaction)
 
 
 def list_view(input_dict):

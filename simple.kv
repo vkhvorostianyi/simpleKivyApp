@@ -192,9 +192,20 @@
             TextInput:
                 id: val
             BoxLayout:
-                AccDrop
-                CatDrop
-#            MyDrop
+                AccDrop:
+                    id: acc_drop
+                CatDrop:
+                    id: cat_drop
+            Button:
+                text: "Add transaction"
+                on_press:
+                    acc_name =  acc_drop.btn_name.text.split(':')[0]
+                    w.wallet.add_transaction(w.Transaction(
+                    val.text, acc_name,cat_drop.btn_name.text))
+                    w.wallet.spend(acc_name,
+                    val.text)
+                    w.save_to_file('transactions.json',w.wallet.transaction_list)
+                    w.save_to_file('accounts.json',w.wallet.account_list)
 
 
 

@@ -107,7 +107,7 @@ class DeleteCatDrop(CustomDrop):
 
 class AccDrop(CustomDrop):
     def __init__(self, **kwargs):
-        super(AccDrop,self).__init__(data = ["{}:{}".format(x, y) for x, y in wallet.account_list.items()],**kwargs)
+        super(AccDrop,self).__init__(title="Set account",data = ["{}:{}".format(x, y) for x, y in wallet.account_list.items()],**kwargs)
 
     def call_acc_add_btn(self, e=None):
         self.parent.parent.parent.add_widget(AccountAdd())
@@ -128,7 +128,7 @@ class AccDrop(CustomDrop):
 
 class CatDrop(CustomDrop):
     def __init__(self, **kwargs):
-        super(CatDrop,self).__init__(data = ["{}".format(x) for x in wallet.category_list.keys()] ,**kwargs)
+        super(CatDrop,self).__init__(title="Set category",data = ["{}".format(x) for x in wallet.category_list.keys()] ,**kwargs)
 
     def call_cat_add_btn(self, e=None):
         self.parent.parent.parent.add_widget(CatAdd())

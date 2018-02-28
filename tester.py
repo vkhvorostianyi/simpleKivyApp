@@ -7,6 +7,8 @@ from kivy.uix.boxlayout import BoxLayout
 from wallet_app import  *
 from kivy.uix.widget import Widget
 
+a = Category('test',True)
+data = dict(test_item = a)
 
 class MyGrid(BoxLayout):
     def __init__(self, **kwargs):

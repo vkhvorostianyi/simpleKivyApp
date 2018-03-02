@@ -7,6 +7,7 @@ from kivy.uix.dropdown import DropDown
 from wallet_app import  *
 from kivy.clock import Clock
 # I'm going to change using db in project
+##
 class AccountScreen(Screen):
     pass
 

@@ -3,7 +3,7 @@ def custom_profiler(func):
         import cProfile, pstats, io
         pr = cProfile.Profile()
         pr.enable()
-        #...do sth...
+        #...do sth...im
         func()
         pr.disable()
         s = io.StringIO()

@@ -1,70 +1,20 @@
 from kivy.uix.screenmanager import ScreenManager, Screen
 from kivy.uix.boxlayout import BoxLayout
+from kivy.uix.anchorlayout import AnchorLayout
+from kivy.uix.gridlayout import GridLayout
 from kivy.app import App
+from kivy.uix.textinput import TextInput
 from kivy.uix.label import Label
 from kivy.uix.button import Button
 from kivy.uix.dropdown import DropDown
 from wallet_app import  *
-from kivy.clock import Clock
-# I'm going to change using db in project
-##
-class AccountScreen(Screen):
-    pass
-
-
-class CategoryScreen(Screen):
-    pass
-
-class Lb(Label):
-    pass
-
-
-class HeadTitle(BoxLayout):
-    pass
-
-
-class MainView(BoxLayout):
-    pass
-
-
-class TransactionScreen(Screen):
-    pass
-
-
-class InputWindow(Screen):
-    pass
-
-
-class Root(ScreenManager):
-
-    def update(self, dt):
-        self.clear_widgets()
-        self.add_widget((StartScreen(name='main')))
-
-
-class StartScreen(Screen):
-    pass
-
+from kivy.uix.widget import Widget
 
 class BlueCanvas(BoxLayout):
     def __init__(self):
         super(BlueCanvas, self).__init__()
         self.orientation = 'vertical'
         self.size_hint  = .75,.25
-
-class DelCat(BlueCanvas):
-    pass
-
-
-class DelAcc(BlueCanvas):
-    pass
-
-
-class CatAdd(BlueCanvas):
-    pass
-
-class AccountAdd(BlueCanvas):
-    pass
 
 class CustomDrop(BoxLayout):
     def __init__(self,title="Choose item",data=None,**kwargs):
@@ -111,11 +61,11 @@ class AccDrop(CustomDrop):
         super(AccDrop,self).__init__(title="Set account",data = ["{}:{}".format(x, y) for x, y in wallet.account_list.items()],**kwargs)
 
     def call_acc_add_btn(self, e=None):
-        self.parent.parent.parent.add_widget(AccountAdd())
+        ...
 
 
     def call_del_acc(self, e=None):
-        self.parent.parent.parent.add_widget(DelAcc())
+        ...
 
     def build_func(self):
         btn = Button(text='add...', size_hint_y=None, height=self.btn_name.height)
@@ -132,10 +82,10 @@ class CatDrop(CustomDrop):
         super(CatDrop,self).__init__(title="Set category",data = ["{}".format(x) for x in wallet.category_list.keys()] ,**kwargs)
 
     def call_cat_add_btn(self, e=None):
-        self.parent.parent.parent.add_widget(CatAdd())
+        ...
 
     def call_del_cat(self, e=None):
-        self.parent.parent.parent.add_widget(DelCat())
+        ...
 
     def build_func(self):
         btn = Button(text='add...', size_hint_y=None, height=self.btn_name.height)
@@ -147,15 +97,22 @@ class CatDrop(CustomDrop):
         del_btn.bind(on_press = self.call_del_cat)
         self.drop_down.add_widget(del_btn)
 
+
+class MainScreen(Widget):
+    pass
+
+
+class TrScreen(Widget):
+    pass
+
+class Root(BoxLayout):
+        pass
+
 class SimpleApp(App):
 
     def build(self):
         app = Root()
-        app.add_widget(StartScreen(name='main'))
-        app.add_widget(InputWindow(name="add_out_tr"))
-        app.add_widget(TransactionScreen(name='out_tr_screen'))
-        app.add_widget(CategoryScreen(name='in_tr_screen'))
-        app.add_widget(AccountScreen(name='add_in_tr'))
+        app.add_widget(MainScreen())
         return app
 
 

@@ -1,4 +1,4 @@
-from kivy.uix.screenmanager import ScreenManager, Screen
+from kivy.uix.screenmanager import ScreenManager, Screen, FadeTransition
 from kivy.uix.boxlayout import BoxLayout
 from kivy.app import App
 from kivy.uix.label import Label
@@ -37,9 +37,14 @@ class InputWindow(Screen):
 
 class Root(ScreenManager):
 
-    def update(self, dt):
+    def update(self):
         self.clear_widgets()
-        self.add_widget((StartScreen(name='main')))
+        self.add_widget (StartScreen (name='main'))
+        self.add_widget (InputWindow (name="add_out_tr"))
+        self.add_widget (TransactionScreen (name='out_tr_screen'))
+        self.add_widget (CategoryScreen (name='in_tr_screen'))
+        self.add_widget (AccountScreen (name='add_in_tr'))
+
 
 
 class StartScreen(Screen):
@@ -150,15 +155,14 @@ class CatDrop(CustomDrop):
 class SimpleApp(App):
 
     def build(self):
-        app = Root()
-        app.add_widget(StartScreen(name='main'))
-        app.add_widget(InputWindow(name="add_out_tr"))
-        app.add_widget(TransactionScreen(name='out_tr_screen'))
-        app.add_widget(CategoryScreen(name='in_tr_screen'))
-        app.add_widget(AccountScreen(name='add_in_tr'))
+        app = Root(transition=FadeTransition())
+        app.add_widget (StartScreen (name='main'))
+        # app.add_widget(InputWindow(name="add_out_tr"))
+        # app.add_widget(TransactionScreen(name='out_tr_screen'))
+        # app.add_widget(CategoryScreen(name='in_tr_screen'))
+        # app.add_widget(AccountScreen(name='add_in_tr'))
+
         return app
-
-
 
 if __name__ == '__main__':
     SimpleApp().run()

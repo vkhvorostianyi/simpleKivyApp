@@ -2,7 +2,7 @@
 #:import w wallet_app
 #:import sla kivy.adapters.simplelistadapter
 #:import hex kivy.utils.get_color_from_hex
-
+#:import main main
 <BlueCanvas>:
     canvas.before:
         Color:
@@ -22,11 +22,9 @@
             text: "OK"
             id: del_cat_btn
             on_press:
-                del (w.wallet.category_list[del_cat_drop.btn_name.text])
-                w.save_to_file('categories.json',w.wallet.category_list)
+                program.del_cat(del_cat_drop.btn_name.text)
                 self.parent.parent.parent.remove_widget(root)
-#                root.clear_widgets()
-#                root.add_widget(Button(text="Ok",on_press = self.parent.parent.parent.remove_widget(root)))
+
         Button:
             text: "Cancel"
             on_press: self.parent.parent.parent.remove_widget(root)
@@ -40,13 +38,11 @@
             text: "OK"
             id: del_cat_btn
             on_press:
-                del (w.wallet.account_list[del_acc_drop.btn_name.text])
-                w.save_to_file('accounts.json',w.wallet.account_list)
+                program.del_acc(del_acc_drop.btn_name.text)
                 self.parent.parent.parent.remove_widget(root)
         Button:
             text: "Cancel"
             on_press:
-
                 self.parent.parent.parent.remove_widget(root)
 
 <AccountAdd>:
@@ -61,8 +57,7 @@
             text: "OK"
             id: add_acc_btn
             on_press:
-                w.wallet.add_account(w.Account(add_account.text,add_acc_value.text))
-                w.save_to_file('accounts.json', w.wallet.account_list)
+                program.add_new_acc(add_account.text, add_acc_value.text)
                 self.parent.parent.parent.remove_widget(root)
         Button:
             text: "Cancel"
@@ -78,8 +73,7 @@
             text: "OK"
             id: add_cat_btn
             on_press:
-                w.wallet.add_category(w.Category(add_category.text,True))
-                w.save_to_file('categories.json', w.wallet.category_list)
+                program.add_new_cat(add_category.text,True)
                 self.parent.parent.remove_widget(root)
         Button:
             text: "Cancel"
@@ -98,8 +92,7 @@
     Button:
         text: "Back"
         on_press:
-            root.manager.transition.direction = 'right'
-            root.manager.current = 'main'
+            root.parent.switch_to(program.StartScreen(name='main'))
 
 
 
@@ -123,12 +116,8 @@
             Button:
                 text: "Back"
                 on_press:
-                    root.manager.transition.direction = 'right'
-                    root.manager.current = 'main'
-            BoxLayout:
-                TextInput:
-                Button:
-                    text: "Search"
+                    root.parent.switch_to(program.StartScreen(name='main'))
+
     AnchorLayout:
         padding: root.width*.1,root.height * 1/4,root.width*.1,10
         MainView
@@ -145,22 +134,23 @@
             Button:
                 text: "add new income \ntransaction"
                 on_press:
-                    root.manager.current = 'add_in_tr'
+                    root.parent.switch_to(program.AccountScreen(name='add_in_tr'))
 
             Button:
                 text: "add new outcome \ntransaction"
                 on_press:
-                    root.manager.current = 'add_out_tr'
+                    root.parent.switch_to(program.InputWindow(name="add_out_tr"))
 
             Button:
                 text: "view all income \ntransactions"
                 on_press:
-                    root.manager.current = 'in_tr_screen'
+                    root.parent.switch_to(program.CategoryScreen(name='in_tr_screen'))
 
             Button:
                 text: "view all outcome \ntransactions"
                 on_press:
-                    root.manager.current = 'out_tr_screen'
+                    root.parent.switch_to(program.TransactionScreen(name='out_tr_screen'))
+
 <HeadTitle>:
     GridLayout:
         rows: 2
@@ -182,11 +172,8 @@
             row_force_default: True
             row_default_height: 48
             spacing: 60
-            Button:
-                text: "Back"
-                on_press:
-                    root.manager.transition.direction = 'right'
-                    root.manager.current= "main"
+
+
             Label:
                 text: "Enter value"
             TextInput:
@@ -200,15 +187,12 @@
                 text: "Add transaction"
                 on_press:
                     acc_name =  acc_drop.btn_name.text.split(':')[0]
-                    w.wallet.add_transaction(w.Transaction(
-                    val.text, acc_name,cat_drop.btn_name.text))
-                    w.wallet.spend(acc_name,
-                    val.text)
-                    w.save_to_file('transactions.json',w.wallet.transaction_list)
-                    w.save_to_file('accounts.json',w.wallet.account_list)
-#                    self.parent.parent.clear_widgets()
-
-
+                    program.add_new_tr(acc_name,cat_drop.btn_name.text,val.text)
+                    root.parent.switch_to(program.StartScreen(name='main'))
+            Button:
+                text: "Cancel"
+                on_press:
+                    root.parent.switch_to(program.StartScreen(name='main'))
 
 
 

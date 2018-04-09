@@ -1,7 +1,7 @@
 from program import SimpleApp
 
-app = SimpleApp()
+myapp = SimpleApp()
 
 if __name__ == '__main__':
-    app.run()
+    myapp.run()
 

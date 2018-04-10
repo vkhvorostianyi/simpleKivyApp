@@ -23,11 +23,13 @@
             id: del_cat_btn
             on_press:
                 program.del_cat(del_cat_drop.btn_name.text)
-                self.parent.parent.parent.remove_widget(root)
-
+#                self.parent.parent.parent.remove_widget(root)
+                root.parent.parent.parent.switch_to(program.InputWindow(name="add_out_tr"))
         Button:
             text: "Cancel"
-            on_press: self.parent.parent.parent.remove_widget(root)
+            on_press:
+#                self.parent.parent.parent.remove_widget(root)
+                root.parent.parent.parent.switch_to(program.InputWindow(name="add_out_tr"))
 <DelAcc>:
     Label:
         text: "Del Account"
@@ -38,13 +40,15 @@
             text: "OK"
             id: del_cat_btn
             on_press:
-                program.del_acc(del_acc_drop.btn_name.text)
-                self.parent.parent.parent.remove_widget(root)
+                acc_name =  del_acc_drop.btn_name.text.split(':')[0]
+                program.del_acc(acc_name)
+#                self.parent.parent.parent.remove_widget(root)
+                root.parent.parent.parent.switch_to(program.InputWindow(name="add_out_tr"))
         Button:
             text: "Cancel"
             on_press:
-                self.parent.parent.parent.remove_widget(root)
-
+#                self.parent.parent.parent.remove_widget(root)
+                root.parent.parent.parent.switch_to(program.InputWindow(name="add_out_tr"))
 <AccountAdd>:
     Label:
         text: "Add Account"
@@ -58,11 +62,13 @@
             id: add_acc_btn
             on_press:
                 program.add_new_acc(add_account.text, add_acc_value.text)
-                self.parent.parent.parent.remove_widget(root)
+#                self.parent.parent.parent.remove_widget(root)
+                root.parent.parent.parent.switch_to(program.InputWindow(name="add_out_tr"))
         Button:
             text: "Cancel"
-            on_press: self.parent.parent.parent.remove_widget(root)
-
+            on_press:
+#                self.parent.parent.parent.remove_widget(root)
+                root.parent.parent.parent.switch_to(program.InputWindow(name="add_out_tr"))
 <CatAdd>:
     Label:
         text: "Add Category"
@@ -74,19 +80,20 @@
             id: add_cat_btn
             on_press:
                 program.add_new_cat(add_category.text,True)
-                self.parent.parent.remove_widget(root)
+                root.parent.parent.parent.switch_to(program.InputWindow(name="add_out_tr"))
+#                self.parent.parent.remove_widget(root)
         Button:
             text: "Cancel"
-            on_press: self.parent.parent.parent.remove_widget(root)
-
+            on_press:
+#                self.parent.parent.parent.remove_widget(root)
+                root.parent.parent.parent.switch_to(program.InputWindow(name="add_out_tr"))
 <Lb>:
     size: 100, 210
 <CategoryScreen>:
     Button:
         text: "Back"
         on_press:
-            root.manager.transition.direction = 'right'
-            root.manager.current = 'main'
+            root.parent.switch_to(program.StartScreen(name="main"))
 
 <AccountScreen>:
     Button:

@@ -4,16 +4,16 @@ from kivy.app import App
 from kivy.uix.label import Label
 from kivy.uix.button import Button
 from kivy.uix.dropdown import DropDown
-from wallet_app import  *
-from kivy.clock import Clock
-# I'm going to change using db in project
-##
+from wallet_app import *
+
+
 class AccountScreen(Screen):
     pass
 
 
 class CategoryScreen(Screen):
     pass
+
 
 class Lb(Label):
     pass
@@ -36,15 +36,7 @@ class InputWindow(Screen):
 
 
 class Root(ScreenManager):
-
-    def update(self):
-        self.clear_widgets()
-        self.add_widget (StartScreen (name='main'))
-        self.add_widget (InputWindow (name="add_out_tr"))
-        self.add_widget (TransactionScreen (name='out_tr_screen'))
-        self.add_widget (CategoryScreen (name='in_tr_screen'))
-        self.add_widget (AccountScreen (name='add_in_tr'))
-
+    ...
 
 
 class StartScreen(Screen):
@@ -55,7 +47,8 @@ class BlueCanvas(BoxLayout):
     def __init__(self):
         super(BlueCanvas, self).__init__()
         self.orientation = 'vertical'
-        self.size_hint  = .75,.25
+        self.size_hint = .75, .25
+
 
 class DelCat(BlueCanvas):
     pass
@@ -68,11 +61,13 @@ class DelAcc(BlueCanvas):
 class CatAdd(BlueCanvas):
     pass
 
+
 class AccountAdd(BlueCanvas):
     pass
 
+
 class CustomDrop(BoxLayout):
-    def __init__(self,title="Choose item",data=None,**kwargs):
+    def __init__(self, title="Choose item",data=None,**kwargs):
 
         super(CustomDrop, self).__init__(**kwargs)
         self.orientation = 'vertical'
@@ -99,7 +94,7 @@ class CustomDrop(BoxLayout):
 
 class DeleteAccDrop(CustomDrop):
     def __init__(self, **kwargs):
-        super(DeleteAccDrop,self).__init__(data = ["{}:{}".format(x, y) for x, y in wallet.account_list.items()],**kwargs)
+        super(DeleteAccDrop,self).__init__(data=["{}:{}".format(x, y) for x, y in wallet.account_list.items()],**kwargs)
 
     def build_func(self):
         pass
@@ -107,17 +102,15 @@ class DeleteAccDrop(CustomDrop):
 
 class DeleteCatDrop(CustomDrop):
     def __init__(self, **kwargs):
-        super(DeleteCatDrop,self).__init__(data = ["{}".format(x) for x in wallet.category_list.keys()], **kwargs)
-
+        super(DeleteCatDrop,self).__init__(data=["{}".format(x) for x in wallet.category_list.keys()], **kwargs)
 
 
 class AccDrop(CustomDrop):
     def __init__(self, **kwargs):
-        super(AccDrop,self).__init__(title="Set account",data = ["{}:{}".format(x, y) for x, y in wallet.account_list.items()],**kwargs)
+        super(AccDrop,self).__init__(title="Set account", data=["{}:{}".format(x, y) for x, y in wallet.account_list.items()],**kwargs)
 
     def call_acc_add_btn(self, e=None):
         self.parent.parent.parent.add_widget(AccountAdd())
-
 
     def call_del_acc(self, e=None):
         self.parent.parent.parent.add_widget(DelAcc())
@@ -132,9 +125,12 @@ class AccDrop(CustomDrop):
         del_btn.bind(on_press=self.call_del_acc)
         self.drop_down.add_widget(del_btn)
 
+
 class CatDrop(CustomDrop):
     def __init__(self, **kwargs):
-        super(CatDrop,self).__init__(title="Set category",data = ["{}".format(x) for x in wallet.category_list.keys()] ,**kwargs)
+        super(CatDrop,self).__init__(title="Set category", data=["{}".format(x)
+                                                                 for x in wallet.category_list.keys()
+                                                                 if wallet.category_list[x] is True], **kwargs)
 
     def call_cat_add_btn(self, e=None):
         self.parent.parent.parent.add_widget(CatAdd())
@@ -152,17 +148,40 @@ class CatDrop(CustomDrop):
         del_btn.bind(on_press = self.call_del_cat)
         self.drop_down.add_widget(del_btn)
 
+
+class InCat(CustomDrop):
+    def __init__(self, **kwargs):
+        super().__init__(title="Set category", data=["{}".format(x)
+                                                                 for x in wallet.category_list.keys()
+                                                                 if wallet.category_list[x] is False], **kwargs)
+
+    def call_cat_add_btn(self, e=None):
+        self.parent.parent.parent.add_widget(CatAdd())
+
+    def call_del_cat(self, e=None):
+        self.parent.parent.parent.add_widget(DelCat())
+
+    def build_func(self):
+        btn = Button(text='add...', size_hint_y=None, height=self.btn_name.height)
+        btn.bind(on_release=lambda btn=btn, drop_down=self.drop_down: drop_down.select(self.title))
+        btn.bind(on_press = self.call_cat_add_btn)
+        self.drop_down.add_widget(btn)
+        del_btn = Button(text='delete...', size_hint_y=None, height=self.btn_name.height)
+        del_btn.bind(on_release=lambda btn=btn, drop_down=self.drop_down: drop_down.select(self.title))
+        del_btn.bind(on_press = self.call_del_cat)
+        self.drop_down.add_widget(del_btn)
+
+
+
+
 class SimpleApp(App):
 
     def build(self):
         app = Root(transition=FadeTransition())
-        app.add_widget (StartScreen (name='main'))
-        # app.add_widget(InputWindow(name="add_out_tr"))
-        # app.add_widget(TransactionScreen(name='out_tr_screen'))
-        # app.add_widget(CategoryScreen(name='in_tr_screen'))
-        # app.add_widget(AccountScreen(name='add_in_tr'))
+        app.add_widget(StartScreen(name='main'))
 
         return app
+
 
 if __name__ == '__main__':
     SimpleApp().run()

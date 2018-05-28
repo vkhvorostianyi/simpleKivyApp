@@ -11,6 +11,7 @@ from datetime import datetime
 from decimal import *
 import json
 
+
 class AppUnit(object):
     def __init__(self, name, value):
         self.name = name
@@ -35,6 +36,7 @@ class Transaction(AppUnit):
 class Category(AppUnit):
     pass
 
+
 class Wallet(object):
     transaction_list = {}
     account_list = {}
@@ -42,26 +44,28 @@ class Wallet(object):
 
     def add_account(self, account):
         self.account_list[account.name] = str(account.value)
-        save_to_file ('accounts.json', self.account_list)
+        save_to_file('accounts.json', self.account_list)
 
     def add_transaction(self, transaction):
         tr_cell = self.transaction_list[transaction.name] = {}
-        tr_cell["value"] = str(transaction.value)
         tr_cell["category"] = transaction.category
+        tr_cell["value"] = transaction.value
         tr_cell['account'] = transaction.account
         save_to_file('transactions.json', self.transaction_list)
+        decimal_account = Decimal(self.account_list[transaction.account]).quantize(Decimal('0.01'), rounding=ROUND_DOWN)
+        decimal_transaction = Decimal(transaction.value).quantize(Decimal('0.01'), rounding=ROUND_DOWN)
+        if self.category_list[transaction.category]:
+            result = decimal_account - decimal_transaction
+        else:
+            result = decimal_account + decimal_transaction
+        self.account_list[transaction.account] = str(result)
+        save_to_file('accounts.json', self.account_list)
 
     def add_category(self,cat):
         # name is string and value is boolean true for spends and false for incomes
         self.category_list[cat.name] = cat.value
         save_to_file('categories.json', self.category_list)
 
-    def spend(self,account, transaction_value):
-        decimal_account = Decimal(self.account_list[account]).quantize(Decimal('0.01'),
-                                                          rounding=ROUND_DOWN)
-        decimal_transaction = Decimal(transaction_value).quantize(Decimal('0.01'), rounding=ROUND_DOWN)
-        self.account_list[account] = str(decimal_account - decimal_transaction)
-        save_to_file('accounts.json', self.account_list)
 
 def list_view(input_dict):
     view_string = ""
@@ -123,19 +127,21 @@ if not wallet.transaction_list:
 
 
 def add_new_tr(acc, cat, val):
+    wallet.add_transaction(Transaction(val, acc, cat))
 
-    wallet.add_transaction(Transaction (val, acc, cat))
-    wallet.spend(acc, val)
 
 def add_new_acc(acc,val):
     wallet.add_account(Account(acc, val))
 
+
 def add_new_cat(name,val):
     wallet.add_category(Category(name, val))
+
 
 def del_cat(cat):
     del(wallet.category_list[cat])
     save_to_file('categories.json', wallet.category_list)
+
 
 def del_acc(acc):
     del(wallet.account_list[acc])

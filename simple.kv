@@ -89,19 +89,6 @@
                 root.parent.parent.parent.switch_to(program.InputWindow(name="add_out_tr"))
 <Lb>:
     size: 100, 210
-<CategoryScreen>:
-    Button:
-        text: "Back"
-        on_press:
-            root.parent.switch_to(program.StartScreen(name="main"))
-
-<AccountScreen>:
-    Button:
-        text: "Back"
-        on_press:
-            root.parent.switch_to(program.StartScreen(name='main'))
-
-
 
 <MainView>:
     ListView:
@@ -200,10 +187,56 @@
                 text: "Cancel"
                 on_press:
                     root.parent.switch_to(program.StartScreen(name='main'))
+<AccountScreen>:
+    AnchorLayout:
+        padding: 50,0,50, root.height*.1
 
 
+        GridLayout:
+            cols: 1
+            row_force_default: True
+            row_default_height: 48
+            spacing: 60
 
 
+            Label:
+                text: "Enter value"
+            TextInput:
+                id: val
+            BoxLayout:
+                AccDrop:
+                    id: acc_drop
+                InCat:
+                    id: cat_drop
+            Button:
+                text: "Add transaction"
+                on_press:
+                    acc_name =  acc_drop.btn_name.text.split(':')[0]
+                    program.add_new_tr(acc_name,cat_drop.btn_name.text,val.text)
+                    root.parent.switch_to(program.StartScreen(name='main'))
+            Button:
+                text: "Cancel"
+                on_press:
+                    root.parent.switch_to(program.StartScreen(name='main'))
+
+
+<CategoryScreen>:
+    AnchorLayout:
+        padding:
+            root.width*.1,10,root.width*.1,root.height * 3/4
+        GridLayout:
+            rows: 2
+            spacing:20
+            row_force_default: True
+            row_default_height: 40
+            Button:
+                text: "Back"
+                on_press:
+                    root.parent.switch_to(program.StartScreen(name='main'))
+
+    AnchorLayout:
+        padding: root.width*.1,root.height * 1/4,root.width*.1,10
+        MainView
 
 
 

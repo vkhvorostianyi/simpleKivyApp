@@ -87,6 +87,25 @@
             on_press:
 #                self.parent.parent.parent.remove_widget(root)
                 root.parent.parent.parent.switch_to(program.InputWindow(name="add_out_tr"))
+
+<CatAddIn>:
+    Label:
+        text: "Add Category"
+    TextInput:
+        id: add_category
+    BoxLayout:
+        Button:
+            text: "OK"
+            id: add_cat_btn
+            on_press:
+                program.add_new_cat(add_category.text,False)
+                root.parent.parent.parent.switch_to(program.InputWindow(name="add_out_tr"))
+#                self.parent.parent.remove_widget(root)
+        Button:
+            text: "Cancel"
+            on_press:
+#                self.parent.parent.parent.remove_widget(root)
+                root.parent.parent.parent.switch_to(program.InputWindow(name="add_out_tr"))
 <Lb>:
     size: 100, 210
 
@@ -148,8 +167,12 @@
 <HeadTitle>:
     GridLayout:
         rows: 2
-        Label:
-            text: "MyWallet\n"
+        BoxLayout:
+            orientation: 'vertical'
+            Label:
+                text: "MyWallet"
+            Label:
+                text:"Balance: {}\n".format(w.search(w.wallet.transaction_list)[4])
         BoxLayout:
             Label:
                 text: "\nLast transaction:\n{}".format(w.last_transaction_view())

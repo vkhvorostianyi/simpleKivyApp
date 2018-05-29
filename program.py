@@ -54,6 +54,9 @@ class BlueCanvas(BoxLayout):
         self.size_hint = .75, .25
 
 
+class CatAddIn(BlueCanvas):
+    pass
+
 class DelCat(BlueCanvas):
     pass
 
@@ -160,7 +163,7 @@ class InCat(CustomDrop):
                                                                  if wallet.category_list[x] is False], **kwargs)
 
     def call_cat_add_btn(self, e=None):
-        self.parent.parent.parent.add_widget(CatAdd())
+        self.parent.parent.parent.add_widget(CatAddIn())
 
     def call_del_cat(self, e=None):
         self.parent.parent.parent.add_widget(DelCat())
@@ -174,8 +177,6 @@ class InCat(CustomDrop):
         del_btn.bind(on_release=lambda btn=btn, drop_down=self.drop_down: drop_down.select(self.title))
         del_btn.bind(on_press = self.call_del_cat)
         self.drop_down.add_widget(del_btn)
-
-
 
 
 class SimpleApp(App):

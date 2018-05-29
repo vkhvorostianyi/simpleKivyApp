@@ -99,7 +99,8 @@ def search(input_list, keyword=None):
             else:
                 search_stack_income.append('{}:\n{}'.format(item, list_view(input_list[item])))
                 total_income += Decimal(input_list[item]['value']).quantize(Decimal('0.01'), rounding=ROUND_DOWN)
-        return total, sorted(search_stack,reverse=True),total_income, sorted(search_stack_income, reverse=True)
+        balance = total_income-total
+        return total, sorted(search_stack,reverse=True),total_income, sorted(search_stack_income, reverse=True),balance
 
 
 def last_transaction_view():

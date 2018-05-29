@@ -189,4 +189,6 @@ class SimpleApp(App):
 
 
 if __name__ == '__main__':
-    SimpleApp().run()
+    myapp = SimpleApp()
+    myapp.run()
+

@@ -76,7 +76,9 @@ def list_view(input_dict):
 
 def search(input_list, keyword=None):
     total = 0
+    total_income = 0
     search_stack = []
+    search_stack_income = []
     if keyword:
         for item in (input_list.keys()):
             if keyword in (item and str(input_list[item].values())):
@@ -91,9 +93,13 @@ def search(input_list, keyword=None):
                 return "No results,sorry"
     else:
         for item in (input_list.keys()):
-            search_stack.append('{}:\n{}'.format(item, list_view(input_list[item])))
-            total += Decimal(input_list[item]['value']).quantize(Decimal('0.01'), rounding=ROUND_DOWN)
-        return total, sorted(search_stack,reverse=True)
+            if input_list[item]['category'] in [i for i in wallet.category_list if wallet.category_list[i] is True]:
+                search_stack.append('{}:\n{}'.format(item, list_view(input_list[item])))
+                total += Decimal(input_list[item]['value']).quantize(Decimal('0.01'), rounding=ROUND_DOWN)
+            else:
+                search_stack_income.append('{}:\n{}'.format(item, list_view(input_list[item])))
+                total_income += Decimal(input_list[item]['value']).quantize(Decimal('0.01'), rounding=ROUND_DOWN)
+        return total, sorted(search_stack,reverse=True),total_income, sorted(search_stack_income, reverse=True)
 
 
 def last_transaction_view():

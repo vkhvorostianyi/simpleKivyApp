@@ -27,6 +27,10 @@ class MainView(BoxLayout):
     pass
 
 
+class MainViewIncome(BoxLayout):
+    pass
+
+
 class TransactionScreen(Screen):
     pass
 

@@ -219,6 +219,13 @@
                 on_press:
                     root.parent.switch_to(program.StartScreen(name='main'))
 
+<MainViewIncome>:
+    ListView:
+        adapter:
+            sla.SimpleListAdapter(
+            data=w.search(w.wallet.transaction_list)[3],
+            cls=program.Lb
+            )
 
 <CategoryScreen>:
     AnchorLayout:
@@ -236,7 +243,7 @@
 
     AnchorLayout:
         padding: root.width*.1,root.height * 1/4,root.width*.1,10
-        MainView
+        MainViewIncome
 
 
 

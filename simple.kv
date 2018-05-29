@@ -1,4 +1,4 @@
-#:import program program
+#:import main main
 #:import w wallet_app
 #:import sla kivy.adapters.simplelistadapter
 #:import hex kivy.utils.get_color_from_hex
@@ -22,14 +22,14 @@
             text: "OK"
             id: del_cat_btn
             on_press:
-                program.del_cat(del_cat_drop.btn_name.text)
+                main.del_cat(del_cat_drop.btn_name.text)
 #                self.parent.parent.parent.remove_widget(root)
-                root.parent.parent.parent.switch_to(program.InputWindow(name="add_out_tr"))
+                root.parent.parent.parent.switch_to(main.InputWindow(name="add_out_tr"))
         Button:
             text: "Cancel"
             on_press:
 #                self.parent.parent.parent.remove_widget(root)
-                root.parent.parent.parent.switch_to(program.InputWindow(name="add_out_tr"))
+                root.parent.parent.parent.switch_to(main.InputWindow(name="add_out_tr"))
 <DelAcc>:
     Label:
         text: "Del Account"
@@ -41,14 +41,14 @@
             id: del_cat_btn
             on_press:
                 acc_name =  del_acc_drop.btn_name.text.split(':')[0]
-                program.del_acc(acc_name)
+                main.del_acc(acc_name)
 #                self.parent.parent.parent.remove_widget(root)
-                root.parent.parent.parent.switch_to(program.InputWindow(name="add_out_tr"))
+                root.parent.parent.parent.switch_to(main.InputWindow(name="add_out_tr"))
         Button:
             text: "Cancel"
             on_press:
 #                self.parent.parent.parent.remove_widget(root)
-                root.parent.parent.parent.switch_to(program.InputWindow(name="add_out_tr"))
+                root.parent.parent.parent.switch_to(main.InputWindow(name="add_out_tr"))
 <AccountAdd>:
     Label:
         text: "Add Account"
@@ -61,14 +61,14 @@
             text: "OK"
             id: add_acc_btn
             on_press:
-                program.add_new_acc(add_account.text, add_acc_value.text)
+                main.add_new_acc(add_account.text, add_acc_value.text)
 #                self.parent.parent.parent.remove_widget(root)
-                root.parent.parent.parent.switch_to(program.InputWindow(name="add_out_tr"))
+                root.parent.parent.parent.switch_to(main.InputWindow(name="add_out_tr"))
         Button:
             text: "Cancel"
             on_press:
 #                self.parent.parent.parent.remove_widget(root)
-                root.parent.parent.parent.switch_to(program.InputWindow(name="add_out_tr"))
+                root.parent.parent.parent.switch_to(main.InputWindow(name="add_out_tr"))
 <CatAdd>:
     Label:
         text: "Add Category"
@@ -79,14 +79,14 @@
             text: "OK"
             id: add_cat_btn
             on_press:
-                program.add_new_cat(add_category.text,True)
-                root.parent.parent.parent.switch_to(program.InputWindow(name="add_out_tr"))
+                main.add_new_cat(add_category.text,True)
+                root.parent.parent.parent.switch_to(main.InputWindow(name="add_out_tr"))
 #                self.parent.parent.remove_widget(root)
         Button:
             text: "Cancel"
             on_press:
 #                self.parent.parent.parent.remove_widget(root)
-                root.parent.parent.parent.switch_to(program.InputWindow(name="add_out_tr"))
+                root.parent.parent.parent.switch_to(main.InputWindow(name="add_out_tr"))
 
 <CatAddIn>:
     Label:
@@ -98,14 +98,14 @@
             text: "OK"
             id: add_cat_btn
             on_press:
-                program.add_new_cat(add_category.text,False)
-                root.parent.parent.parent.switch_to(program.InputWindow(name="add_out_tr"))
+                main.add_new_cat(add_category.text,False)
+                root.parent.parent.parent.switch_to(main.InputWindow(name="add_out_tr"))
 #                self.parent.parent.remove_widget(root)
         Button:
             text: "Cancel"
             on_press:
 #                self.parent.parent.parent.remove_widget(root)
-                root.parent.parent.parent.switch_to(program.InputWindow(name="add_out_tr"))
+                root.parent.parent.parent.switch_to(main.InputWindow(name="add_out_tr"))
 <Lb>:
     size: 100, 210
 
@@ -114,7 +114,7 @@
         adapter:
             sla.SimpleListAdapter(
             data=w.search(w.wallet.transaction_list)[1],
-            cls=program.Lb
+            cls=main.Lb
             )
 
 <TransactionScreen>:
@@ -129,7 +129,7 @@
             Button:
                 text: "Back"
                 on_press:
-                    root.parent.switch_to(program.StartScreen(name='main'))
+                    root.parent.switch_to(main.StartScreen(name='main'))
 
     AnchorLayout:
         padding: root.width*.1,root.height * 1/4,root.width*.1,10
@@ -147,22 +147,22 @@
             Button:
                 text: "add new income \ntransaction"
                 on_press:
-                    root.parent.switch_to(program.AccountScreen(name='add_in_tr'))
+                    root.parent.switch_to(main.AccountScreen(name='add_in_tr'))
 
             Button:
                 text: "add new outcome \ntransaction"
                 on_press:
-                    root.parent.switch_to(program.InputWindow(name="add_out_tr"))
+                    root.parent.switch_to(main.InputWindow(name="add_out_tr"))
 
             Button:
                 text: "view all income \ntransactions"
                 on_press:
-                    root.parent.switch_to(program.CategoryScreen(name='in_tr_screen'))
+                    root.parent.switch_to(main.CategoryScreen(name='in_tr_screen'))
 
             Button:
                 text: "view all outcome \ntransactions"
                 on_press:
-                    root.parent.switch_to(program.TransactionScreen(name='out_tr_screen'))
+                    root.parent.switch_to(main.TransactionScreen(name='out_tr_screen'))
 
 <HeadTitle>:
     GridLayout:
@@ -204,12 +204,12 @@
                 text: "Add transaction"
                 on_press:
                     acc_name =  acc_drop.btn_name.text.split(':')[0]
-                    program.add_new_tr(acc_name,cat_drop.btn_name.text,val.text)
-                    root.parent.switch_to(program.StartScreen(name='main'))
+                    main.add_new_tr(acc_name,cat_drop.btn_name.text,val.text)
+                    root.parent.switch_to(main.StartScreen(name='main'))
             Button:
                 text: "Cancel"
                 on_press:
-                    root.parent.switch_to(program.StartScreen(name='main'))
+                    root.parent.switch_to(main.StartScreen(name='main'))
 <AccountScreen>:
     AnchorLayout:
         padding: 50,0,50, root.height*.1
@@ -235,19 +235,19 @@
                 text: "Add transaction"
                 on_press:
                     acc_name =  acc_drop.btn_name.text.split(':')[0]
-                    program.add_new_tr(acc_name,cat_drop.btn_name.text,val.text)
-                    root.parent.switch_to(program.StartScreen(name='main'))
+                    main.add_new_tr(acc_name,cat_drop.btn_name.text,val.text)
+                    root.parent.switch_to(main.StartScreen(name='main'))
             Button:
                 text: "Cancel"
                 on_press:
-                    root.parent.switch_to(program.StartScreen(name='main'))
+                    root.parent.switch_to(main.StartScreen(name='main'))
 
 <MainViewIncome>:
     ListView:
         adapter:
             sla.SimpleListAdapter(
             data=w.search(w.wallet.transaction_list)[3],
-            cls=program.Lb
+            cls=main.Lb
             )
 
 <CategoryScreen>:
@@ -262,7 +262,7 @@
             Button:
                 text: "Back"
                 on_press:
-                    root.parent.switch_to(program.StartScreen(name='main'))
+                    root.parent.switch_to(main.StartScreen(name='main'))
 
     AnchorLayout:
         padding: root.width*.1,root.height * 1/4,root.width*.1,10

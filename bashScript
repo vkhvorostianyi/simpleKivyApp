@@ -2,7 +2,6 @@
 git add -A
 git status
 echo "If it's OK enter commit man, if not press 'Ctrl-C' to escape"
-read commit
-git commit -m "$commit"
+git commit -m "$1"
 git push
 

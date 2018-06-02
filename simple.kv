@@ -99,13 +99,12 @@
             id: add_cat_btn
             on_press:
                 main.add_new_cat(add_category.text,False)
-                root.parent.parent.parent.switch_to(main.InputWindow(name="add_out_tr"))
-#                self.parent.parent.remove_widget(root)
+                root.parent.parent.parent.switch_to(main.InputWindow(name="main"))
+
         Button:
             text: "Cancel"
             on_press:
-#                self.parent.parent.parent.remove_widget(root)
-                root.parent.parent.parent.switch_to(main.InputWindow(name="add_out_tr"))
+                root.parent.parent.parent.switch_to(main.InputWindow(name="main"))
 <Lb>:
     size: 100, 210
 
@@ -138,7 +137,7 @@
 <StartScreen>:
     AnchorLayout:
         padding:
-            root.width*.1,10,root.width*.1,root.height * 3/4
+            root.width*.1,10,root.width*.1,root.height * 2/4
         HeadTitle:
     AnchorLayout:
         padding: root.width*.1,root.height * 3/4,root.width*.1,10
@@ -166,18 +165,22 @@
 
 <HeadTitle>:
     GridLayout:
-        rows: 2
+        rows: 3
+        spacing: 20
         BoxLayout:
             orientation: 'vertical'
             Label:
-                text: "MyWallet"
+                text: 'MyWallet\n'
             Label:
                 text:"Balance: {}\n".format(w.search(w.wallet.transaction_list)[4])
         BoxLayout:
             Label:
-                text: "\nLast transaction:\n{}".format(w.last_transaction_view())
+                text: "\nLast outcome transaction:\n{}".format(w.last_transaction_view(True))
             Label:
-                text: "Accounts:\n{}".format(w.list_view(w.wallet.account_list))
+                text: "\nLast income transaction:\n{}".format(w.last_transaction_view(False))
+        BoxLayout:
+            Label:
+                text: 'Accounts:\n{}'.format(w.list_view(w.wallet.account_list))
 
 <InputWindow>:
     AnchorLayout:
@@ -205,11 +208,11 @@
                 on_press:
                     acc_name =  acc_drop.btn_name.text.split(':')[0]
                     main.add_new_tr(acc_name,cat_drop.btn_name.text,val.text)
-                    root.parent.switch_to(main.StartScreen(name='main'))
+                    root.parent.switch_to(main.StartScreen(name='add_in_tr'))
             Button:
                 text: "Cancel"
                 on_press:
-                    root.parent.switch_to(main.StartScreen(name='main'))
+                    root.parent.switch_to(main.StartScreen(name='add_in_tr'))
 <AccountScreen>:
     AnchorLayout:
         padding: 50,0,50, root.height*.1
@@ -228,14 +231,14 @@
                 id: val
             BoxLayout:
                 AccDrop:
-                    id: acc_drop
+                    id: acc_drop_in
                 InCat:
-                    id: cat_drop
+                    id: cat_drop_in
             Button:
                 text: "Add transaction"
                 on_press:
-                    acc_name =  acc_drop.btn_name.text.split(':')[0]
-                    main.add_new_tr(acc_name,cat_drop.btn_name.text,val.text)
+                    acc_name =  acc_drop_in.btn_name.text.split(':')[0]
+                    main.add_new_tr(acc_name,cat_drop_in.btn_name.text,val.text)
                     root.parent.switch_to(main.StartScreen(name='main'))
             Button:
                 text: "Cancel"

@@ -159,23 +159,23 @@ class CatDrop(CustomDrop):
 class InCat(CustomDrop):
     def __init__(self, **kwargs):
         super().__init__(title="Set category", data=["{}".format(x)
-                                                                 for x in wallet.category_list.keys()
-                                                                 if wallet.category_list[x] is False], **kwargs)
+                                                     for x in wallet.category_list.keys()
+                                                     if wallet.category_list[x] is False], **kwargs)
 
-    def call_cat_add_btn(self, e=None):
+    def call_cat_add(self, e=None):
         self.parent.parent.parent.add_widget(CatAddIn())
 
-    def call_del_cat(self, e=None):
+    def del_cat(self, e=None):
         self.parent.parent.parent.add_widget(DelCat())
 
     def build_func(self):
         btn = Button(text='add...', size_hint_y=None, height=self.btn_name.height)
         btn.bind(on_release=lambda btn=btn, drop_down=self.drop_down: drop_down.select(self.title))
-        btn.bind(on_press = self.call_cat_add_btn)
+        btn.bind(on_press=self.call_cat_add)
         self.drop_down.add_widget(btn)
         del_btn = Button(text='delete...', size_hint_y=None, height=self.btn_name.height)
         del_btn.bind(on_release=lambda btn=btn, drop_down=self.drop_down: drop_down.select(self.title))
-        del_btn.bind(on_press = self.call_del_cat)
+        del_btn.bind(on_press=self.del_cat)
         self.drop_down.add_widget(del_btn)
 
 
@@ -184,7 +184,6 @@ class SimpleApp(App):
     def build(self):
         app = Root(transition=FadeTransition())
         app.add_widget(StartScreen(name='main'))
-
         return app
 
 

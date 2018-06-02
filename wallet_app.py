@@ -52,8 +52,8 @@ class Wallet(object):
         tr_cell["value"] = transaction.value
         tr_cell['account'] = transaction.account
         save_to_file('transactions.json', self.transaction_list)
-        decimal_account = Decimal(self.account_list[transaction.account]).quantize(Decimal('0.01'), rounding=ROUND_DOWN)
-        decimal_transaction = Decimal(transaction.value).quantize(Decimal('0.01'), rounding=ROUND_DOWN)
+        decimal_account = round(float(self.account_list[transaction.account]), 2)
+        decimal_transaction = round(float(transaction.value), 2)
         if self.category_list[transaction.category]:
             result = decimal_account - decimal_transaction
         else:
@@ -83,7 +83,7 @@ def search(input_list, keyword=None):
         for item in (input_list.keys()):
             if keyword in (item and str(input_list[item].values())):
                 search_stack.append('{}:\n{}'.format(item, list_view(input_list[item])))
-                total += Decimal(input_list[item]['value']).quantize(Decimal('0.01'), rounding=ROUND_DOWN)
+                total += round(float(input_list[item]['value']), 2)
         else:
             if search_stack:
                 for i in search_stack:
@@ -95,16 +95,19 @@ def search(input_list, keyword=None):
         for item in (input_list.keys()):
             if input_list[item]['category'] in [i for i in wallet.category_list if wallet.category_list[i] is True]:
                 search_stack.append('{}:\n{}'.format(item, list_view(input_list[item])))
-                total += Decimal(input_list[item]['value']).quantize(Decimal('0.01'), rounding=ROUND_DOWN)
+                total += round(float(input_list[item]['value']), 2)
             else:
                 search_stack_income.append('{}:\n{}'.format(item, list_view(input_list[item])))
-                total_income += Decimal(input_list[item]['value']).quantize(Decimal('0.01'), rounding=ROUND_DOWN)
+                total_income += round(float(input_list[item]['value']), 2)
         balance = total_income-total
-        return total, sorted(search_stack,reverse=True),total_income, sorted(search_stack_income, reverse=True),balance
+        return total, sorted(search_stack,reverse=True), total_income, sorted(search_stack_income, reverse=True),balance
 
 
-def last_transaction_view():
-    return search(wallet.transaction_list)[1][0]
+def last_transaction_view(option):
+    if option:
+        return search(wallet.transaction_list)[1][0]
+    else:
+        return search(wallet.transaction_list)[3][0]
 
 
 def save_to_file(file_name, data):

@@ -69,24 +69,24 @@
             on_press:
 #                self.parent.parent.parent.remove_widget(root)
                 root.parent.parent.parent.switch_to(main.InputWindow(name="add_out_tr"))
-<CatAdd>:
-    Label:
-        text: "Add Category"
-    TextInput:
-        id: add_category
-    BoxLayout:
-        Button:
-            text: "OK"
-            id: add_cat_btn
-            on_press:
-                main.add_new_cat(add_category.text,True)
-                root.parent.parent.parent.switch_to(main.InputWindow(name="add_out_tr"))
-#                self.parent.parent.remove_widget(root)
-        Button:
-            text: "Cancel"
-            on_press:
-#                self.parent.parent.parent.remove_widget(root)
-                root.parent.parent.parent.switch_to(main.InputWindow(name="add_out_tr"))
+#<CatAdd>:
+#    Label:
+#        text: "Add Category"
+#    TextInput:
+#        id: add_category
+#    BoxLayout:
+#        Button:
+#            text: "OK"
+#            id: add_cat_btn
+#            on_press:
+#                main.add_new_cat(add_category.text,True)
+#                root.parent.parent.parent.switch_to(main.InputWindow(name="add_out_tr"))
+##                self.parent.parent.remove_widget(root)
+#        Button:
+#            text: "Cancel"
+#            on_press:
+##                self.parent.parent.parent.remove_widget(root)
+#                root.parent.parent.parent.switch_to(main.InputWindow(name="add_out_tr"))
 
 <CatAddIn>:
     Label:
@@ -99,12 +99,12 @@
             id: add_cat_btn
             on_press:
                 main.add_new_cat(add_category.text,False)
-                root.parent.parent.parent.switch_to(main.InputWindow(name="main"))
+                root.parent.parent.parent.switch_to(main.InputWindow(name="add_in_tr"))
 
         Button:
             text: "Cancel"
             on_press:
-                root.parent.parent.parent.switch_to(main.InputWindow(name="main"))
+                root.parent.parent.parent.switch_to(main.InputWindow(name="add_in_tr"))
 <Lb>:
     size: 100, 210
 
@@ -208,11 +208,11 @@
                 on_press:
                     acc_name =  acc_drop.btn_name.text.split(':')[0]
                     main.add_new_tr(acc_name,cat_drop.btn_name.text,val.text)
-                    root.parent.switch_to(main.StartScreen(name='add_in_tr'))
+                    root.parent.switch_to(main.StartScreen(name='main'))
             Button:
                 text: "Cancel"
                 on_press:
-                    root.parent.switch_to(main.StartScreen(name='add_in_tr'))
+                    root.parent.switch_to(main.StartScreen(name='main'))
 <AccountScreen>:
     AnchorLayout:
         padding: 50,0,50, root.height*.1

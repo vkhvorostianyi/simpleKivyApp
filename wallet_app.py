@@ -137,7 +137,8 @@ if not wallet.transaction_list:
 
 
 def add_new_tr(acc, cat, val):
-    wallet.add_transaction(Transaction(val, acc, cat))
+    if val:
+        wallet.add_transaction(Transaction(val, acc, cat))
 
 
 def add_new_acc(acc,val):

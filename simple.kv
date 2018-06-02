@@ -69,28 +69,28 @@
             on_press:
 #                self.parent.parent.parent.remove_widget(root)
                 root.parent.parent.parent.switch_to(main.InputWindow(name="add_out_tr"))
-#<CatAdd>:
-#    Label:
-#        text: "Add Category"
-#    TextInput:
-#        id: add_category
-#    BoxLayout:
-#        Button:
-#            text: "OK"
-#            id: add_cat_btn
-#            on_press:
-#                main.add_new_cat(add_category.text,True)
-#                root.parent.parent.parent.switch_to(main.InputWindow(name="add_out_tr"))
-##                self.parent.parent.remove_widget(root)
-#        Button:
-#            text: "Cancel"
-#            on_press:
-##                self.parent.parent.parent.remove_widget(root)
-#                root.parent.parent.parent.switch_to(main.InputWindow(name="add_out_tr"))
+<CatAdd>:
+    Label:
+        text: "Add Outcome Category"
+    TextInput:
+        id: add_category
+    BoxLayout:
+        Button:
+            text: "OK"
+            id: add_cat_btn
+            on_press:
+                main.add_new_cat(add_category.text,True)
+                root.parent.parent.parent.switch_to(main.InputWindow(name="add_out_tr"))
+#                self.parent.parent.remove_widget(root)
+        Button:
+            text: "Cancel"
+            on_press:
+#                self.parent.parent.parent.remove_widget(root)
+                root.parent.parent.parent.switch_to(main.InputWindow(name="add_out_tr"))
 
 <CatAddIn>:
     Label:
-        text: "Add Category"
+        text: "Add InCome Category"
     TextInput:
         id: add_category
     BoxLayout:
@@ -99,12 +99,12 @@
             id: add_cat_btn
             on_press:
                 main.add_new_cat(add_category.text,False)
-                root.parent.parent.parent.switch_to(main.InputWindow(name="add_in_tr"))
+                root.parent.parent.parent.switch_to(main.AccountScreen(name="add_in_tr"))
 
         Button:
             text: "Cancel"
             on_press:
-                root.parent.parent.parent.switch_to(main.InputWindow(name="add_in_tr"))
+                root.parent.parent.parent.switch_to(main.AccountScreen(name="add_in_tr"))
 <Lb>:
     size: 100, 210
 

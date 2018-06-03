@@ -174,9 +174,9 @@
                 text:"Balance: {}\n".format(w.search(w.wallet.transaction_list)[4])
         BoxLayout:
             Label:
-                text: "\nLast outcome transaction:\n{}".format(w.last_transaction_view(True))
+                text: "\nLast income:\n{}".format(w.last_transaction_view(False))
             Label:
-                text: "\nLast income transaction:\n{}".format(w.last_transaction_view(False))
+                text: "\nLast outcome:\n{}".format(w.last_transaction_view(True))
         BoxLayout:
             Label:
                 text: 'Accounts:\n{}'.format(w.list_view(w.wallet.account_list))

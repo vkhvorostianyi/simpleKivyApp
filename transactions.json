@@ -1,1 +1,1 @@
-{"02-06-18 23:44:29": {"category": "wage", "value": "40", "account": "test_2"}, "03-06-18 19:18:57": {"category": "testing again", "value": "100", "account": "cash"}, "03-06-18 19:24:56": {"category": "wage", "value": "1000", "account": "cash"}}
+{"03-06-18 19:18:57": {"category": "testing again", "value": "0", "account": "cash"}, "03-06-18 19:18:58": {"category": "wage", "value": "0", "account": "cash"}, "03-06-18 19:49:55": {"category": "wage", "value": "200", "account": "cash"}}

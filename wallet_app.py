@@ -74,33 +74,20 @@ def list_view(input_dict):
     return view_string + '\n'
 
 
-def search(input_list, keyword=None):
+def search(input_list):
     total = 0
     total_income = 0
     search_stack = []
     search_stack_income = []
-    if keyword:
-        for item in (input_list.keys()):
-            if keyword in (item and str(input_list[item].values())):
-                search_stack.append('{}:\n{}'.format(item, list_view(input_list[item])))
-                total += round(float(input_list[item]['value']), 2)
+    for item in (input_list.keys()):
+        if input_list[item]['category'] in [i for i in wallet.category_list if wallet.category_list[i] is True]:
+            search_stack.append('{}:\n{}'.format(item, list_view(input_list[item])))
+            total += round(float(input_list[item]['value']), 2)
         else:
-            if search_stack:
-                for i in search_stack:
-                    print(i)
-                return total, sorted(search_stack)
-            else:
-                return "No results,sorry"
-    else:
-        for item in (input_list.keys()):
-            if input_list[item]['category'] in [i for i in wallet.category_list if wallet.category_list[i] is True]:
-                search_stack.append('{}:\n{}'.format(item, list_view(input_list[item])))
-                total += round(float(input_list[item]['value']), 2)
-            else:
-                search_stack_income.append('{}:\n{}'.format(item, list_view(input_list[item])))
-                total_income += round(float(input_list[item]['value']), 2)
-        balance = total_income-total
-        return total, sorted(search_stack,reverse=True), total_income, sorted(search_stack_income, reverse=True),balance
+            search_stack_income.append('{}:\n{}'.format(item, list_view(input_list[item])))
+            total_income += round(float(input_list[item]['value']), 2)
+    balance = total_income-total
+    return total, sorted(search_stack,reverse=True), total_income, sorted(search_stack_income, reverse=True),balance
 
 
 def last_transaction_view(option):
@@ -127,14 +114,6 @@ wallet.category_list = read_from_file('categories.json')
 wallet.transaction_list = read_from_file('transactions.json')
 wallet.account_list = read_from_file('accounts.json')
 
-if not wallet.account_list:
-    wallet.account_list['cash(default)'] = '0.00'
-if not wallet.category_list:
-    wallet.category_list['transport(default)'] = True
-if not wallet.transaction_list:
-    time = datetime.now().strftime("%d-%m-%y %H:%M:%S")
-    wallet.transaction_list[time]={'value':'0.00','account':None,'category': None}
-
 
 def add_new_tr(acc, cat, val):
     if val:
@@ -142,10 +121,12 @@ def add_new_tr(acc, cat, val):
 
 
 def del_tr(mode):
-    last_tr = (search(wallet.transaction_list)[mode][0]).split(':/n')[0]
-    last_tr = last_tr.split(':\n')[0]
-    del wallet.transaction_list[last_tr]
-    save_to_file('transactions.json', wallet.transaction_list)
+    list = (search(wallet.transaction_list)[mode])
+    if len(list) > 1:
+        last_tr = (list[0]).split(':/n')[0]
+        last_tr = last_tr.split(':\n')[0]
+        del wallet.transaction_list[last_tr]
+        save_to_file('transactions.json', wallet.transaction_list)
 
 
 def add_new_acc(acc,val):
@@ -162,5 +143,9 @@ def del_cat(cat):
 
 
 def del_acc(acc):
-    del(wallet.account_list[acc])
-    save_to_file('accounts.json', wallet.account_list)
+    if wallet.account_list:
+        del(wallet.account_list[acc])
+        save_to_file('accounts.json', wallet.account_list)
+    else:
+        wallet.account_list['cash'] = 0
+        save_to_file('accounts.json', wallet.account_list)

@@ -43,7 +43,7 @@ class Wallet(object):
     category_list = {}
 
     def add_account(self, account):
-        self.account_list[account.name] = str(account.value)
+        self.account_list[account.name] = round(float(account.value), 2)
         save_to_file('accounts.json', self.account_list)
 
     def add_transaction(self, transaction):

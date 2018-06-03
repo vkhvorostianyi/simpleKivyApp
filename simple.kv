@@ -41,11 +41,13 @@
             on_press:
                 acc_name =  del_acc_drop.btn_name.text.split(':')[0]
                 main.del_acc(acc_name)
-                root.parent.parent.parent.switch_to(main.InputWindow(name="add_out_tr"))
+                if root.parent.parent.name == "add_out_tr":root.parent.parent.parent.switch_to(main.InputWindow(name="add_out_tr"))
+                else:root.parent.parent.parent.switch_to(main.InputWindow(name="add_in_tr"))
         Button:
             text: "Cancel"
             on_press:
-                root.parent.parent.parent.switch_to(main.InputWindow(name="add_out_tr"))
+                if root.parent.parent.name == "add_out_tr":root.parent.parent.parent.switch_to(main.InputWindow(name="add_out_tr"))
+                else:root.parent.parent.parent.switch_to(main.InputWindow(name="add_in_tr"))
 <AccountAdd>:
     Label:
         text: "Add Account"

@@ -82,12 +82,12 @@
             id: add_acc_btn
             on_press:
                 main.add_new_acc(add_account.text, add_acc_value.text)
-                if root.parent.parent.name == "add_out_tr":root.parent.parent.parent.switch_to(main.InputWindow(name="add_out_tr"))
+                if root.parent.parent.parent.name == "add_out_tr":root.parent.parent.parent.switch_to(main.InputWindow(name="add_out_tr"))
                 else:root.parent.parent.parent.switch_to(main.AccountScreen(name="add_in_tr"))
         Button:
             text: "Cancel"
             on_press:
-                if root.parent.parent.name == "add_out_tr":root.parent.parent.parent.switch_to(main.InputWindow(name="add_out_tr"))
+                if root.parent.parent.parent.name == "add_out_tr":root.parent.parent.parent.switch_to(main.InputWindow(name="add_out_tr"))
                 else:root.parent.parent.parent.switch_to(main.AccountScreen(name="add_in_tr"))
 <CatAdd>:
     Label:
@@ -100,12 +100,12 @@
             id: add_cat_btn
             on_press:
                 main.add_new_cat(add_category.text,True)
-                if root.parent.parent.name == "add_out_tr":root.parent.parent.parent.switch_to(main.InputWindow(name="add_out_tr"))
+                if root.parent.parent.parent.name == "add_out_tr":root.parent.parent.parent.switch_to(main.InputWindow(name="add_out_tr"))
                 else:root.parent.parent.parent.switch_to(main.AccountScreen(name="add_in_tr"))
         Button:
             text: "Cancel"
             on_press:
-                if root.parent.parent.name == "add_out_tr":root.parent.parent.parent.switch_to(main.InputWindow(name="add_out_tr"))
+                if root.parent.parent.parent.name == "add_out_tr":root.parent.parent.parent.switch_to(main.InputWindow(name="add_out_tr"))
                 else:root.parent.parent.parent.switch_to(main.AccountScreen(name="add_in_tr"))
 
 <CatAddIn>:
@@ -251,7 +251,7 @@
             cols: 1
             row_force_default: True
             row_default_height: 48
-            spacing: 20
+            spacing: 60
 
 
             Label:

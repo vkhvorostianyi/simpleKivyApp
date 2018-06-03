@@ -28,7 +28,6 @@ class Transaction(AppUnit):
     # var name always is string, var value is number, account is object of Account class
     def __init__(self, value, account, category):
         super(Transaction,self).__init__(name=datetime.now().strftime("%d-%m-%y %H:%M:%S"), value=value)
-        self.name = datetime.now().strftime("%d-%m-%y %H:%M:%S")
         self.account = account
         self.category = category
 
@@ -43,17 +42,16 @@ class Wallet(object):
     category_list = {}
 
     def add_account(self, account):
-        self.account_list[account.name] = round(float(account.value), 2)
+        self.account_list[account.name] = account.value
         save_to_file('accounts.json', self.account_list)
 
     def add_transaction(self, transaction):
         tr_cell = self.transaction_list[transaction.name] = {}
         tr_cell["category"] = transaction.category
-        tr_cell["value"] = transaction.value
-        tr_cell['account'] = transaction.account
+        tr_cell["value"] = str(Decimal(transaction.value).quantize(Decimal('0.01'), rounding=ROUND_DOWN))
         save_to_file('transactions.json', self.transaction_list)
-        decimal_account = round(float(self.account_list[transaction.account]), 2)
-        decimal_transaction = round(float(transaction.value), 2)
+        decimal_account = Decimal(self.account_list[transaction.account]).quantize(Decimal('0.01'), rounding=ROUND_DOWN)
+        decimal_transaction = Decimal(transaction.value).quantize(Decimal('0.01'), rounding=ROUND_DOWN)
         if self.category_list[transaction.category]:
             result = decimal_account - decimal_transaction
         else:
@@ -82,10 +80,10 @@ def search(input_list):
     for item in (input_list.keys()):
         if input_list[item]['category'] in [i for i in wallet.category_list if wallet.category_list[i] is True]:
             search_stack.append('{}:\n{}'.format(item, list_view(input_list[item])))
-            total += round(float(input_list[item]['value']), 2)
+            total += Decimal(input_list[item]['value']).quantize(Decimal('0.01'), rounding=ROUND_DOWN)
         else:
             search_stack_income.append('{}:\n{}'.format(item, list_view(input_list[item])))
-            total_income += round(float(input_list[item]['value']), 2)
+            total_income += Decimal(input_list[item]['value']).quantize(Decimal('0.01'), rounding=ROUND_DOWN)
     balance = total_income-total
     return total, sorted(search_stack,reverse=True), total_income, sorted(search_stack_income, reverse=True),balance
 

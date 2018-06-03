@@ -1,7 +1,7 @@
 [app]
 
 # (str) Title of your application
-title = MyWallet
+title = My Application
 
 # (str) Package name
 package.name = myapp
@@ -13,7 +13,7 @@ package.domain = org.test
 source.dir = .
 
 # (list) Source files to include (let empty to include all the files)
-source.include_exts = py,pyc,png,jpg,kv,atlas,json
+source.include_exts = py,png,jpg,kv,atlas
 
 # (list) List of inclusions using pattern matching
 #source.include_patterns = assets/*,images/*.png
@@ -36,7 +36,7 @@ version = 0.1
 
 # (list) Application requirements
 # comma seperated e.g. requirements = sqlite3,kivy
-requirements = kivy, jsonrpclib, jsonpickle, ujson
+requirements = kivy
 
 # (str) Custom source folders for requirements
 # Sets custom source for any requirements with recipes
@@ -88,16 +88,16 @@ fullscreen = 0
 #android.permissions = INTERNET
 
 # (int) Android API to use
-android.api = 14
+#android.api = 19
 
 # (int) Minimum API required
-android.minapi = 8
+#android.minapi = 9
 
 # (int) Android SDK version to use
-android.sdk = 23
+#android.sdk = 20
 
 # (str) Android NDK version to use
-#android.ndk = 9d
+#android.ndk = 9c
 
 # (bool) Use --private data storage (True) or --dir public storage (False)
 #android.private_storage = True
@@ -146,9 +146,6 @@ android.sdk = 23
 # bootstrap)
 #android.gradle_dependencies =
 
-# (list) Java classes to add as activities to the manifest.
-#android.add_activites = com.example.ExampleActivity
-
 # (str) python-for-android branch to use, defaults to stable
 #p4a.branch = stable
 
@@ -161,9 +158,6 @@ android.sdk = 23
 
 # (str) XML file to include as an intent filters in <activity> tag
 #android.manifest.intent_filters =
-
-# (str) launchMode to set for the main activity
-#android.manifest.launch_mode = standard
 
 # (list) Android additionnal libraries to copy into libs/armeabi
 #android.add_libs_armeabi = libs/android/*.so
@@ -207,9 +201,6 @@ android.arch = armeabi-v7a
 # (str) Bootstrap to use for android builds
 # p4a.bootstrap = sdl2
 
-# (int) port number to specify an explicit --port= p4a argument (eg for bootstrap flask)
-#p4a.port =
-
 
 #
 # iOS specific
@@ -229,7 +220,7 @@ android.arch = armeabi-v7a
 [buildozer]
 
 # (int) Log level (0 = error only, 1 = info, 2 = debug (with command output))
-log_level = 2
+log_level = 1
 
 # (int) Display warning if buildozer is run as root (0 = False, 1 = True)
 warn_on_root = 1

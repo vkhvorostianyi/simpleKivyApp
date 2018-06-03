@@ -41,19 +41,17 @@
             on_press:
                 acc_name =  del_acc_drop.btn_name.text.split(':')[0]
                 main.del_acc(acc_name)
-#                self.parent.parent.parent.remove_widget(root)
                 root.parent.parent.parent.switch_to(main.InputWindow(name="add_out_tr"))
         Button:
             text: "Cancel"
             on_press:
-#                self.parent.parent.parent.remove_widget(root)
                 root.parent.parent.parent.switch_to(main.InputWindow(name="add_out_tr"))
 <AccountAdd>:
     Label:
         text: "Add Account"
     TextInput:
         id: add_account
-    TextInput:
+    FloatInput:
         id: add_acc_value
     BoxLayout:
         Button:

@@ -141,6 +141,13 @@ def add_new_tr(acc, cat, val):
         wallet.add_transaction(Transaction(val, acc, cat))
 
 
+def del_tr(mode):
+    last_tr = (search(wallet.transaction_list)[mode][0]).split(':/n')[0]
+    last_tr = last_tr.split(':\n')[0]
+    del wallet.transaction_list[last_tr]
+    save_to_file('transactions.json', wallet.transaction_list)
+
+
 def add_new_acc(acc,val):
     wallet.add_account(Account(acc, val))
 

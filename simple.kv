@@ -22,13 +22,13 @@
             id: del_cat_btn
             on_press:
                 main.del_cat(del_cat_drop.btn_name.text)
-#                self.parent.parent.parent.remove_widget(root)
-                root.parent.parent.parent.switch_to(main.InputWindow(name="add_out_tr"))
+                if root.parent.parent.name == "add_out_tr":root.parent.parent.parent.switch_to(main.InputWindow(name="add_out_tr"))
+                else:root.parent.parent.parent.switch_to(main.InputWindow(name="add_in_tr"))
         Button:
             text: "Cancel"
             on_press:
-#                self.parent.parent.parent.remove_widget(root)
-                root.parent.parent.parent.switch_to(main.InputWindow(name="add_out_tr"))
+                if root.parent.parent.name == "add_out_tr":root.parent.parent.parent.switch_to(main.InputWindow(name="add_out_tr"))
+                else:root.parent.parent.parent.switch_to(main.InputWindow(name="add_in_tr"))
 <DelAcc>:
     Label:
         text: "Del Account"
@@ -59,12 +59,10 @@
             id: add_acc_btn
             on_press:
                 main.add_new_acc(add_account.text, add_acc_value.text)
-#                self.parent.parent.parent.remove_widget(root)
                 root.parent.parent.parent.switch_to(main.InputWindow(name="add_out_tr"))
         Button:
             text: "Cancel"
             on_press:
-#                self.parent.parent.parent.remove_widget(root)
                 root.parent.parent.parent.switch_to(main.InputWindow(name="add_out_tr"))
 <CatAdd>:
     Label:
@@ -193,7 +191,7 @@
 
             Label:
                 text: "Enter value"
-            TextInput:
+            FloatInput:
                 id: val
             BoxLayout:
                 AccDrop:
@@ -224,7 +222,7 @@
 
             Label:
                 text: "Enter value"
-            TextInput:
+            FloatInput:
                 id: val
             BoxLayout:
                 AccDrop:

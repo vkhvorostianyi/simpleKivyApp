@@ -71,7 +71,12 @@ class BlueCanvas(BoxLayout):
 class CatAddIn(BlueCanvas):
     pass
 
+
 class DelCat(BlueCanvas):
+    pass
+
+
+class DelCatIn(BlueCanvas):
     pass
 
 
@@ -89,7 +94,6 @@ class AccountAdd(BlueCanvas):
 
 class CustomDrop(BoxLayout):
     def __init__(self, title="Choose item",data=None,**kwargs):
-
         super(CustomDrop, self).__init__(**kwargs)
         self.orientation = 'vertical'
         self.data = data
@@ -122,8 +126,17 @@ class DeleteAccDrop(CustomDrop):
 
 
 class DeleteCatDrop(CustomDrop):
-    def __init__(self, **kwargs):
-        super(DeleteCatDrop,self).__init__(data=["{}".format(x) for x in wallet.category_list.keys()], **kwargs)
+    def __init__(self, option=True, **kwargs):
+        self.option = option
+        super(DeleteCatDrop,self).__init__(data=["{}".format(x) for x in wallet.category_list.keys()
+                                                 if wallet.category_list[x] is option], **kwargs)
+
+
+class DeleteCatDropIn(CustomDrop):
+    def __init__(self, option=False, **kwargs):
+        self.option = option
+        super(DeleteCatDropIn,self).__init__(data=["{}".format(x) for x in wallet.category_list.keys()
+                                                   if wallet.category_list[x] is option], **kwargs)
 
 
 class AccDrop(CustomDrop):
@@ -166,7 +179,7 @@ class CatDrop(CustomDrop):
         self.drop_down.add_widget(btn)
         del_btn = Button(text='delete...', size_hint_y=None, height=self.btn_name.height)
         del_btn.bind(on_release=lambda btn=btn, drop_down=self.drop_down: drop_down.select(self.title))
-        del_btn.bind(on_press = self.call_del_cat)
+        del_btn.bind(on_press=self.call_del_cat)
         self.drop_down.add_widget(del_btn)
 
 
@@ -180,7 +193,7 @@ class InCat(CustomDrop):
         self.parent.parent.parent.add_widget(CatAddIn())
 
     def del_cat(self, e=None):
-        self.parent.parent.parent.add_widget(DelCat())
+        self.parent.parent.parent.add_widget(DelCatIn())
 
     def build_func(self):
         btn = Button(text='add...', size_hint_y=None, height=self.btn_name.height)

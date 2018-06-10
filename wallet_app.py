@@ -9,7 +9,7 @@ This app helps to control your own finances, your wallet.
 
 from datetime import datetime
 from decimal import *
-import json
+from kivy.storage.jsonstore import JsonStore
 
 
 class AppUnit(object):
@@ -27,9 +27,9 @@ class Transaction(AppUnit):
 
     # var name always is string, var value is number, account is object of Account class
     def __init__(self, value, account, category):
-        super(Transaction,self).__init__(name=datetime.now().strftime("%d-%m-%y %H:%M:%S"), value=value)
-        self.account = account
-        self.category = category
+        super(Transaction, self).__init__(name=datetime.now().strftime("%d-%m-%y %H:%M:%S"), value={'value': value})
+        self.value['account'] = account
+        self.value['category'] = category
 
 
 class Category(AppUnit):
@@ -42,27 +42,22 @@ class Wallet(object):
     category_list = {}
 
     def add_account(self, account):
-        self.account_list[account.name] = account.value
-        save_to_file('accounts.json', self.account_list)
+        save_to_file('accounts.json', account)
 
     def add_transaction(self, transaction):
-        tr_cell = self.transaction_list[transaction.name] = {}
-        tr_cell["category"] = transaction.category
-        tr_cell["value"] = str(Decimal(transaction.value).quantize(Decimal('0.01'), rounding=ROUND_DOWN))
-        save_to_file('transactions.json', self.transaction_list)
-        decimal_account = Decimal(self.account_list[transaction.account]).quantize(Decimal('0.01'), rounding=ROUND_DOWN)
-        decimal_transaction = Decimal(transaction.value).quantize(Decimal('0.01'), rounding=ROUND_DOWN)
-        if self.category_list[transaction.category]:
+        save_to_file('transactions.json', transaction)
+        decimal_account = Decimal(self.account_list[transaction.value['account']]).quantize(Decimal('0.01'), rounding=ROUND_DOWN)
+        decimal_transaction = Decimal(transaction.value['value']).quantize(Decimal('0.01'), rounding=ROUND_DOWN)
+        if self.category_list[transaction.value['category']]:
             result = decimal_account - decimal_transaction
         else:
             result = decimal_account + decimal_transaction
-        self.account_list[transaction.account] = str(result)
-        save_to_file('accounts.json', self.account_list)
+        acc = Account(transaction.value['account'], str(result))
+        save_to_file('accounts.json',acc)
 
     def add_category(self,cat):
         # name is string and value is boolean true for spends and false for incomes
-        self.category_list[cat.name] = cat.value
-        save_to_file('categories.json', self.category_list)
+        save_to_file('categories.json', cat)
 
 
 def list_view(input_dict):
@@ -95,15 +90,15 @@ def last_transaction_view(option):
         return search(wallet.transaction_list)[3][0]
 
 
-def save_to_file(file_name, data):
-    with open(file_name, "w") as outfile:
-        json.dump(data, outfile)
-
+def save_to_file(file_name, record):
+    data_loaded = JsonStore(file_name)
+    data_loaded.store_put(record.name,record.value)
+    data_loaded.store_sync()
+    data_loaded = JsonStore(file_name)
 
 def read_from_file(file_name):
-    with open(file_name) as data_file:
-        data_loaded = json.load(data_file)
-    return data_loaded
+    data_loaded = JsonStore(file_name)
+    return data_loaded._data
 
 
 wallet = Wallet()
@@ -121,7 +116,7 @@ def add_new_tr(acc, cat, val):
 def del_tr(mode):
     list = (search(wallet.transaction_list)[mode])
     if len(list) > 1:
-        last_tr = (list[0]).split(':/n')[0]
+        last_tr = (list[0]).split(':\n')[0]
         last_tr = last_tr.split(':\n')[0]
         del wallet.transaction_list[last_tr]
         save_to_file('transactions.json', wallet.transaction_list)

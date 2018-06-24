@@ -1,0 +1,44 @@
+#: import main main
+<StartScreen>:
+    GridLayout:
+        cols: 2
+        Button:
+            text: "add new income \ntransaction"
+            on_press:
+                root.parent.switch_to(main.NewIncomeTransaction(name='new_in_tr'))
+
+        Button:
+            text: "add new outcome \ntransaction"
+            on_press:
+                root.parent.switch_to(main.NewOutcomeTransaction(name="new_out_tr"))
+
+        Button:
+            text: "view all income \ntransactions"
+            on_press:
+                root.parent.switch_to(main.ViewIncomeTransaction(name='in_tr_screen'))
+
+        Button:
+            text: "view all outcome \ntransactions"
+            on_press:
+                root.parent.switch_to(main.ViewOutcomeTransaction(name='out_tr_screen'))
+
+<NewIncomeTransaction>:
+    Button:
+        text: "back"
+        on_press:
+            root.parent.switch_to(main.StartScreen(name='main'))
+<NewOutcomeTransaction>:
+    Button:
+        text: "back"
+        on_press:
+            root.parent.switch_to(main.StartScreen(name='main'))
+<ViewIncomeTransaction>:
+    Button:
+        text: "back"
+        on_press:
+            root.parent.switch_to(main.StartScreen(name='main'))
+<ViewOutcomeTransaction>:
+    Button:
+        text: "back"
+        on_press:
+            root.parent.switch_to(main.StartScreen(name='main'))

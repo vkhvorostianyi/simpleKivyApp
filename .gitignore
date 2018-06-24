@@ -4,3 +4,4 @@ __pycache__/
 *.pyc
 /mysnd.py
 .buildozer/
+buildozer.spec

@@ -70,7 +70,7 @@ def account_parse(code):
         data = ['{}:{}\n'.format(x.name, x.value) for x in log[0].values()]
     
     elif code == 1 and log[code]:
-        data = ['{}'.format(x.name) for x in log[1].values()]
+        data = ['{}\n'.format(x.name) for x in log[1].values()]
 
     elif code == 2 and log[code]:
         data = ['{}\n{}\n{}\{}\n\n'.format(x.name, x.value, x.category.name, x.account.name) for x in log[2].values()]

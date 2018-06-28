@@ -3,9 +3,6 @@ from datetime import datetime
 from decimal import Decimal, ROUND_DOWN
 
 
-log = [{}, {}, {}]
-
-
 class Base(object):
 
     def __init__(self, name, value):
@@ -66,6 +63,21 @@ def balance_count():
     return balance
 
 
+def account_parse(code):
+    data = []
+    
+    if code == 0 and log[code]:
+        data = ['{}:{}\n'.format(x.name, x.value) for x in log[0].values()]
+    
+    elif code == 1 and log[code]:
+        data = ['{}'.format(x.name) for x in log[1].values()]
+
+    elif code == 2 and log[code]:
+        data = ['{}\n{}\n{}\{}\n\n'.format(x.name, x.value, x.category.name, x.account.name) for x in log[2].values()]
+    
+    return data
+
+
 def dump_data():
     with open('log.obj', 'wb') as file:
         pickle.dump(log, file)
@@ -74,3 +86,9 @@ def dump_data():
 def load_data():
     with open('log.obj', 'rb') as file:
         return pickle.load(file)
+
+
+log = load_data()
+
+if not log:
+    log = [{}, {}, {}]

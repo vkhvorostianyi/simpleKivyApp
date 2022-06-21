@@ -26,7 +26,7 @@ kivymd==0.1.2
 linecache2==1.0.0
 macholib==1.9
 MarkupSafe==1.0
-numpy==1.13.3
+numpy==1.22.0
 olefile==0.44
 parso==0.1.1
 pathtools==0.1.2
